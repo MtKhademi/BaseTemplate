@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Funds>
+	<Node>
+		<RegNo>10600</RegNo>
+		<FundType>1</FundType>
+		<FundSize>1</FundSize>
+		<Date>۱۴۰۴/۰۲/۰۸</Date>
+		<NAVRed>90,210</NAVRed>
+		<FundProfits>
+			<profit Date="" Value="" />
+		</FundProfits>
+		<NAVSub>90,819</NAVSub>
+		<NAVStat>90,210</NAVStat>
+		<InitiationDate>۱۳۸۷/۰۲/۲۰</InitiationDate>
+		<NetAsset>77,625,318,027,173</NetAsset>
+		<Units>860,499,342</Units>
+		<UnitsSubDAY>686,274</UnitsSubDAY>
+		<UnitsSubFromFirst>1,899,584,773</UnitsSubFromFirst>
+		<UnitsRedDAY>758,965</UnitsRedDAY>
+		<UnitsRedFromFirst>1,039,085,431</UnitsRedFromFirst>
+		<Portfolio>
+			<Cash>0</Cash>
+			<Deposit>3.24</Deposit>
+			<Bond>0</Bond>
+			<FiveBest>23.74</FiveBest>
+			<Stock>96.26</Stock>
+			<Other>0.5</Other>
+		</Portfolio>
+		<Custodian>موسسه حسابرسی داریا روش</Custodian>
+		<CustodianEng>
+		</CustodianEng>
+		<Guarantor />
+		<GuarantorEng>
+		</GuarantorEng>
+		<ProfitGuarantor>ندارد</ProfitGuarantor>
+		<Manager>شرکت سبدگردان مفید</Manager>
+		<ManagerEng>
+		</ManagerEng>
+		<InvestmentManager>رضا ابراهیمی قلعه حسن</InvestmentManager>
+		<InvestmentManagerEng>
+		</InvestmentManagerEng>
+		<RegistrationManager>شرکت کارگزاری مفید</RegistrationManager>
+		<ExecutiveManager>ندارد</ExecutiveManager>
+		<MarketMaker />
+		<Auditor>موسسه حسابرسی ارقام نگر آریا</Auditor>
+		<AuditorEN />
+		<Name>صندوق سرمایه‌گذاری مشترک پیشتاز</Name>
+		<NameEng>Pishtaz</NameEng>
+		<WebSite>pishtazfund.com</WebSite>
+		<RetInvNo>29306</RetInvNo>
+		<InsInvNo>37</InsInvNo>
+		<RetInvPercent>34.8</RetInvPercent>
+		<InsInvPercent>65.14</InsInvPercent>
+		<NaturalPercent>0</NaturalPercent>
+		<LegalPercent>0</LegalPercent>
+		<GuaranteedEarningRate />
+		<EstimatedEarningRate />
+		<DividentIntervalPeriod>0</DividentIntervalPeriod>
+		<Day1Return>0.895</Day1Return>
+		<Day7Return>1.059</Day7Return>
+		<Day30Return>12.712</Day30Return>
+		<Day90Return>9.156</Day90Return>
+		<Day180Return>44.225</Day180Return>
+		<Day365Return>42.193</Day365Return>
+		<DayFirstReturn>90110</DayFirstReturn>
+		<UnitsSub>686,274</UnitsSub>
+		<UnitsRed>758,965</UnitsRed>
+		<ManagerNationalCode>14005981364</ManagerNationalCode>
+		<FixedRedemptionFee>0</FixedRedemptionFee>
+		<FixedSubscriptionFee>0</FixedSubscriptionFee>
+		<VariableSubscriptionFee>0</VariableSubscriptionFee>
+		<VariableSubscriptionFeeUpperLimit>0</VariableSubscriptionFeeUpperLimit>
+		<SplitRate>9900</SplitRate>
+	</Node>
+</Funds>

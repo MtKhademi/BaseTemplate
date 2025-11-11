@@ -1,0 +1,12 @@
+C:\source\BaseTemplate\src\modules\IAMModule\obj\Debug\net8.0\IAMModule.csproj.AssemblyReference.cache
+C:\source\BaseTemplate\src\modules\IAMModule\obj\Debug\net8.0\IAMModule.GeneratedMSBuildEditorConfig.editorconfig
+C:\source\BaseTemplate\src\modules\IAMModule\obj\Debug\net8.0\IAMModule.AssemblyInfoInputs.cache
+C:\source\BaseTemplate\src\modules\IAMModule\obj\Debug\net8.0\IAMModule.AssemblyInfo.cs
+C:\source\BaseTemplate\src\modules\IAMModule\obj\Debug\net8.0\IAMModule.csproj.CoreCompileInputs.cache
+C:\source\BaseTemplate\src\modules\IAMModule\obj\Debug\net8.0\IAMModule.sourcelink.json
+D:\source\BaseTemplate\src\modules\IAMModule\obj\Debug\net8.0\IAMModule.csproj.AssemblyReference.cache
+D:\source\BaseTemplate\src\modules\IAMModule\obj\Debug\net8.0\IAMModule.GeneratedMSBuildEditorConfig.editorconfig
+D:\source\BaseTemplate\src\modules\IAMModule\obj\Debug\net8.0\IAMModule.AssemblyInfoInputs.cache
+D:\source\BaseTemplate\src\modules\IAMModule\obj\Debug\net8.0\IAMModule.AssemblyInfo.cs
+D:\source\BaseTemplate\src\modules\IAMModule\obj\Debug\net8.0\IAMModule.csproj.CoreCompileInputs.cache
+D:\source\BaseTemplate\src\modules\IAMModule\obj\Debug\net8.0\IAMModule.sourcelink.json

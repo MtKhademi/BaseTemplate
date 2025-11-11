@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Funds>
+	<Node>
+		<RegNo>12196</RegNo>
+		<FundType>19</FundType>
+		<FundSize>2</FundSize>
+		<Date>۱۴۰۴/۰۵/۱۸</Date>
+		<NAVRed>16,897</NAVRed>
+		<FundProfits>
+			<profit Date="" Value="" />
+		</FundProfits>
+		<NAVSub>17,005</NAVSub>
+		<NAVStat>16,897</NAVStat>
+		<InitiationDate>۱۴۰۲/۰۸/۲۲</InitiationDate>
+		<NetAsset>115,129,816,376,540</NetAsset>
+		<Units>6,813,658,710</Units>
+		<UnitsSubDAY>0</UnitsSubDAY>
+		<UnitsSubFromFirst>11,793</UnitsSubFromFirst>
+		<UnitsRedDAY>0</UnitsRedDAY>
+		<UnitsRedFromFirst>3,642</UnitsRedFromFirst>
+		<Portfolio>
+			<Cash>0</Cash>
+			<Deposit>0.34</Deposit>
+			<Bond>0</Bond>
+			<FiveBest>34.7</FiveBest>
+			<Stock>84.28</Stock>
+			<Other>15.38</Other>
+		</Portfolio>
+		<Custodian>موسسه حسابرسی آگاهان و همکاران</Custodian>
+		<CustodianEng>
+		</CustodianEng>
+		<Guarantor>نامشخص نامشخص</Guarantor>
+		<GuarantorEng>
+		</GuarantorEng>
+		<ProfitGuarantor>نامشخص نامشخص</ProfitGuarantor>
+		<Manager>شرکت سبدگردان توسعه فیروزه</Manager>
+		<ManagerEng>
+		</ManagerEng>
+		<InvestmentManager>هانیه جعفری نجف آّبادی, حسین پارسا سرشت, ملیحه السادات رسولی</InvestmentManager>
+		<InvestmentManagerEng>
+		</InvestmentManagerEng>
+		<RegistrationManager>شرکت کارگزاری فیروزه آسیا</RegistrationManager>
+		<ExecutiveManager>ندارد</ExecutiveManager>
+		<MarketMaker>شرکت سبدگردان توسعه فیروزه</MarketMaker>
+		<Auditor>موسسه حسابرسی آتیه اندیش نمودگر</Auditor>
+		<AuditorEN />
+		<Name>صندوق سرمایه گذاری سهامی اهرمی موج فیروزه</Name>
+		<NameEng>mojfund.ir</NameEng>
+		<WebSite>mojfund.ir</WebSite>
+		<RetInvNo>2360</RetInvNo>
+		<InsInvNo>52</InsInvNo>
+		<RetInvPercent>0</RetInvPercent>
+		<InsInvPercent>0</InsInvPercent>
+		<NaturalPercent>0</NaturalPercent>
+		<LegalPercent>0</LegalPercent>
+		<GuaranteedEarningRate />
+		<EstimatedEarningRate>0</EstimatedEarningRate>
+		<DividentIntervalPeriod>0</DividentIntervalPeriod>
+		<Day1Return>1.565</Day1Return>
+		<Day7Return>-10.879</Day7Return>
+		<Day30Return>-10.051</Day30Return>
+		<Day90Return>-34.262</Day90Return>
+		<Day180Return>-25.604</Day180Return>
+		<Day365Return>64.978</Day365Return>
+		<DayFirstReturn>71.902</DayFirstReturn>
+		<UnitsSub>0</UnitsSub>
+		<UnitsRed>0</UnitsRed>
+		<ManagerNationalCode>14008631905</ManagerNationalCode>
+		<FixedRedemptionFee>0</FixedRedemptionFee>
+		<FixedSubscriptionFee>0</FixedSubscriptionFee>
+		<VariableSubscriptionFee>0</VariableSubscriptionFee>
+		<VariableSubscriptionFeeUpperLimit>0</VariableSubscriptionFeeUpperLimit>
+		<SplitRate />
+		<FundSplits />
+		<BaseUnitsSubscriptionNAV>16705.21</BaseUnitsSubscriptionNAV>
+		<BaseUnitsCancelNAV>16705.21</BaseUnitsCancelNAV>
+		<BaseUnitsTotalNetAssetValue>78,649,785,135,213</BaseUnitsTotalNetAssetValue>
+		<BaseTotalUnit>4,708,099,158</BaseTotalUnit>
+		<BaseUnitsTotalSubscription>0</BaseUnitsTotalSubscription>
+		<BaseUnitsTotalCancel>0</BaseUnitsTotalCancel>
+		<SuperUnitsSubscriptionNAV>17,676</SuperUnitsSubscriptionNAV>
+		<SuperUnitsCancelNAV>17,326</SuperUnitsCancelNAV>
+		<SuperUnitsTotalNetAssetValue>36,480,031,241,327</SuperUnitsTotalNetAssetValue>
+		<SuperTotalUnit>2,105,559,552</SuperTotalUnit>
+		<SuperUnitsTotalSubscription>0</SuperUnitsTotalSubscription>
+		<SuperUnitsTotalCancel>0</SuperUnitsTotalCancel>
+	</Node>
+</Funds>

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Funds>
+	<Node>
+		<RegNo>12033</RegNo>
+		<FundType>19</FundType>
+		<FundSize>1</FundSize>
+		<Date>۱۴۰۴/۰۲/۰۸</Date>
+		<NAVRed>23,020</NAVRed>
+		<FundProfits>
+			<profit Date="" Value="" />
+		</FundProfits>
+		<NAVSub>23,168</NAVSub>
+		<NAVStat>23,020</NAVStat>
+		<InitiationDate>۱۴۰۱/۰۸/۱۶</InitiationDate>
+		<NetAsset>101,452,665,974,442</NetAsset>
+		<Units>4,407,113,546</Units>
+		<UnitsSubDAY>0</UnitsSubDAY>
+		<UnitsSubFromFirst>2,354,702,000</UnitsSubFromFirst>
+		<UnitsRedDAY>20,000,000</UnitsRedDAY>
+		<UnitsRedFromFirst>491,702,000</UnitsRedFromFirst>
+		<Portfolio>
+			<Cash>0</Cash>
+			<Deposit>7.27</Deposit>
+			<Bond>0</Bond>
+			<FiveBest>23</FiveBest>
+			<Stock>92.15</Stock>
+			<Other>0.58</Other>
+		</Portfolio>
+		<Custodian>موسسه حسابرسی رازدار</Custodian>
+		<CustodianEng>
+		</CustodianEng>
+		<Guarantor>نامشخص نامشخص</Guarantor>
+		<GuarantorEng>
+		</GuarantorEng>
+		<ProfitGuarantor>نامشخص نامشخص</ProfitGuarantor>
+		<Manager>شرکت سبدگردان مفید</Manager>
+		<ManagerEng>
+		</ManagerEng>
+		<InvestmentManager>نامشخص نامشخص</InvestmentManager>
+		<InvestmentManagerEng>
+		</InvestmentManagerEng>
+		<RegistrationManager>شرکت کارگزاری مفید</RegistrationManager>
+		<ExecutiveManager>ندارد</ExecutiveManager>
+		<MarketMaker>شرکت سبدگردان مفید</MarketMaker>
+		<Auditor>موسسه حسابرسی بیات رایان</Auditor>
+		<AuditorEN />
+		<Name>صندوق سرمایه‌گذاری سهامی اهرمی مفید</Name>
+		<NameEng>TAVAN</NameEng>
+		<WebSite>tavanfund.com</WebSite>
+		<RetInvNo>27538</RetInvNo>
+		<InsInvNo>36</InsInvNo>
+		<RetInvPercent>0</RetInvPercent>
+		<InsInvPercent>0</InsInvPercent>
+		<NaturalPercent>0</NaturalPercent>
+		<LegalPercent>0</LegalPercent>
+		<GuaranteedEarningRate />
+		<EstimatedEarningRate />
+		<DividentIntervalPeriod>0</DividentIntervalPeriod>
+		<Day1Return>-0.5</Day1Return>
+		<Day7Return>1.339</Day7Return>
+		<Day30Return>15.377</Day30Return>
+		<Day90Return>9.672</Day90Return>
+		<Day180Return>73.83</Day180Return>
+		<Day365Return>51.731</Day365Return>
+		<DayFirstReturn>194.235</DayFirstReturn>
+		<UnitsSub>0</UnitsSub>
+		<UnitsRed>20,000,000</UnitsRed>
+		<ManagerNationalCode>14005981364</ManagerNationalCode>
+		<FixedRedemptionFee>0</FixedRedemptionFee>
+		<FixedSubscriptionFee>0</FixedSubscriptionFee>
+		<VariableSubscriptionFee>0</VariableSubscriptionFee>
+		<VariableSubscriptionFeeUpperLimit>500,000</VariableSubscriptionFeeUpperLimit>
+		<SplitRate />
+		<BaseUnitsSubscriptionNAV>18,762</BaseUnitsSubscriptionNAV>
+		<BaseUnitsCancelNAV>18,762</BaseUnitsCancelNAV>
+		<BaseUnitsTotalNetAssetValue>47,732,454,820,968</BaseUnitsTotalNetAssetValue>
+		<BaseTotalUnit>2,544,113,546</BaseTotalUnit>
+		<BaseUnitsTotalSubscription>20,020,524</BaseUnitsTotalSubscription>
+		<BaseUnitsTotalCancel>4,785,719</BaseUnitsTotalCancel>
+		<SuperUnitsSubscriptionNAV>29,185</SuperUnitsSubscriptionNAV>
+		<SuperUnitsCancelNAV>28,835</SuperUnitsCancelNAV>
+		<SuperUnitsTotalNetAssetValue>53,720,211,153,474</SuperUnitsTotalNetAssetValue>
+		<SuperTotalUnit>1,863,000,000</SuperTotalUnit>
+		<SuperUnitsTotalSubscription>0</SuperUnitsTotalSubscription>
+		<SuperUnitsTotalCancel>20,000,000</SuperUnitsTotalCancel>
+	</Node>
+</Funds>

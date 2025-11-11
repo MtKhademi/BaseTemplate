@@ -1,0 +1,17 @@
+﻿global using MDF.Test.Integration.Fixtures;
+global using MDF.Test.Integration.Common;
+global using Test.Integration.ModulesTest.Common;
+global using Xunit.Abstractions;
+global using MDF.Test.Common.Extentions;
+global using FluentAssertions;
+global using MDF.Modules.Common.Extentions;
+global using MDF.Common.Infrastructure.TableInfra.TableInfra;
+global using MDF.Common.Extentions;
+global using MDF.Common;
+global using MDF.Test.Common.Dtos;
+global using Shared.Pagination;
+global using Microsoft.Extensions.DependencyInjection;
+global using MDF.Modules.Common.Providers.DateTimeProviders;
+global using Moq;
+global using Microsoft.Extensions.DependencyInjection.Extensions;
+global using OfficeOpenXml;
