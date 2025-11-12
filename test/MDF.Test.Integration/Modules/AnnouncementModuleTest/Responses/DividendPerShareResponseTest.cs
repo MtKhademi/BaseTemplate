@@ -1,0 +1,31 @@
+﻿namespace MDF.Test.Integration.Modules.AnnouncementModuleTest.Responses;
+
+public record DividendPerShareResponseTest(
+    int? DividendPerShareIdPk,
+    int? AnnouncementIdFk,
+    long? ProportionableRetainedEarnings,
+    long? DividedRetainedEarning,
+    long? LegalReserve,
+    long? ExtenseReserve,
+    long? Other,
+    int? NetIncomeLoss,
+    int? AnnualAdjustment,
+    int? BeginingRetainedEarnings,
+    long? PreYearDevidedRetainedEarning,
+    long? PreYearOtherReserves,
+    long? TransferToCapital,
+    long? PreYearOtherReservesTransferToRetainedEarning,
+    long? PreYearBoardMemberGift,
+    long? EndingRetainedEarning,
+    long? DividendPerShare1,
+    string? EntryDate,
+    string? ModifyDate,
+    bool? IsConfirmed,
+    bool? IsDeleted,
+    short? InsertionType,
+    string? InsertedBy,
+    bool? IsConfirmedManual,
+    string? ConfirmedManualTime,
+    bool? OnlyForPrevCap,
+    long? ListedCapital
+);

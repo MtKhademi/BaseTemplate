@@ -1,4 +1,5 @@
-﻿namespace Common.Interfaces;
+﻿
+namespace Common.Interfaces;
 
 public enum ApiResultStatusCode
 {
@@ -9,7 +10,8 @@ public enum ApiResultStatusCode
     Unauthorized = 4,
     BadRequest = 5,
     InternalServerError = 6,
-    AlreadyExists = 7
+    AlreadyExists = 7,
+    Forbidden = 8
 }
 
 public class ApiResult
@@ -59,7 +61,7 @@ public class ApiResult
             StatusCode = ApiResultStatusCode.NotFound,
             Messages = messages.ToList()
         };
-    public static ApiResult NotFound(NotFoundDataException ex)
+    public static ApiResult NotFound(NotFoundException ex)
         => new()
         {
             IsSuccess = false,
@@ -77,7 +79,7 @@ public class ApiResult
             StatusCode = ApiResultStatusCode.AlreadyExists,
             Messages = messages.ToList()
         };
-    public static ApiResult AlreadyExists(AlreadyExistDataException ex)
+    public static ApiResult AlreadyExists(AlreadyExistException ex)
         => new()
         {
             IsSuccess = false,
@@ -86,12 +88,23 @@ public class ApiResult
             ErrorKey = ex.ErrorKey
         };
 
+    //public static object? UnAuthorize(string v1, string v2)
+
+
     public static ApiResult Unauthorized()
         => new()
         {
             IsSuccess = false,
             StatusCode = ApiResultStatusCode.Unauthorized,
             Messages = new List<string> { "Unauthorized" }
+        };
+    public static ApiResult Unauthorized(UnauthorizedException ex)
+        => new()
+        {
+            IsSuccess = false,
+            StatusCode = ApiResultStatusCode.Unauthorized,
+            Messages = new List<string> { "Unauthorized", ex.Location },
+            ErrorKey = ex.ErrorKey
         };
     public static ApiResult Unauthenticated(params string[] messages)
         => new()
@@ -101,6 +114,13 @@ public class ApiResult
             Messages = messages.ToList()
         };
 
+    public static ApiResult InternalServerError(Exception ex)
+        => new()
+        {
+            IsSuccess = false,
+            StatusCode = ApiResultStatusCode.InternalServerError,
+            Messages = new List<string> { "Internal server error" }
+        };
     public static ApiResult InternalServerError(params string[]? messages)
         => new()
         {
@@ -109,7 +129,14 @@ public class ApiResult
             Messages = messages?.ToList() ?? new List<string> { "Internal server error" }
         };
 
-
+    internal static ApiResult Forbidden(ForbiddenException ex)
+        => new()
+        {
+            IsSuccess = false,
+            StatusCode = ApiResultStatusCode.Forbidden,
+            Messages = new List<string> { "Forbidden", ex.Location },
+            ErrorKey = ex.ErrorKey
+        };
 }
 
 public class ApiResult<T> : ApiResult
@@ -172,4 +199,10 @@ public class ApiResult<T> : ApiResult
             Messages = messages.ToList(),
             Result = default
         };
+}
+
+public static class ApiResultExtensions
+{
+    public static ApiResult<T> ToApiResultSuccess<T>(this T data, params string[]? messages)
+        => ApiResult<T>.Success(data, messages);
 }

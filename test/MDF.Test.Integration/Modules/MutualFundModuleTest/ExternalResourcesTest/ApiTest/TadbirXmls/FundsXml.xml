@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Funds>
+	<Node>
+		<RegNo>12290</RegNo>
+		<FundType>19</FundType>
+		<FundSize>2</FundSize>
+		<Date>۱۴۰۴/۰۲/۰۱</Date>
+		<NAVRed>14,802</NAVRed>
+		<FundProfits>
+			<profit Date="" Value="" />
+		</FundProfits>
+		<NAVSub>14,900</NAVSub>
+		<NAVStat>14,802</NAVStat>
+		<InitiationDate>۱۴۰۳/۰۴/۰۳</InitiationDate>
+		<NetAsset>61,405,860,398,327</NetAsset>
+		<Units>4,148,503,996</Units>
+		<UnitsSubDAY>0</UnitsSubDAY>
+		<UnitsSubFromFirst>117</UnitsSubFromFirst>
+		<UnitsRedDAY>0</UnitsRedDAY>
+		<UnitsRedFromFirst>66</UnitsRedFromFirst>
+		<Portfolio>
+			<Cash>0</Cash>
+			<Deposit>8.37</Deposit>
+			<Bond>0</Bond>
+			<FiveBest>25.52</FiveBest>
+			<Stock>91.12</Stock>
+			<Other>0.51</Other>
+		</Portfolio>
+		<Custodian>مشاور سرمایه گذاری سهم آشنا</Custodian>
+		<CustodianEng>
+		</CustodianEng>
+		<Guarantor>نامشخص نامشخص</Guarantor>
+		<GuarantorEng>
+		</GuarantorEng>
+		<ProfitGuarantor>نامشخص نامشخص</ProfitGuarantor>
+		<Manager>شرکت سبدگردان اقتصاد بیدار</Manager>
+		<ManagerEng>
+		</ManagerEng>
+		<InvestmentManager>پریسا خسروی, سولماز شبانی تپه بر, محمد علی کمالی</InvestmentManager>
+		<InvestmentManagerEng>
+		</InvestmentManagerEng>
+		<RegistrationManager>شرکت سبدگردان اقتصاد بیدار</RegistrationManager>
+		<ExecutiveManager>ندارد</ExecutiveManager>
+		<MarketMaker>شرکت سبدگردان اقتصاد بیدار</MarketMaker>
+		<Auditor>مؤسسه حسابرسی ارقام نگر آریا</Auditor>
+		<AuditorEN />
+		<Name>صندوق سرمایه گذاری سهامی اهرمی بیدار</Name>
+		<NameEng />
+		<WebSite>ahrom.ebidar.ir</WebSite>
+		<RetInvNo>8</RetInvNo>
+		<InsInvNo>26</InsInvNo>
+		<RetInvPercent>0</RetInvPercent>
+		<InsInvPercent>0</InsInvPercent>
+		<NaturalPercent>0</NaturalPercent>
+		<LegalPercent>0</LegalPercent>
+		<GuaranteedEarningRate />
+		<EstimatedEarningRate>20</EstimatedEarningRate>
+		<DividentIntervalPeriod>0</DividentIntervalPeriod>
+		<Day1Return>1.804</Day1Return>
+		<Day7Return>11.212</Day7Return>
+		<Day30Return>29.638</Day30Return>
+		<Day90Return>17.498</Day90Return>
+		<Day180Return>151.636</Day180Return>
+		<Day365Return>0</Day365Return>
+		<DayFirstReturn>73.728</DayFirstReturn>
+		<UnitsSub>0</UnitsSub>
+		<UnitsRed>0</UnitsRed>
+		<ManagerNationalCode>14008261181</ManagerNationalCode>
+		<FixedRedemptionFee>0</FixedRedemptionFee>
+		<FixedSubscriptionFee>0</FixedSubscriptionFee>
+		<VariableSubscriptionFee>0</VariableSubscriptionFee>
+		<VariableSubscriptionFeeUpperLimit>0</VariableSubscriptionFeeUpperLimit>
+		<SplitRate />
+		<FundSplits />
+		<BaseUnitsSubscriptionNAV>12837.25</BaseUnitsSubscriptionNAV>
+		<BaseUnitsCancelNAV>12837.25</BaseUnitsCancelNAV>
+		<BaseUnitsTotalNetAssetValue>30,212,519,172,651</BaseUnitsTotalNetAssetValue>
+		<BaseTotalUnit>2,353,503,996</BaseTotalUnit>
+		<BaseUnitsTotalSubscription>0</BaseUnitsTotalSubscription>
+		<BaseUnitsTotalCancel>0</BaseUnitsTotalCancel>
+		<SuperUnitsSubscriptionNAV>17,604</SuperUnitsSubscriptionNAV>
+		<SuperUnitsCancelNAV>17,378</SuperUnitsCancelNAV>
+		<SuperUnitsTotalNetAssetValue>31,193,341,225,676</SuperUnitsTotalNetAssetValue>
+		<SuperTotalUnit>1,795,000,000</SuperTotalUnit>
+		<SuperUnitsTotalSubscription>0</SuperUnitsTotalSubscription>
+		<SuperUnitsTotalCancel>0</SuperUnitsTotalCancel>
+	</Node>
+	<Node>
+		<RegNo>12196</RegNo>
+		<FundType>19</FundType>
+		<FundSize>2</FundSize>
+		<Date>۱۴۰۴/۰۲/۰۱</Date>
+		<NAVRed>19,338</NAVRed>
+		<FundProfits>
+			<profit Date="" Value="" />
+		</FundProfits>
+		<NAVSub>19,466</NAVSub>
+		<NAVStat>19,338</NAVStat>
+		<InitiationDate>۱۴۰۲/۰۸/۲۲</InitiationDate>
+		<NetAsset>129,201,569,432,882</NetAsset>
+		<Units>6,681,285,676</Units>
+		<UnitsSubDAY>0</UnitsSubDAY>
+		<UnitsSubFromFirst>7,400</UnitsSubFromFirst>
+		<UnitsRedDAY>0</UnitsRedDAY>
+		<UnitsRedFromFirst>2,209</UnitsRedFromFirst>
+		<Portfolio>
+			<Cash>0</Cash>
+			<Deposit>4.23</Deposit>
+			<Bond>0</Bond>
+			<FiveBest>38.84</FiveBest>
+			<Stock>95.62</Stock>
+			<Other>0.15</Other>
+		</Portfolio>
+		<Custodian>موسسه حسابرسی آگاهان و همکاران</Custodian>
+		<CustodianEng>
+		</CustodianEng>
+		<Guarantor>نامشخص نامشخص</Guarantor>
+		<GuarantorEng>
+		</GuarantorEng>
+		<ProfitGuarantor>نامشخص نامشخص</ProfitGuarantor>
+		<Manager>شرکت سبدگردان توسعه فیروزه</Manager>
+		<ManagerEng>
+		</ManagerEng>
+		<InvestmentManager>هانیه جعفری نجف آّبادی, حسین پارسا سرشت, ملیحه السادات رسولی</InvestmentManager>
+		<InvestmentManagerEng>
+		</InvestmentManagerEng>
+		<RegistrationManager>شرکت کارگزاری فیروزه آسیا</RegistrationManager>
+		<ExecutiveManager>ندارد</ExecutiveManager>
+		<MarketMaker>شرکت سبدگردان توسعه فیروزه</MarketMaker>
+		<Auditor>موسسه حسابرسی آتیه اندیش نمودگر</Auditor>
+		<AuditorEN />
+		<Name>صندوق سرمایه گذاری سهامی اهرمی موج فیروزه</Name>
+		<NameEng>mojfund.ir</NameEng>
+		<WebSite>mojfund.ir</WebSite>
+		<RetInvNo>1671</RetInvNo>
+		<InsInvNo>54</InsInvNo>
+		<RetInvPercent>0</RetInvPercent>
+		<InsInvPercent>0</InsInvPercent>
+		<NaturalPercent>0</NaturalPercent>
+		<LegalPercent>0</LegalPercent>
+		<GuaranteedEarningRate />
+		<EstimatedEarningRate>0</EstimatedEarningRate>
+		<DividentIntervalPeriod>0</DividentIntervalPeriod>
+		<Day1Return>2.271</Day1Return>
+		<Day7Return>13.576</Day7Return>
+		<Day30Return>32.417</Day30Return>
+		<Day90Return>24.422</Day90Return>
+		<Day180Return>170.661</Day180Return>
+		<Day365Return>123.397</Day365Return>
+		<DayFirstReturn>186.854</DayFirstReturn>
+		<UnitsSub>0</UnitsSub>
+		<UnitsRed>0</UnitsRed>
+		<ManagerNationalCode>14008631905</ManagerNationalCode>
+		<FixedRedemptionFee>0</FixedRedemptionFee>
+		<FixedSubscriptionFee>0</FixedSubscriptionFee>
+		<VariableSubscriptionFee>0</VariableSubscriptionFee>
+		<VariableSubscriptionFeeUpperLimit>0</VariableSubscriptionFeeUpperLimit>
+		<SplitRate />
+		<FundSplits />
+		<BaseUnitsSubscriptionNAV>15247.5</BaseUnitsSubscriptionNAV>
+		<BaseUnitsCancelNAV>15247.5</BaseUnitsCancelNAV>
+		<BaseUnitsTotalNetAssetValue>71,378,972,087,828</BaseUnitsTotalNetAssetValue>
+		<BaseTotalUnit>4,681,355,769</BaseTotalUnit>
+		<BaseUnitsTotalSubscription>2,138,686</BaseUnitsTotalSubscription>
+		<BaseUnitsTotalCancel>8,493,909</BaseUnitsTotalCancel>
+		<SuperUnitsSubscriptionNAV>29,341</SuperUnitsSubscriptionNAV>
+		<SuperUnitsCancelNAV>28,912</SuperUnitsCancelNAV>
+		<SuperUnitsTotalNetAssetValue>57,822,597,345,055</SuperUnitsTotalNetAssetValue>
+		<SuperTotalUnit>1,999,929,907</SuperTotalUnit>
+		<SuperUnitsTotalSubscription>0</SuperUnitsTotalSubscription>
+		<SuperUnitsTotalCancel>0</SuperUnitsTotalCancel>
+	</Node>
+	<Node>
+		<RegNo>12127</RegNo>
+		<FundType>19</FundType>
+		<FundSize>2</FundSize>
+		<Date>۱۴۰۴/۰۲/۰۱</Date>
+		<NAVRed>16,735</NAVRed>
+		<FundProfits>
+			<profit Date="" Value="" />
+		</FundProfits>
+		<NAVSub>16,841</NAVSub>
+		<NAVStat>16,735</NAVStat>
+		<InitiationDate>۱۴۰۲/۰۳/۱۷</InitiationDate>
+		<NetAsset>62,086,511,504,196</NetAsset>
+		<Units>3,710,011,134</Units>
+		<UnitsSubDAY>0</UnitsSubDAY>
+		<UnitsSubFromFirst>24,962</UnitsSubFromFirst>
+		<UnitsRedDAY>0</UnitsRedDAY>
+		<UnitsRedFromFirst>10,240</UnitsRedFromFirst>
+		<Portfolio>
+			<Cash>0</Cash>
+			<Deposit>9.55</Deposit>
+			<Bond>0</Bond>
+			<FiveBest>22</FiveBest>
+			<Stock>89.79</Stock>
+			<Other>0.66</Other>
+		</Portfolio>
+		<Custodian>موسسه حسابرسی و بهبود سیستم های مدیریت حسابرسین</Custodian>
+		<CustodianEng>
+		</CustodianEng>
+		<Guarantor>نامشخص نامشخص</Guarantor>
+		<GuarantorEng>
+		</GuarantorEng>
+		<ProfitGuarantor>نامشخص نامشخص</ProfitGuarantor>
+		<Manager>شرکت سبدگردان آگاه(سهامی خاص)</Manager>
+		<ManagerEng>
+		</ManagerEng>
+		<InvestmentManager>حمیدرضا ملکوتی خواه, مونا حامی احمدی, علی سماعی</InvestmentManager>
+		<InvestmentManagerEng>
+		</InvestmentManagerEng>
+		<RegistrationManager>شرکت کارگزاری آگاه</RegistrationManager>
+		<ExecutiveManager>ندارد</ExecutiveManager>
+		<MarketMaker>شرکت سبدگردان آگاه(سهامی خاص)</MarketMaker>
+		<Auditor>موسسه حسابرسی و خدمات مالی و مدیریت ایران مشهود</Auditor>
+		<AuditorEN />
+		<Name>صندوق اهرمی شتاب آگاه</Name>
+		<NameEng />
+		<WebSite>shetabfund.ir</WebSite>
+		<RetInvNo>4334</RetInvNo>
+		<InsInvNo>20</InsInvNo>
+		<RetInvPercent>0</RetInvPercent>
+		<InsInvPercent>0</InsInvPercent>
+		<NaturalPercent>0</NaturalPercent>
+		<LegalPercent>0</LegalPercent>
+		<GuaranteedEarningRate />
+		<EstimatedEarningRate>20</EstimatedEarningRate>
+		<DividentIntervalPeriod>0</DividentIntervalPeriod>
+		<Day1Return>2.123</Day1Return>
+		<Day7Return>11.42</Day7Return>
+		<Day30Return>27.838</Day30Return>
+		<Day90Return>13.88</Day90Return>
+		<Day180Return>110.012</Day180Return>
+		<Day365Return>61.334</Day365Return>
+		<DayFirstReturn>71.048</DayFirstReturn>
+		<UnitsSub>0</UnitsSub>
+		<UnitsRed>0</UnitsRed>
+		<ManagerNationalCode>14007821167</ManagerNationalCode>
+		<FixedRedemptionFee>0</FixedRedemptionFee>
+		<FixedSubscriptionFee>0</FixedSubscriptionFee>
+		<VariableSubscriptionFee>0</VariableSubscriptionFee>
+		<VariableSubscriptionFeeUpperLimit>0</VariableSubscriptionFeeUpperLimit>
+		<SplitRate />
+		<FundSplits />
+		<BaseUnitsSubscriptionNAV>16472.48</BaseUnitsSubscriptionNAV>
+		<BaseUnitsCancelNAV>16472.48</BaseUnitsCancelNAV>
+		<BaseUnitsTotalNetAssetValue>34,461,511,670,317</BaseUnitsTotalNetAssetValue>
+		<BaseTotalUnit>2,092,065,777</BaseTotalUnit>
+		<BaseUnitsTotalSubscription>2,017,284</BaseUnitsTotalSubscription>
+		<BaseUnitsTotalCancel>24,661,531</BaseUnitsTotalCancel>
+		<SuperUnitsSubscriptionNAV>17,317</SuperUnitsSubscriptionNAV>
+		<SuperUnitsCancelNAV>17,074</SuperUnitsCancelNAV>
+		<SuperUnitsTotalNetAssetValue>27,624,999,833,879</SuperUnitsTotalNetAssetValue>
+		<SuperTotalUnit>1,617,945,357</SuperTotalUnit>
+		<SuperUnitsTotalSubscription>0</SuperUnitsTotalSubscription>
+		<SuperUnitsTotalCancel>0</SuperUnitsTotalCancel>
+	</Node>
+</Funds>

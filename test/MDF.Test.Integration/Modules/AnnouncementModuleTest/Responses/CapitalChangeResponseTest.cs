@@ -1,0 +1,33 @@
+﻿namespace MDF.Test.Integration.Modules.AnnouncementModuleTest.Responses;
+
+public record CapitalChangeResponseTest(
+    int CapitalChangeIdPk,
+    int AnnouncementIdFk,
+    byte CapitalChangeTypeIdFk,
+    long LastShareValue,
+    long NewShareValue,
+    double LastShareCount,
+    double NewShareCount,
+    bool ApprovalType,
+    bool IsAccept,
+    string EntryDate,
+    string ModifyDate,
+    bool IsConfirmed,
+    bool IsDeleted,
+    short InsertionType,
+    string? InsertedBy,
+    bool? IsConfirmedManual,
+    string? ConfirmedManualTime,
+    bool? IsUseSalb,
+    double? CashIncoming,
+    double? RetaindedEarning,
+    double? Reserves,
+    double? SarfSaham,
+    double? RevaluationSurplus,
+    double? CashIncomingPercent,
+    double? CapitalChangePercent,
+    double? RetainedEarningPercent,
+    double? ReservesPercent,
+    double? SarfSahamPercent,
+    double? RevaluationSurplusPercent
+);
