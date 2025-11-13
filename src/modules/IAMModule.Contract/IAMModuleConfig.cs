@@ -1,31 +1,34 @@
-using Common.Interfaces;
-
 namespace IAMModule.Contract;
 
 public class IAMModuleConfig : BaseConfig<IAMModuleConfig>
 {
     public string Secret { get; set; }
     public int TokenExpiryInMinutes { get; set; }
+    public string ConnectionString { get; set; }
 
 
     public override (bool isValid, IEnumerable<string> errors) IsValid()
     {
-        //if (string.IsNullOrWhiteSpace(Secret))
-        //    throw new IAMConfigException($"{nameof(Secret)} is required");
+        var errors = new List<string>();
+        if (string.IsNullOrWhiteSpace(ConnectionString))
+            errors.Add($"{nameof(ConnectionString)} is required.");
 
-        //if (TokenExpiryInMinutes <= 0)
-        //    throw new IAMConfigException($"{nameof(TokenExpiryInMinutes)} must be greater than 0");
+        if (errors.Any())
+            return (false, errors);
+
         return (true, Array.Empty<string>());
     }
 
     public override void IsValidAndThrow()
     {
+        var (isValid, errors) = IsValid();
+        if (!isValid)
+            throw new IAMConfigException(errors);
     }
-}
-
-public class IAMConfigException : NotValidDataException
-{
-    public IAMConfigException(string message) : base(message, nameof(IAMConfigException))
+    internal class IAMConfigException : NotValidDataException<IAMConfigException>
     {
+        public IAMConfigException(IEnumerable<string> errors) : base(errors)
+        {
+        }
     }
 }

@@ -9,7 +9,7 @@ internal class LoginEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapPost("/api/BankingGateWay/v{apiVersion:apiVersion}/login", async (
+        app.MapPost("/api/basetemplate/iam/v{apiVersion:apiVersion}/login", async (
                 [FromBody] LoginRequest request,
                 [FromServices] ISender sender,
                 [FromServices] ILogger<LoginEndpoint> logger,

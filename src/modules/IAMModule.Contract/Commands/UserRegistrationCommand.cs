@@ -1,21 +1,34 @@
 using IAMModule.Contract.Models;
+using IAMModule.Contract.Requests;
 
 namespace IAMModule.Contract.Commands;
 
 public record UseRegistrationCommand : ICommand<ApplicationUserModel>
 {
-    public string FirstName { get; init; }
-    public string LastName { get; init; }
     public string Email { get; init; }
     public string UserName { get; init; }
     public string Password { get; init; }
     public string ConfirmPassword { get; init; }
     public string PhoneNumber { get; init; }
-    public bool Activate { get; init; }
-    public bool AutoConfirmEmail { get; init; }
+    public string? FirstName { get; init; }
+    public string? LastName { get; init; }
 
-    public UseRegistrationCommand(string firstName, string lastName, string email, string userName, string password, string confirmPassword, string phoneNumber, bool activate, bool autoConfirmEmail)
+    private UseRegistrationCommand(string email, string userName,
+        string password, string confirmPassword,
+        string firstName, string lastName, string phoneNumber)
     {
+
+        var errors = new List<string>();
+        if (string.IsNullOrWhiteSpace(email))
+            errors.Add($"{nameof(email)} is required.");
+        if (string.IsNullOrWhiteSpace(userName))
+            errors.Add($"{nameof(userName)} is required.");
+        if (string.IsNullOrWhiteSpace(password))
+            errors.Add($"{nameof(password)} is required.");
+        if (password != confirmPassword)
+            errors.Add("Passwords do not match.");
+
+
         FirstName = firstName;
         LastName = lastName;
         Email = email;
@@ -23,7 +36,25 @@ public record UseRegistrationCommand : ICommand<ApplicationUserModel>
         Password = password;
         ConfirmPassword = confirmPassword;
         PhoneNumber = phoneNumber;
-        Activate = activate;
-        AutoConfirmEmail = autoConfirmEmail;
+    }
+
+    public static UseRegistrationCommand Create(UserRegistrationRequest request)
+        => new UseRegistrationCommand(
+            request.FirstName!,
+            request.LastName!,
+            request.Email!,
+            request.UserName!,
+            request.Password!,
+            request.ConfirmPassword!,
+            request.PhoneNumber!
+        );
+
+
+    internal class UseRegistrationCommandException : NotValidDataException<UseRegistrationCommandException>
+    {
+        public UseRegistrationCommandException(IEnumerable<string> errors) :
+            base(errors)
+        {
+        }
     }
 }
