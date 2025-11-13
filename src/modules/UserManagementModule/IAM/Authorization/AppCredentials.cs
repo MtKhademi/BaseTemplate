@@ -9,9 +9,9 @@ public static class AppCredentials
             {
                 Email = "admin@ss.com",
                 UserName = "admin",
-                Password = "8585",
+                Password = "8585@8585",
                 FirstName = "Admin",
-                LastName = "SLS",
+                LastName = "Admin",
                 PhoneNumber = "+98 9399172444"
             }
         };

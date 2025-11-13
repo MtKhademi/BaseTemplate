@@ -1,6 +1,3 @@
-using UserManagementModule.IAM.Authentications;
-using UserManagementModule.IAM.Services;
-
 namespace UserManagementModule;
 
 public static class UserManagementModule

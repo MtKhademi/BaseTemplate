@@ -10,6 +10,7 @@ public enum ETypeOfApiResultStatusCodeTest
     BadRequest = 5,
     InternalServerError = 6,
     AlreadyExist = 7,
+    Forbidden = 8
 }
 
 public record ApiResultTest(

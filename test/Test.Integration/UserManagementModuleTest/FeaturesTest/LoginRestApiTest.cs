@@ -65,7 +65,6 @@ public partial class LoginRestApiTest : BaseTest
     }
 
 
-
     [Fact]
     public async Task Should_not_be_able_login_when_user_not_dont_correct_password()
     {
@@ -117,35 +116,26 @@ public partial class LoginRestApiTest : BaseTest
         userToken.RefreshToken.Should().NotBeNullOrEmpty();
     }
 
-    //[Fact]
-    //public async Task Should_not_be_()
-    //{
-    //    // Arrange: create a custom config
-    //    var customConfig = new IAMModuleConfig
-    //    {
-    //        SecretKey = "MySuperLongSecretKeyForTesting1234567890",
-    //        TokenExpiryInMinutes = 99,
-    //        ConnectionString = "TestConnectionString"
-    //    };
 
-    //    // Create a new factory with the custom config injected
-    //    var factory = _factory.WithWebHostBuilder(builder =>
-    //    {
-    //        builder.ConfigureServices(services =>
-    //        {
-    //            // Remove the existing config registration
-    //            var descriptor = services.SingleOrDefault(
-    //                d => d.ServiceType == typeof(IAMModuleConfig));
-    //            if (descriptor != null)
-    //                services.Remove(descriptor);
+    [Fact]
+    public async Task Should_be_able_adminLogin()
+    {
+        //-ARRANGE
+        var dto = new LoginRequestTest(
+            UserName: "admin",
+            Password: "8585@8585");
 
-    //            // Add the custom config
-    //            services.AddSingleton(customConfig);
-    //        });
-    //    });
+        //-ACT
+        var response = await _client.PostAsync(_api, dto.ToContentHttp());
+        await response.WriteOnConsoleAsync(_outPutHelper);
 
-    //    var client = factory.CreateClient();
-
-    //    // ...proceed with your test using 'client'
-    //}
+        //-ASSERT
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        var apiResult = await response.Content.ReadModelFromJsonAsync<ApiResultTest<TokenResponseTest>>();
+        apiResult.Should().NotBeNull();
+        var userToken = apiResult.Result;
+        userToken.Should().NotBeNull();
+        userToken.Token.Should().NotBeNullOrEmpty();
+        userToken.RefreshToken.Should().NotBeNullOrEmpty();
+    }
 }

@@ -2,8 +2,16 @@
 
 public interface IPagination
 {
-    int CurrentPage { get; set; }
-    int PageSize { get; set; }
+    int CurrentPage
+    {
+        get => 1; // Default value
+        set { }
+    }
+    int PageSize
+    {
+        get => 10; // Default value
+        set { }
+    }
 }
 
 public class Pagination : IPagination

@@ -1,6 +1,4 @@
 ﻿using Microsoft.CodeAnalysis;
-using UserManagementModule.IAM.Authorization;
-using UserManagementModule.IAM.Services;
 
 namespace UserManagementModule.IAM.Authentications;
 
@@ -59,35 +57,31 @@ internal static class JwtRESTAuthentication
                         return Task.CompletedTask;
                     },
 
-                    OnAuthenticationFailed = c =>
+                    OnAuthenticationFailed = async context =>
                     {
-                        if (c.Exception is SecurityTokenValidationException)
+                        if (context.Exception is SecurityTokenValidationException)
                         {
 
-                            if (c.Request.IsRESTRequest())
+                            if (context.Request.IsRESTRequest())
                             {
-                                c.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                                c.Response.ContentType = "application/json";
-                                throw new JwtRESTNotValidTokenException($"Token validation failed: {c.Exception.Message}");
+                                var exception = new JwtRESTNotValidTokenException($"Token validation failed: {context.Exception.Message}");
+                                await exception.WriteResponseAsync(context.HttpContext);
                             }
                         }
-
-                        return Task.CompletedTask;
                     },
-                    OnChallenge = context =>
+                    OnChallenge = async context =>
                     {
                         context.HandleResponse();
                         if (!context.Response.HasStarted)
                         {
-                            throw new JwtRESTUnauthorizedException(location: context.Request.Path);
-
+                            var exception = new JwtRESTUnauthorizedException(location: context.Request.Path);
+                            await exception.WriteResponseAsync(context.HttpContext);
                         }
-
-                        return Task.CompletedTask;
                     },
-                    OnForbidden = context =>
+                    OnForbidden = async context =>
                     {
-                        throw new JwtRESTForbiddenException(location: context.Request.Path);
+                        var exception = new JwtRESTForbiddenException(location: context.Request.Path);
+                        await exception.WriteResponseAsync(context.HttpContext);
                     }
                 };
             });
@@ -126,6 +120,15 @@ internal class JwtRESTNotValidTokenException : NotValidDataException<JwtRESTNotV
     public JwtRESTNotValidTokenException(string errors) : base(errors)
     {
     }
+
+    public async Task WriteResponseAsync(HttpContext context)
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+        context.Response.ContentType = "application/json";
+
+        var response = ApiResult.BadRequest(this);
+        await context.Response.WriteAsync(response.ToJson());
+    }
 }
 
 internal class JwtRESTUnauthorizedException : UnauthorizedException<JwtRESTUnauthorizedException>
@@ -133,11 +136,27 @@ internal class JwtRESTUnauthorizedException : UnauthorizedException<JwtRESTUnaut
     public JwtRESTUnauthorizedException(string location) : base(location)
     {
     }
+    public async Task WriteResponseAsync(HttpContext context)
+    {
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+
+        var response = ApiResult.Unauthorized(this);
+        await context.Response.WriteAsync(response.ToJson());
+    }
 }
 
-internal class JwtRESTForbiddenException : NotValidDataException<JwtRESTForbiddenException>
+internal class JwtRESTForbiddenException : ForbiddenException<JwtRESTForbiddenException>
 {
     public JwtRESTForbiddenException(string location) : base(location)
     {
+    }
+    public async Task WriteResponseAsync(HttpContext context)
+    {
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+
+        var response = ApiResult.Forbidden(this);
+        await context.Response.WriteAsync(response.ToJson());
     }
 }
