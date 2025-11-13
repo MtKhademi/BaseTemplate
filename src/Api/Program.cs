@@ -1,9 +1,5 @@
-using Api.Configs;
-using BankingGateWay.Modules.IAMModule;
 using CacheModule;
-using Carter;
-using Common.Exceptions;
-using Serilog;
+using UserManagementModule;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,14 +31,14 @@ builder.Services.AddCorsConfig();
 //        options.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
 //    });
 
-builder.Services.AddIAMModule(builder.Configuration)
+builder.Services.AddUserManagementModule(builder.Configuration)
     .AddCacheModule(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
     option
-    .AddSwaggerIAMModule()
+    .AddSwaggerUserManagementModule()
     .AddSwaggerCacheModule();
 });
 builder.Services.AddVersioningConfig();
@@ -55,7 +51,7 @@ app.MapCarter();
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
-    options.UseSwaggerIAMModule()
+    options.UseSwaggerUserManagementModule()
         .UseSwaggerCacheModule();
 
 });
@@ -74,7 +70,7 @@ app.UseCorsConfig();
 app.UseAuthorization();
 app.UseMiddleware<GlobalExceptionHandler>();
 
-app.UseIAMModule()
+app.UseUserManagementModule()
     .UseCacheModule();
 
 app.Run();

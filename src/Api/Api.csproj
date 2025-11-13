@@ -18,8 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\modules\CacheModule.Contract\CacheModule.Contract.csproj" />
     <ProjectReference Include="..\modules\CacheModule\CacheModule.csproj" />
-    <ProjectReference Include="..\modules\IAMModule\IAMModule.csproj" />
+    <ProjectReference Include="..\modules\UserManagementModule\UserManagementModule.csproj" />
   </ItemGroup>
+
 
 </Project>
