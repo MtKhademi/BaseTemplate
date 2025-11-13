@@ -1,4 +1,5 @@
 ﻿using IAMModule.Contract.Models;
+using IAMModule.Extentions;
 
 namespace IAMModule.Features.Login;
 
@@ -20,25 +21,17 @@ internal class RegisterHandler : ICommandHandler<UseRegistrationCommand, Applica
 
     public async Task<ApplicationUserModel> Handle(UseRegistrationCommand command, CancellationToken cancellationToken)
     {
-        var userWithSameEmail = await _userManager.FindByEmailAsync(command.Email);
+        await _userManager.CheckExistEmailAndThrowAsync(command.Email);
 
-        if (userWithSameEmail is not null)
-            throw new UserAlreadyExistWithEmailException(command.Email);
+        await _userManager.CheckExistPhoneOrThrowAsync(command.PhoneNumber);
 
-        var userWithSamePhone = await _userManager.Users
-            .FirstOrDefaultAsync(u => u.PhoneNumber == command.PhoneNumber, cancellationToken);
-        if (userWithSamePhone is not null)
-            throw new UserAlreadyExistWithPhoneException(command.PhoneNumber);
-
-        var userWithSameUserName = await _userManager.FindByNameAsync(command.UserName);
-        if (userWithSameUserName is not null)
-            throw new UserAlreadyExistWithUserNameException(command.UserName);
+        await _userManager.CheckExistUserNameOrThrowAsync(command.UserName);
 
         var newUser = new ApplicationUser
         {
             Email = command.Email,
-            LastName = command.LastName,
-            FirstName = command.FirstName,
+            LastName = command.LastName ?? "",
+            FirstName = command.FirstName ?? "",
             UserName = command.UserName,
             PhoneNumber = command.PhoneNumber,
             IsActive = true,

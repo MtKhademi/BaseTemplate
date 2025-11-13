@@ -16,5 +16,6 @@ public class BaseTest : IAsyncLifetime
 
     public async Task InitializeAsync()
     {
+        await _factory.InitializeAsync();
     }
 }

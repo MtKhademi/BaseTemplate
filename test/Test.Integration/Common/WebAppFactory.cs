@@ -1,4 +1,6 @@
-﻿namespace Test.Integration.Common;
+﻿using Common.Data.Seed;
+
+namespace Test.Integration.Common;
 
 public class WebAppFactory : WebApplicationFactory<Api.Program>, IAsyncLifetime
 {
@@ -26,10 +28,9 @@ public class WebAppFactory : WebApplicationFactory<Api.Program>, IAsyncLifetime
 
     internal async Task ClearDbAsync()
     {
-        //var scope = Services.CreateScope();
-        //var dbContext = scope.ServiceProvider.GetService<DatabaseContext>();
-        //var script = File.ReadAllText("ClearDb.sql");
-        //await dbContext.Database.ExecuteSqlRawAsync(script);
+        var scope = Services.CreateScope();
+        var dbContext = scope.ServiceProvider.GetService<IAMModuleDbContext>();
+        await dbContext.Database.EnsureDeletedAsync();
     }
 
     //internal DatabaseRepositoryFixture Repositories
@@ -86,6 +87,13 @@ public class WebAppFactory : WebApplicationFactory<Api.Program>, IAsyncLifetime
         await _dbContainer.StartAsync();
 
         var connnectionString = _dbContainer.GetConnectionString();
+
+        var scope = Services.CreateScope();
+        var seeders = scope.ServiceProvider.GetServices<IDataSeeder>();
+        foreach (var item in seeders)
+        {
+            await item.SeedAllAsync();
+        }
 
         //var script = File.ReadAllText("DUMP2.sql");
         //var result = await _dbContainer.ExecScriptAsync(script);

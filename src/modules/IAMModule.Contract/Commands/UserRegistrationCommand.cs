@@ -13,9 +13,12 @@ public record UseRegistrationCommand : ICommand<ApplicationUserModel>
     public string? FirstName { get; init; }
     public string? LastName { get; init; }
 
-    private UseRegistrationCommand(string email, string userName,
+    public UseRegistrationCommand(
+        string email, 
+        string userName,
         string password, string confirmPassword,
-        string firstName, string lastName, string phoneNumber)
+        string firstName, string lastName, 
+        string phoneNumber)
     {
 
         var errors = new List<string>();
@@ -37,18 +40,6 @@ public record UseRegistrationCommand : ICommand<ApplicationUserModel>
         ConfirmPassword = confirmPassword;
         PhoneNumber = phoneNumber;
     }
-
-    public static UseRegistrationCommand Create(UserRegistrationRequest request)
-        => new UseRegistrationCommand(
-            request.FirstName!,
-            request.LastName!,
-            request.Email!,
-            request.UserName!,
-            request.Password!,
-            request.ConfirmPassword!,
-            request.PhoneNumber!
-        );
-
 
     internal class UseRegistrationCommandException : NotValidDataException<UseRegistrationCommandException>
     {
