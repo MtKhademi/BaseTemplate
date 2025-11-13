@@ -1,6 +1,4 @@
-﻿using Common.Data.Seed;
-
-namespace Test.Integration.Common;
+﻿namespace Test.Integration.Common;
 
 public class WebAppFactory : WebApplicationFactory<Api.Program>, IAsyncLifetime
 {
@@ -29,7 +27,7 @@ public class WebAppFactory : WebApplicationFactory<Api.Program>, IAsyncLifetime
     internal async Task ClearDbAsync()
     {
         var scope = Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetService<IAMModuleDbContext>();
+        var dbContext = scope.ServiceProvider.GetService<UserManagementModuleDbContext>();
         await dbContext.Database.EnsureDeletedAsync();
     }
 
@@ -52,8 +50,8 @@ public class WebAppFactory : WebApplicationFactory<Api.Program>, IAsyncLifetime
         builder.ConfigureTestServices(services =>
         {
 
-            services.RemoveAll<DbContextOptions<IAMModuleDbContext>>();
-            services.AddDbContext<IAMModuleDbContext>(options =>
+            services.RemoveAll<DbContextOptions<UserManagementModuleDbContext>>();
+            services.AddDbContext<UserManagementModuleDbContext>(options =>
             {
                 options.UseSqlServer(connnectionString,
                     options =>

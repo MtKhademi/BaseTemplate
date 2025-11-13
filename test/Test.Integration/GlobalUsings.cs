@@ -6,7 +6,6 @@ global using Thinktecture;
 global using Microsoft.AspNetCore.Mvc.Testing;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.DependencyInjection.Extensions;
-global using IAMModule.Data.Context;
 global using FluentAssertions;
 global using Test.Integration.Common;
 global using Xunit.Abstractions;
