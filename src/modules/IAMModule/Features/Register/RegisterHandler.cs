@@ -1,22 +1,13 @@
-﻿using IAMModule.Contract.Models;
-using IAMModule.Extentions;
-
-namespace IAMModule.Features.Login;
+﻿namespace IAMModule.Features.Login;
 
 
 internal class RegisterHandler : ICommandHandler<UseRegistrationCommand, ApplicationUserModel>
 {
     private readonly UserManager<ApplicationUser> _userManager;
-    private readonly RoleManager<ApplicationRole> _roleManager;
-    private readonly IAMModuleConfig _UserManagementConfig;
 
-    public RegisterHandler(UserManager<ApplicationUser> userManager,
-        RoleManager<ApplicationRole> roleManager,
-        IOptions<IAMModuleConfig> userManagementConfig)
+    public RegisterHandler(UserManager<ApplicationUser> userManager)
     {
         _userManager = userManager;
-        _roleManager = roleManager;
-        _UserManagementConfig = userManagementConfig.Value;
     }
 
     public async Task<ApplicationUserModel> Handle(UseRegistrationCommand command, CancellationToken cancellationToken)
@@ -35,7 +26,7 @@ internal class RegisterHandler : ICommandHandler<UseRegistrationCommand, Applica
             UserName = command.UserName,
             PhoneNumber = command.PhoneNumber,
             IsActive = true,
-            EmailConfirmed = true,
+            EmailConfirmed = false,
             RefreshToken = ""
         };
 

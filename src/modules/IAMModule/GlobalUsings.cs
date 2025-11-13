@@ -53,6 +53,8 @@ global using IAMModule.Contract.Requests;
 global using IAMModule.Authorization;
 global using IAMModule.Data.Context;
 global using IAMModule.Services;
+global using IAMModule.Contract.Models;
+global using IAMModule.Extentions;
 
 
 

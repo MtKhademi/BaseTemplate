@@ -13,3 +13,4 @@ global using Xunit.Abstractions;
 global using Common.Extentions;
 global using Test.Common.Extentions;
 global using Test.Common.Requestes;
+global using System.Net;

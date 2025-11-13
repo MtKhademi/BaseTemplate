@@ -15,7 +15,6 @@ internal class LoginEndpoint : ICarterModule
                 [FromServices] ILogger<LoginEndpoint> logger,
                 CancellationToken cancellationToken) =>
             {
-                request.Validate();
                 return (await sender.Send(request.ToCommand(), cancellationToken)).ToApiResultSuccess();
             })
             .WithMetadata(new ApiVersion(1, 0))
