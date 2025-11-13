@@ -14,7 +14,7 @@ internal class RegisterEndpoint : ICarterModule
                 [FromServices] ISender sender,
                 CancellationToken cancellationToken) =>
             {
-                return (await sender.Send(request.ToCommand(), cancellationToken)).ToApiResultSuccess();
+                return Results.Ok((await sender.Send(request.ToCommand(), cancellationToken)).ToResponse().ToApiResultSuccess());
             })
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)

@@ -30,7 +30,15 @@ public record UserRegistrationRequest(
             throw new UserRegistrationRequestException(errors);
 
 
-        return UseRegistrationCommand.Create(this);
+        return new UseRegistrationCommand(
+            email: Email!,
+            userName: UserName!,
+            password: Password!,
+            confirmPassword: ConfirmPassword!,
+            firstName: FirstName!,
+            lastName: LastName!,
+            phoneNumber: PhoneNumber!
+        );
     }
 
     internal class UserRegistrationRequestException : NotValidDataException<UserRegistrationRequestException>
