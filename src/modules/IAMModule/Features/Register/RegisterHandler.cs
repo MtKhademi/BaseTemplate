@@ -41,18 +41,26 @@ internal class RegisterHandler : ICommandHandler<UseRegistrationCommand, Applica
             FirstName = command.FirstName,
             UserName = command.UserName,
             PhoneNumber = command.PhoneNumber,
-            IsActive = command.Activate,
-            EmailConfirmed = command.AutoConfirmEmail,
+            IsActive = true,
+            EmailConfirmed = true,
             RefreshToken = ""
         };
 
         var userResult = await _userManager.CreateAsync(newUser, command.Password);
 
-        //if (!userResult.Succeeded)
-        //    throw new Exception(userResult.GetErrorsInLine());
+        if (!userResult.Succeeded)
+            throw new RegisterHandlerException(userResult.Errors.Select(x => x.Description));
 
         await _userManager.AddToRoleAsync(newUser, AppRoles.Basic);
 
         return newUser.ToModel();
+    }
+
+
+    internal class RegisterHandlerException : NotValidDataException<RegisterHandlerException>
+    {
+        public RegisterHandlerException(IEnumerable<string> errors) : base(errors)
+        {
+        }
     }
 }

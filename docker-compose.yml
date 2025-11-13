@@ -1,0 +1,4 @@
+services:
+
+  basetemplateDb:
+    container_name: basetemplate-db

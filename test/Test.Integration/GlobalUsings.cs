@@ -1,0 +1,15 @@
+﻿global using Microsoft.AspNetCore.Hosting;
+global using Microsoft.AspNetCore.TestHost;
+global using Microsoft.EntityFrameworkCore;
+global using Testcontainers.MsSql;
+global using Thinktecture;
+global using Microsoft.AspNetCore.Mvc.Testing;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.DependencyInjection.Extensions;
+global using IAMModule.Data.Context;
+global using FluentAssertions;
+global using Test.Integration.Common;
+global using Xunit.Abstractions;
+global using Common.Extentions;
+global using Test.Common.Extentions;
+global using Test.Common.Requestes;

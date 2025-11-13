@@ -4,7 +4,7 @@ namespace Common.Extentions;
 
 public static class HttpContentExtentions
 {
-    public static StringContent ToContentHttpString(this object o)
+    public static StringContent ToContentHttp(this object o)
            => new StringContent(JsonConvert.SerializeObject(o), Encoding.UTF8, "application/json");
 
     public static async Task<T?> ReadModelFromJsonAsync<T>(this HttpContent content)

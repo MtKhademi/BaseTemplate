@@ -13,13 +13,13 @@ public static class IAMModule
             .AddRecurringJobs(assembly)
             .RegistersServices<IBaseRepository>(assembly);
 
-        return services.AddServices(configuration)
+        return services.AddServices(iamConfig)
             .AddIdentitySettings()
             .AddJwtRESTAuthentication(iamConfig);
     }
     public static IApplicationBuilder UseIAMModule(this IApplicationBuilder app)
     {
-        //app.UseMigration<IAMModuleDbContext>();
+        app.UseMigration<IAMModuleDbContext>();
         return app;
     }
 
@@ -61,10 +61,10 @@ public static class IAMModule
             .AddDefaultTokenProviders();
         return services;
     }
-    private static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddServices(this IServiceCollection services, IAMModuleConfig config)
     {
         services.AddDbContext<IAMModuleDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(config.ConnectionString));
 
         services.AddHttpContextAccessor();
 

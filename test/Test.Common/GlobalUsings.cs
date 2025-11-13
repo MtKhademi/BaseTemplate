@@ -1,0 +1,9 @@
+﻿global using Test.Common.Requestes;
+global using FluentAssertions;
+global using Xunit.Abstractions;
+global using Common.DateTimeHelpers.DateTimeProviders;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.DependencyInjection.Extensions;
+global using Moq;
+global using Microsoft.Extensions.Logging;
+global using Moq.Protected;

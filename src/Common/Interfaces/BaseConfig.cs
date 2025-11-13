@@ -1,6 +1,7 @@
 ﻿namespace Common.Interfaces;
 
-public abstract class BaseConfig<T> where T : class
+public abstract class BaseConfig<T> 
+    where T : class
 {
     public bool IsActive { get; set; } = false;
 
