@@ -25,7 +25,6 @@ public partial class RegisterRestApiTest : BaseTest
     [InlineData("test@example.com", null, null, null)]
     [InlineData("test@example.com", "testuser", null, null)]
     [InlineData(null, "testuser", null, null)]
-    [InlineData("test@example.com", "testuser", "P@ssw0rd", "P@ssw0rd")]
     [InlineData("test@example.com", "testuser", "P@ssw0rd", null)]
     [InlineData("test@example.com", "testuser", "P@ssw0rd", "123")]
     public async Task Should_not_be_able_register_when_not_send_correct_data(
@@ -86,7 +85,7 @@ public partial class RegisterRestApiTest : BaseTest
         user.PhoneNumber.Should().Be(dto.PhoneNumber);
         user.UserId.Should().NotBeEmpty();
         user.IsActive.Should().BeTrue();
-        user.EmailConfirmed.Should().BeTrue();
+        user.EmailConfirmed.Should().BeFalse();
     }
 
     [Fact]

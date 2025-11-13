@@ -115,4 +115,23 @@ internal static class UserManagerExtentions
         if (await userManager.CheckExistUserNameAsync(userName, cancellationToken))
             throw new UserAlreadyExistWithUserNameException(userName);
     }
+
+    /// <summary>
+    /// if not exist this user name throw UserNotFoundWithUserNameException
+    /// </summary>
+    /// <param name="userManager"></param>
+    /// <param name="userName"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    /// <exception cref="UserNotFoundWithUserNameException"></exception>
+    internal static async Task<ApplicationUser> FindByNameOrThrowAsync(
+        this UserManager<ApplicationUser> userManager,
+        string userName,
+        CancellationToken cancellationToken = default)
+    {
+        var user = await userManager.FindByNameAsync(userName);
+        if (user is null)
+            throw new UserNotFoundWithUserNameException(userName);
+        return user;
+    }
 }

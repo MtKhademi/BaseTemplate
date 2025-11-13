@@ -6,7 +6,7 @@ internal static class JwtRESTAuthentication
 {
     internal static IServiceCollection AddJwtRESTAuthentication(this IServiceCollection services, IAMModuleConfig config)
     {
-        var key = Encoding.UTF8.GetBytes(config.Secret);
+        var key = Encoding.UTF8.GetBytes(config.SecretKey);
 
         services.AddAuthentication(auth =>
         {

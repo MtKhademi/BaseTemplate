@@ -61,7 +61,7 @@ internal class IdentityTokenService : ITokenService
     }
     private SigningCredentials GetSigningCredentials()
     {
-        var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_UserManagementConfig.Secret));
+        var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_UserManagementConfig.SecretKey));
         return new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
     }
 
@@ -100,7 +100,7 @@ internal class IdentityTokenService : ITokenService
         var tokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_UserManagementConfig.Secret)),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_UserManagementConfig.SecretKey)),
             ValidateIssuer = false,
             ValidateAudience = false,
             RoleClaimType = ClaimTypes.Role,

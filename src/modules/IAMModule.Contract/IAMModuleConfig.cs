@@ -2,7 +2,7 @@ namespace IAMModule.Contract;
 
 public class IAMModuleConfig : BaseConfig<IAMModuleConfig>
 {
-    public string Secret { get; set; }
+    public string SecretKey { get; set; }
     public int TokenExpiryInMinutes { get; set; }
     public string ConnectionString { get; set; }
 
@@ -12,6 +12,12 @@ public class IAMModuleConfig : BaseConfig<IAMModuleConfig>
         var errors = new List<string>();
         if (string.IsNullOrWhiteSpace(ConnectionString))
             errors.Add($"{nameof(ConnectionString)} is required.");
+
+        if(string.IsNullOrWhiteSpace(SecretKey))
+            errors.Add($"{nameof(SecretKey)} is required.");
+
+        if(TokenExpiryInMinutes <= 0)
+            errors.Add($"{nameof(TokenExpiryInMinutes)} must be greater than zero.");
 
         if (errors.Any())
             return (false, errors);

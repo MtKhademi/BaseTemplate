@@ -1,39 +1,28 @@
 namespace IAMModule.Contract.Requests;
 
-public class LoginRequest
+public record LoginRequest(string? UserName, string? Password)
 {
-    public string? UserName { get; set; }
-    public string? Password { get; set; }
-    public void Validate()
-    {
-        if (string.IsNullOrWhiteSpace(UserName))
-        {
-            throw new LoginRequestException("نام کاربری الزامی است.");
-        }
-
-        if (string.IsNullOrWhiteSpace(Password))
-        {
-            throw new LoginRequestException("رمز عبور الزامی است.");
-        }
-
-        if (Password.Length < 6)
-        {
-            throw new LoginRequestException("رمز عبور باید حداقل 6 کاراکتر باشد.");
-        }
-    }
 
 
     public LoginCommand ToCommand()
     {
-        Validate();
+        var errors = new List<string>();
+        if (string.IsNullOrWhiteSpace(UserName))
+            errors.Add($"{nameof(UserName)} is required.");
+
+        if (string.IsNullOrWhiteSpace(Password) || Password.Length < 6)
+            errors.Add($"{nameof(Password)} is invalid. It must be at least 6 characters long.");
+
+        if (errors.Any())
+            throw new LoginRequestException(errors);
+
         return new LoginCommand(UserName!, Password!);
     }
 
-    internal class LoginRequestException : NotValidDataException
+    internal class LoginRequestException : NotValidDataException<LoginRequestException>
     {
-        public LoginRequestException(string message) : base(message, nameof(LoginRequestException))
+        public LoginRequestException(IEnumerable<string> errors) : base(errors)
         {
         }
     }
 }
-
