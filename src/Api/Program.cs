@@ -31,7 +31,8 @@ builder.Services.AddCorsConfig();
 //        options.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
 //    });
 
-builder.Services.AddUserManagementModule(builder.Configuration)
+builder.Services
+    .AddUserManagementModule(builder.Configuration)
     .AddCacheModule(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
@@ -47,6 +48,7 @@ builder.Services.AddVersioningConfig();
 var app = builder.Build();
 
 app.MapCarter();
+
 
 app.UseSwagger();
 app.UseSwaggerUI(options =>

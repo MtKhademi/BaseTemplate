@@ -17,7 +17,7 @@ public class ForbiddenException : BaseException
 public class ForbiddenException<TException> : ForbiddenException
 {
     public ForbiddenException(string location) :
-        base(typeof(TException).Name, location)
+        base(location, typeof(TException).Name)
     {
     }
 }

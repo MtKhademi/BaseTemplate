@@ -129,7 +129,7 @@ public class ApiResult
             Messages = messages?.ToList() ?? new List<string> { "Internal server error" }
         };
 
-    internal static ApiResult Forbidden(ForbiddenException ex)
+    public static ApiResult Forbidden(ForbiddenException ex)
         => new()
         {
             IsSuccess = false,

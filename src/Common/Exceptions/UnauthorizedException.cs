@@ -17,7 +17,7 @@ public class UnauthorizedException : BaseException
 public class UnauthorizedException<TException> : UnauthorizedException
 {
     public UnauthorizedException(string location) :
-        base(typeof(TException).Name, location)
+        base(location, typeof(TException).Name)
     {
     }
 }
