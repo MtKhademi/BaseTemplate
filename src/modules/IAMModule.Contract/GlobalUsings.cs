@@ -1,4 +1,6 @@
-﻿global using Common.Contracts.CQRS;
+﻿global using MediatR;
+
+global using Common.Contracts.CQRS;
 global using Common.Exceptions;
 global using Common.DateTimeHelpers.DateTimeFormatter;
 global using Common.DateTimeHelpers.DateTimeProviders;
