@@ -1,5 +1,5 @@
 using CacheModule;
-using UserManagementModule;
+using IAMModule;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,14 +32,14 @@ builder.Services.AddCorsConfig();
 //    });
 
 builder.Services
-    .AddUserManagementModule(builder.Configuration)
+    .AddIAMModule(builder.Configuration)
     .AddCacheModule(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
     option
-    .AddSwaggerUserManagementModule()
+    .AddSwaggerIAMModule()
     .AddSwaggerCacheModule();
 });
 builder.Services.AddVersioningConfig();
@@ -53,7 +53,7 @@ app.MapCarter();
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
-    options.UseSwaggerUserManagementModule()
+    options.UseSwaggerIAMModule()
         .UseSwaggerCacheModule();
 
 });
@@ -72,7 +72,7 @@ app.UseCorsConfig();
 app.UseAuthorization();
 app.UseMiddleware<GlobalExceptionHandler>();
 
-app.UseUserManagementModule()
+app.UseIAMModule()
     .UseCacheModule();
 
 app.Run();

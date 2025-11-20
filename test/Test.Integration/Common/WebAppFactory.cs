@@ -27,7 +27,7 @@ public class WebAppFactory : WebApplicationFactory<Api.Program>, IAsyncLifetime
     internal async Task ClearDbAsync()
     {
         var scope = Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetService<UserManagementModuleDbContext>();
+        var dbContext = scope.ServiceProvider.GetService<IAMModuleDbContext>();
         await dbContext.Database.EnsureDeletedAsync();
     }
 
@@ -50,8 +50,8 @@ public class WebAppFactory : WebApplicationFactory<Api.Program>, IAsyncLifetime
         builder.ConfigureTestServices(services =>
         {
 
-            services.RemoveAll<DbContextOptions<UserManagementModuleDbContext>>();
-            services.AddDbContext<UserManagementModuleDbContext>(options =>
+            services.RemoveAll<DbContextOptions<IAMModuleDbContext>>();
+            services.AddDbContext<IAMModuleDbContext>(options =>
             {
                 options.UseSqlServer(connnectionString,
                     options =>
