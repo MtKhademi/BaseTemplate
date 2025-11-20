@@ -23,17 +23,19 @@ public partial class UserGetPaginatedTest : BaseTest
     public async Task Should_be_able_get_users_if_current_user_is_admin()
     {
         //-ARRANGE
+        await _client.IAMLoginAdmin();
         for (int i = 1; i <= 5; i++)
         {
-            await _client.IAMRegister(
-                email: $"user{i}@example.com",
+            await _client.IAMCreateAUser(
                 userName: $"user{i}",
-                phoneNumber: $"123456789{i}",
+                password: "8585@8585",
+                confirmPassword: "8585@8585",
+                email: $"user{i}@example.com",
+                phone: $"123456789{i}",
                 firstName: $"User{i}",
                 lastName: $"User{i}");
         }
 
-        await _client.IAMLoginAdmin();
 
         //-ACT
         var response = await _client.GetAsync(_api);

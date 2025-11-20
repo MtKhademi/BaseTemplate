@@ -3,14 +3,14 @@
 namespace Test.Integration.IAMModuleTest.FeaturesTest;
 
 [Collection("Collection tests v1")]
-[Trait("IAM", "Register[REST]")]
-public partial class RegisterRestApiTest : BaseTest
+[Trait("IAM", "user-create[REST]")]
+public partial class UserCreateRestApiTest : BaseTest
 {
-    private readonly string _api = $"/api/iam/v1/register";
+    private readonly string _api = $"/api/iam/v1/user";
     private readonly WebAppFactory _factory;
     private HttpClient _client;
     private readonly ITestOutputHelper _outPutHelper;
-    public RegisterRestApiTest(WebAppFactory factory, ITestOutputHelper outPutHelper) : base(factory)
+    public UserCreateRestApiTest(WebAppFactory factory, ITestOutputHelper outPutHelper) : base(factory)
     {
         _factory = factory;
         _client = _factory.CreateClient();
@@ -20,28 +20,21 @@ public partial class RegisterRestApiTest : BaseTest
 
 
     [Theory]
-    [InlineData(null, null, null, null)]
-    [InlineData("test@example.com", null, null, null)]
-    [InlineData("test@example.com", "testuser", null, null)]
-    [InlineData(null, "testuser", null, null)]
-    [InlineData("test@example.com", "testuser", "P@ssw0rd", null)]
-    [InlineData("test@example.com", "testuser", "P@ssw0rd", "123")]
+    [InlineData(null, null, null)]
+    [InlineData("testuser", null, null)]
+    [InlineData("testuser", null, "null")]
     public async Task Should_not_be_able_register_when_not_send_correct_data(
-        string? email = default!,
         string? userName = default!,
         string? password = default!,
         string? confirmPassword = default!)
     {
         //-ARRANGE
-        var dto = new UserRegistrationRequestTest(
-            Email: email,
+        var dto = new UserCreateRequestTest(
             UserName: userName,
             Password: password,
-            ConfirmPassword: confirmPassword,
-            PhoneNumber: "0939917",
-            FirstName: "Test",
-            LastName: "User"
+            ConfirmPassword: confirmPassword
         );
+        await _client.IAMLoginAdmin();
 
         //-ACT
         var response = await _client.PostAsync(_api, dto.ToContentHttp());
@@ -51,14 +44,14 @@ public partial class RegisterRestApiTest : BaseTest
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         var apiResult = await response.Content.ReadModelFromJsonAsync<ApiResultTest>();
         apiResult.Should().NotBeNull();
-        apiResult.ErrorKey.Should().Be("UserRegistrationRequestException");
+        apiResult.ErrorKey.Should().Be("UserCreateCommandException");
     }
 
     [Fact]
-    public async Task Should_be_able_register_new_user()
+    public async Task Should_be_able_create_an_new_user()
     {
         //-ARRANGE
-        var dto = new UserRegistrationRequestTest(
+        var dto = new UserCreateRequestTest(
             Email: "test@example.com",
             UserName: "testuser",
             Password: "P@ssw0rd",
@@ -67,6 +60,7 @@ public partial class RegisterRestApiTest : BaseTest
             FirstName: "Test",
             LastName: "User"
         );
+        await _client.IAMLoginAdmin();
 
         //-ACT
         var response = await _client.PostAsync(_api, dto.ToContentHttp());
@@ -88,10 +82,10 @@ public partial class RegisterRestApiTest : BaseTest
     }
 
     [Fact]
-    public async Task Should_not_be_able_register_when_exist_already_userEmail()
+    public async Task Should_not_be_able_create_an_user_when_exist_already_userEmail()
     {
         //-ARRANGE
-        var dto = new UserRegistrationRequestTest(
+        var dto = new UserCreateRequestTest(
             Email: "test@example.com",
             UserName: "testuser",
             Password: "P@ssw0rd",
@@ -100,10 +94,24 @@ public partial class RegisterRestApiTest : BaseTest
             FirstName: "Test",
             LastName: "User"
         );
-        await _client.IAMRegister(email: dto.Email);
+        await _client.IAMLoginAdmin();
+
 
         //-ACT
         var response = await _client.PostAsync(_api, dto.ToContentHttp());
+        await response.WriteOnConsoleAsync(_outPutHelper);
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        dto = new UserCreateRequestTest(
+            Email: "test@example.com",
+            UserName: "testuser2",
+            Password: "P@ssw0rd",
+            ConfirmPassword: "P@ssw0rd",
+            PhoneNumber: "1234567892",
+            FirstName: "Test",
+            LastName: "User"
+        );
+        response = await _client.PostAsync(_api, dto.ToContentHttp());
         await response.WriteOnConsoleAsync(_outPutHelper);
 
         //-ASSERT
@@ -116,10 +124,10 @@ public partial class RegisterRestApiTest : BaseTest
     }
 
     [Fact]
-    public async Task Should_not_be_able_register_when_exist_already_userName()
+    public async Task Should_not_be_able_create_an_user_when_exist_already_userName()
     {
         //-ARRANGE
-        var dto = new UserRegistrationRequestTest(
+        var dto = new UserCreateRequestTest(
             Email: "test@example.com",
             UserName: "testuser",
             Password: "P@ssw0rd",
@@ -128,15 +136,27 @@ public partial class RegisterRestApiTest : BaseTest
             FirstName: "Test",
             LastName: "User"
         );
-        await _client.IAMRegister(email: "test2@example.com",
-            phoneNumber: "1234567898", userName: dto.UserName);
+        await _client.IAMLoginAdmin();
+
 
         //-ACT
         var response = await _client.PostAsync(_api, dto.ToContentHttp());
         await response.WriteOnConsoleAsync(_outPutHelper);
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        dto = new UserCreateRequestTest(
+            Email: "test2@example.com",
+            UserName: "testuser",
+            Password: "P@ssw0rd",
+            ConfirmPassword: "P@ssw0rd",
+            PhoneNumber: "1234567892",
+            FirstName: "Test",
+            LastName: "User"
+        );
+        response = await _client.PostAsync(_api, dto.ToContentHttp());
+        await response.WriteOnConsoleAsync(_outPutHelper);
 
         //-ASSERT
-        response.StatusCode.Should().Be(HttpStatusCode.Conflict);
         response.StatusCode.Should().Be(HttpStatusCode.Conflict);
         var apiResult = await response.Content.ReadModelFromJsonAsync<ApiResultTest>();
         apiResult.Should().NotBeNull();
@@ -145,11 +165,12 @@ public partial class RegisterRestApiTest : BaseTest
 
     }
 
+    // در این حالت بار اول باید ثتب بشه ولی بار دومی چون همون شماهر تلفن و میفرستیم باید خطا بده
     [Fact]
-    public async Task Should_not_be_able_register_when_exist_already_phoneNumber()
+    public async Task Should_not_be_able_create_an_user_when_exist_already_phoneNumber()
     {
         //-ARRANGE
-        var dto = new UserRegistrationRequestTest(
+        var dto = new UserCreateRequestTest(
             Email: "test@example.com",
             UserName: "testuser",
             Password: "P@ssw0rd",
@@ -158,10 +179,24 @@ public partial class RegisterRestApiTest : BaseTest
             FirstName: "Test",
             LastName: "User"
         );
-        await _client.IAMRegister(email: "test2@example.com", userName: "testuser2", phoneNumber: "1234567890");
+        await _client.IAMLoginAdmin();
+
 
         //-ACT
         var response = await _client.PostAsync(_api, dto.ToContentHttp());
+        await response.WriteOnConsoleAsync(_outPutHelper);
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        dto = new UserCreateRequestTest(
+            Email: "test2@example.com",
+            UserName: "testuser2",
+            Password: "P@ssw0rd",
+            ConfirmPassword: "P@ssw0rd",
+            PhoneNumber: "1234567890",
+            FirstName: "Test",
+            LastName: "User"
+        );
+        response = await _client.PostAsync(_api, dto.ToContentHttp());
         await response.WriteOnConsoleAsync(_outPutHelper);
 
         //-ASSERT

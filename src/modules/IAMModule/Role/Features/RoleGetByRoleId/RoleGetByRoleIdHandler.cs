@@ -1,4 +1,6 @@
-﻿namespace IAMModule.Role.Features.RoleGetByRoleId;
+﻿using IAMModule.Extensions;
+
+namespace IAMModule.Role.Features.RoleGetByRoleId;
 
 internal class RoleGetByRoleIdHandler(RoleManager<ApplicationRole> roleManager)
     : IQueryHandler<RoleGetByRoleIdQuery, RoleModel>

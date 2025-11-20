@@ -1,21 +1,12 @@
-﻿using IAMModule.IAM.Extentions;
+﻿using IAMModule.Extensions;
 using IAMModule.IAM.Services;
 
 namespace IAMModule.IAM.Features.Login;
 
-internal class LoginHandler : ICommandHandler<LoginCommand, TokenModel>
+internal class LoginHandler(
+    UserManager<ApplicationUser> _userManager,
+    ITokenService _tokenService) : ICommandHandler<LoginCommand, TokenModel>
 {
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly ITokenService _tokenService;
-
-    public LoginHandler(
-        UserManager<ApplicationUser> userManager,
-        ITokenService tokenService)
-    {
-        _userManager = userManager;
-        _tokenService = tokenService;
-    }
-
     public async Task<TokenModel> Handle(LoginCommand command, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByNameOrThrowAsync(command.UserName);

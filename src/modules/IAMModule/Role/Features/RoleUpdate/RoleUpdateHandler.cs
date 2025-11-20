@@ -1,4 +1,6 @@
-﻿namespace IAMModule.Role.Features.RoleUpdate;
+﻿using IAMModule.Extensions;
+
+namespace IAMModule.Role.Features.RoleUpdate;
 
 internal class RoleUpdateHandler(RoleManager<ApplicationRole> roleManager)
     : ICommandHandler<RoleUpdateCommand, RoleModel>

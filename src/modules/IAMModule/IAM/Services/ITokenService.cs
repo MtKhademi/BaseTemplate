@@ -83,7 +83,7 @@ internal class IdentityTokenService : ITokenService
         var claims = new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, user.Id),
-            new(ClaimTypes.Email, user.Email),
+            new(ClaimTypes.Email, user.Email ?? ""),
             new(ClaimTypes.Name, user.FirstName),
             new(ClaimTypes.Surname, user.LastName),
             new(ClaimTypes.MobilePhone, user.PhoneNumber ?? string.Empty),

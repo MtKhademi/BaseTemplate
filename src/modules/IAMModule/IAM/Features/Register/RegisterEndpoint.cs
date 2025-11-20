@@ -14,7 +14,7 @@ internal class RegisterEndpoint : ICarterModule
                 [FromServices] ISender sender,
                 CancellationToken cancellationToken) =>
             {
-                return Results.Ok((await sender.Send(request.ToCommand(), cancellationToken)).ToResponse().ToApiResultSuccess());
+                return Results.Ok((await sender.Send(request.ToCommand(), cancellationToken)).ToApplicationUserResponse().ToApiResultSuccess());
             })
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
@@ -25,7 +25,7 @@ internal class RegisterEndpoint : ICarterModule
             .Produces<ApiResult<TokenResponse>>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status500InternalServerError)
-            .WithSummary("User Registration")
-            .WithDescription("This endpoint allows a user to register by providing their details such as email, password, and other required information. Upon successful registration, a token is returned for authentication purposes.");
+            .WithSummary("User registration")
+            .WithDescription("");
     }
 }

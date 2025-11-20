@@ -1,4 +1,4 @@
-﻿namespace IAMModule.Role.Extensions;
+﻿namespace IAMModule.Extensions;
 
 internal static class RoleNameValidations
 {

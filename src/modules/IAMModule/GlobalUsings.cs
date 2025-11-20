@@ -56,6 +56,5 @@ global using IAMModule.IAM.Authentications;
 global using IAMModule.IAM.Exceptions;
 global using IAMModule.IAM.Authorization;
 global using IAMModule.IAM.Services;
-global using IAMModule.IAM.Extentions;
 global using IAMModule.Role.Exceptions;
-global using IAMModule.Role.Extensions;
+global using IAMModule.Extensions;

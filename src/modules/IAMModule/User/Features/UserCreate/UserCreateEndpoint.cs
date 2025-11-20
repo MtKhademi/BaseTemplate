@@ -1,8 +1,6 @@
-﻿using Common.Pagination;
+﻿namespace IAMModule.User.Features.UserCreate;
 
-namespace IAMModule.UserManagement.Features.UserGetPaginated;
-
-internal class UserGetPaginatedEndpoint : ICarterModule
+internal class UserCreateEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
@@ -11,28 +9,29 @@ internal class UserGetPaginatedEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapGet("/api/IAM/v{apiVersion:apiVersion}/user", async (
-                [AsParameters] UserGetPaginatedRequest request,
+        app.MapPost("/api/IAM/v{apiVersion:apiVersion}/user", async (
+                [FromBody] UserCreateRequest request,
                 [FromServices] ISender sender,
-                [FromServices] ILogger<UserGetPaginatedEndpoint> logger,
+                [FromServices] ILogger<UserCreateEndpoint> logger,
                 CancellationToken cancellationToken) =>
             {
                 return Results.Ok(
-                    (await sender.Send(request.ToQuery(), cancellationToken))
-                    .ToPaginatedList(x => x.ToApplicationUserResponse()).ToApiResultSuccess());
+                    (await sender.Send(request.ToUserCreateCommand(), cancellationToken))
+                    .ToApplicationUserResponse()
+                    .ToApiResultSuccess());
             })
             .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Read))
+            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Create))
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")
             .MapToApiVersion(1)
             .WithTags("USER")
             .IncludeInOpenApi()
-            .Produces<ApiResult<PaginatedList<ApplicationUserResponse>>>(StatusCodes.Status200OK)
+            .Produces<ApiResult<ApplicationUserResponse>>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status500InternalServerError)
-            .WithSummary("get users paginated list")
+            .WithSummary("create a new user")
             .WithDescription("");
     }
 }

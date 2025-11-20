@@ -13,7 +13,7 @@ public record ApplicationUserModel(
     bool? IsActive
 )
 {
-    public ApplicationUserResponse ToResponse()
+    public ApplicationUserResponse ToApplicationUserResponse()
         => new ApplicationUserResponse(
             UserId: UserId,
             FirstName: FirstName,
