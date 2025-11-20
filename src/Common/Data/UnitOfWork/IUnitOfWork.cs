@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-namespace Common.Data.UnitOfWork;
+﻿namespace Common.Data.UnitOfWork;
 
 public interface IUnitOfWork : IAsyncDisposable, IDisposable
 {
