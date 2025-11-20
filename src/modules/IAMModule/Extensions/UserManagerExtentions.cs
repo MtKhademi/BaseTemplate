@@ -1,6 +1,6 @@
 ﻿using IAMModule.IAM.Exceptions;
 
-namespace IAMModule.IAM.Extentions;
+namespace IAMModule.Extensions;
 
 internal static class UserManagerExtentions
 {

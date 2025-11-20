@@ -1,4 +1,6 @@
-﻿namespace IAMModule.Role.Features.RoleDelete;
+﻿using IAMModule.Extensions;
+
+namespace IAMModule.Role.Features.RoleDelete;
 
 internal class RoleDeleteHandler(RoleManager<ApplicationRole> roleManager)
     : ICommandHandler<RoleDeleteCommand, Unit>

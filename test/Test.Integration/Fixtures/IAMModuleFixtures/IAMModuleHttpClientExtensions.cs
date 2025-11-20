@@ -7,19 +7,12 @@ internal static class IAMModuleHttpClientExtensions
     public const string DefaultUserName = "testuser";
 
     internal static async Task<ApplicationUserResponseTest> IAMRegister(this HttpClient client,
-        string email = "test@example.com",
-        string userName = DefaultUserName, string phoneNumber = "1234567890",
-        string password = DefaultUserPassword, string confirmPassword = DefaultUserPassword,
-        string firstName = "testUser", string lastName = "testUser")
+        string userName = DefaultUserName,
+        string password = DefaultUserPassword, string confirmPassword = DefaultUserPassword)
         => await client.IAMRegister(new UserRegistrationRequestTest(
-            Email: email,
             UserName: userName,
             Password: password,
-            ConfirmPassword: confirmPassword,
-            PhoneNumber: phoneNumber,
-            FirstName: firstName,
-            LastName: lastName
-        ));
+            ConfirmPassword: confirmPassword));
     internal static async Task<ApplicationUserResponseTest> IAMRegister(this HttpClient client, UserRegistrationRequestTest dto)
     {
         var api = $"/api/iam/v1/register";
@@ -31,7 +24,32 @@ internal static class IAMModuleHttpClientExtensions
         user.Should().NotBeNull();
         return user!;
     }
-
+    internal static async Task<ApplicationUserResponseTest> IAMCreateAUser(this HttpClient client,
+        string userName,
+        string password,
+        string confirmPassword,
+        string? email = default!,
+        string? phone = default!,
+        string? firstName = default!,
+        string? lastName = default!)
+    {
+        var api = $"/api/iam/v1/user";
+        var response = await client.PostAsync(api, new UserCreateRequestTest
+        {
+            UserName = userName,
+            Password = password,
+            ConfirmPassword = confirmPassword,
+            Email = email,
+            PhoneNumber = phone,
+            FirstName = firstName,
+            LastName = lastName
+        }.ToContentHttp());
+        var apiResult = await response.Content.ReadModelFromJsonAsync<ApiResultTest<ApplicationUserResponseTest>>();
+        apiResult.Should().NotBeNull();
+        var user = apiResult!.Result;
+        user.Should().NotBeNull();
+        return user!;
+    }
 
 
 

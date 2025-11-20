@@ -1,0 +1,12 @@
+﻿namespace Test.Integration.IAMModuleTest.Requests;
+
+public record UserCreateRequestTest(
+   string? Email = default!,
+   string? UserName = default!,
+   string? Password = default!,
+   string? ConfirmPassword = default!,
+   string? PhoneNumber = default!,
+   string? FirstName = default!,
+   string? LastName = default!
+);
+

@@ -423,3 +423,5 @@ fabric.properties
 appsettings.Test.json
 
 wwwroot/Logs/
+
+obj/
