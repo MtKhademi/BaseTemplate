@@ -24,6 +24,18 @@ internal static class IAMModuleHttpClientExtensions
         user.Should().NotBeNull();
         return user!;
     }
+
+
+    internal static async Task<ApplicationUserResponseTest> IAMCreateAUser(this HttpClient client, UserCreateRequestTest request)
+    {
+        var api = $"/api/iam/v1/user";
+        var response = await client.PostAsync(api, request.ToContentHttp());
+        var apiResult = await response.Content.ReadModelFromJsonAsync<ApiResultTest<ApplicationUserResponseTest>>();
+        apiResult.Should().NotBeNull();
+        var user = apiResult!.Result;
+        user.Should().NotBeNull();
+        return user!;
+    }
     internal static async Task<ApplicationUserResponseTest> IAMCreateAUser(this HttpClient client,
         string userName,
         string password,
@@ -32,24 +44,16 @@ internal static class IAMModuleHttpClientExtensions
         string? phone = default!,
         string? firstName = default!,
         string? lastName = default!)
-    {
-        var api = $"/api/iam/v1/user";
-        var response = await client.PostAsync(api, new UserCreateRequestTest
-        {
-            UserName = userName,
-            Password = password,
-            ConfirmPassword = confirmPassword,
-            Email = email,
-            PhoneNumber = phone,
-            FirstName = firstName,
-            LastName = lastName
-        }.ToContentHttp());
-        var apiResult = await response.Content.ReadModelFromJsonAsync<ApiResultTest<ApplicationUserResponseTest>>();
-        apiResult.Should().NotBeNull();
-        var user = apiResult!.Result;
-        user.Should().NotBeNull();
-        return user!;
-    }
+        => await client.IAMCreateAUser(new UserCreateRequestTest
+        (
+            UserName: userName,
+            Password: password,
+            ConfirmPassword: confirmPassword,
+            Email: email,
+            PhoneNumber: phone,
+            FirstName: firstName,
+            LastName: lastName
+        ));
 
 
 
