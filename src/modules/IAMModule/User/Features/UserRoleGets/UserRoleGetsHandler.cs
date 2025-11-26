@@ -1,11 +1,11 @@
-﻿namespace IAMModule.UserManagement.Features.UserGetRoles;
+﻿namespace IAMModule.UserManagement.Features.UserRoleGets;
 
-internal class UserGetRolesHandler(
+internal class UserRoleGetsHandler(
     UserManager<ApplicationUser> userManager,
     RoleManager<ApplicationRole> roleManager) :
-    IQueryHandler<UserGetRolesQuery, IEnumerable<UserRoleModel>>
+    IQueryHandler<UserRoleGetsQuery, IEnumerable<UserRoleModel>>
 {
-    public async Task<IEnumerable<UserRoleModel>> Handle(UserGetRolesQuery query, CancellationToken cancellationToken)
+    public async Task<IEnumerable<UserRoleModel>> Handle(UserRoleGetsQuery query, CancellationToken cancellationToken)
     {
         var user = await userManager.FindByNameOrThrowAsync(query.UserName);
 
