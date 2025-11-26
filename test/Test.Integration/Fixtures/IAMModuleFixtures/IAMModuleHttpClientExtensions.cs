@@ -57,8 +57,8 @@ internal static class IAMModuleHttpClientExtensions
 
 
 
-    internal static async Task IAMLoginAdmin(this HttpClient client) => await client.IAMLoginUser(userName: "admin", password: "8585@8585");
-    internal static async Task IAMLoginUser(this HttpClient client,
+    internal static async Task<TokenResponseTest> IAMLoginAdmin(this HttpClient client) => await client.IAMLoginUser(userName: "admin", password: "8585@8585");
+    internal static async Task<TokenResponseTest> IAMLoginUser(this HttpClient client,
         string userName = DefaultUserName,
         string password = DefaultUserPassword)
     {
@@ -70,11 +70,13 @@ internal static class IAMModuleHttpClientExtensions
 
         var apiResult = await response.Content.ReadModelFromJsonAsync<ApiResultTest<TokenResponseTest>>();
         apiResult.Should().NotBeNull();
-        var user = apiResult!.Result;
-        user.Should().NotBeNull();
+        var tokenResponse = apiResult!.Result;
+        tokenResponse.Should().NotBeNull();
 
         client.DefaultRequestHeaders.Authorization =
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiResult!.Result!.Token);
+
+        return tokenResponse!;
     }
     internal static async Task IAMRegisterUserAndLoginUser(this HttpClient client,
         string userName = DefaultUserName,
