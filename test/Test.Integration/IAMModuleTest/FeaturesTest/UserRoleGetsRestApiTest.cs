@@ -4,13 +4,13 @@ namespace Test.Integration.IAMModuleTest.FeaturesTest;
 
 [Collection("Collection tests v1")]
 [Trait("IAM", "user-get-roles[REST]")]
-public partial class UserGetRolesRestApiTest : BaseTest
+public partial class UserRoleGetsRestApiTest : BaseTest
 {
     private readonly string _api = $"/api/IAM/v1/user/[user-name]/roles";
     private readonly WebAppFactory _factory;
     private HttpClient _client;
     private readonly ITestOutputHelper _outPutHelper;
-    public UserGetRolesRestApiTest(WebAppFactory factory, ITestOutputHelper outPutHelper) : base(factory)
+    public UserRoleGetsRestApiTest(WebAppFactory factory, ITestOutputHelper outPutHelper) : base(factory)
     {
         _factory = factory;
         _client = _factory.CreateClient();

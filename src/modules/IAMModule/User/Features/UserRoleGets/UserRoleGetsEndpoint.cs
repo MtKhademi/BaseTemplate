@@ -1,6 +1,6 @@
-﻿namespace IAMModule.User.Features.UserGetRoles;
+﻿namespace IAMModule.User.Features.UserRoleGets;
 
-internal class UserGetRolesEndpoint : ICarterModule
+internal class UserRoleGetsEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
@@ -15,7 +15,7 @@ internal class UserGetRolesEndpoint : ICarterModule
             CancellationToken cancellationToken) =>
             {
                 return Results.Ok(
-                    (await sender.Send(UserGetRolesQuery.Create(userName), cancellationToken))
+                    (await sender.Send(UserRoleGetsQuery.Create(userName), cancellationToken))
                     .Select(role => role.ToUserRoleResponse())
                     .ToApiResultSuccess());
             })

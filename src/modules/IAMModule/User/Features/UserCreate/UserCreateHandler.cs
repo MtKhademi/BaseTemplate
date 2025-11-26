@@ -28,16 +28,20 @@ internal class UserCreateHandler(UserManager<ApplicationUser> userManager)
         var userResult = await userManager.CreateAsync(newUser, command.Password);
 
         if (!userResult.Succeeded)
-            throw new UserCreateHandlerException(userResult.Errors.Select(x => x.Description));
+            throw new UserCreateHandlerException(userResult);
 
         await userManager.AddToRoleAsync(newUser, AppRoles.Basic);
 
         return newUser.ToModel();
     }
 
-
     internal class UserCreateHandlerException : NotValidDataException<UserCreateHandlerException>
     {
+        public UserCreateHandlerException(IdentityResult result)
+            : this(result.Errors.Select(x => x.Description))
+        {
+            
+        }
         public UserCreateHandlerException(IEnumerable<string> errors) : base(errors)
         {
         }
