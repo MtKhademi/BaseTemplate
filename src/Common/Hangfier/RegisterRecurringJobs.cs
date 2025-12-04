@@ -1,4 +1,4 @@
-﻿namespace Common.Hangfier;
+﻿namespace Infrastructure.Hangfier;
 
 public static class HangfireJobRegistrar
 {

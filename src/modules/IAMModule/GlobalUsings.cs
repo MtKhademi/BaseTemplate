@@ -22,27 +22,27 @@ global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.CodeAnalysis;
+
 
 global using Asp.Versioning;
 global using Carter;
 global using Carter.OpenApi;
 global using MediatR;
-global using Newtonsoft.Json;
 global using Swashbuckle.AspNetCore.SwaggerGen;
 global using Swashbuckle.AspNetCore.SwaggerUI;
 
-global using Common.DI;
-global using Common.Extentions;
-global using Common.Hangfier;
-global using Common.MediatR;
-global using Common.Messaging.Extentions;
-global using Common.Data.UnitOfWork;
-global using Common.Contracts.CQRS;
-global using Common.Data.Seed;
-global using Common.Exceptions;
-global using Common.Data;
-global using Common.Interfaces;
-global using Common.Pagination;
+global using Infrastructure.DI;
+global using Infrastructure.Extentions;
+global using Infrastructure.Hangfier;
+global using Infrastructure.MediatR;
+global using Infrastructure.Messaging.Extentions;
+global using Infrastructure.Contracts.CQRS;
+global using Infrastructure.Exceptions;
+global using Infrastructure.Data;
+global using Infrastructure.Pagination;
+global using Infrastructure.Data.Repository;
+global using Infrastructure.Web.ApiResult;
 
 global using IAMModule.Contract;
 global using IAMModule.Contract.Responses;

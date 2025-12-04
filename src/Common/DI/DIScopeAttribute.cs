@@ -1,12 +1,4 @@
-﻿namespace Common.DI;
-
-
-public enum DIScopeType
-{
-    Transiant = 0,
-    Scope = 1,
-    Singleton = 2
-}
+﻿namespace Infrastructure.DI;
 
 public class DIScopeAttribute : Attribute
 {

@@ -1,6 +1,8 @@
-﻿namespace IAMModule.IAM.Features.Login;
+﻿using Infrastructure.Web.ApiResult;
 
-internal class LoginEndpoint : ICarterModule
+namespace IAMModule.IAM.Features.ExchangeRefreshTokenWithAccessToken;
+
+internal class ExchangeRefreshTokenWithAccessTokenEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
@@ -9,24 +11,24 @@ internal class LoginEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapPost("/api/iam/v{apiVersion:apiVersion}/login", async (
-                [FromBody] LoginRequest request,
+        app.MapPut("/api/BankingGateWay/v{apiVersion:apiVersion}/exchange-refresh-token-with-access-token", async (
+                [FromBody] TokenCreateWithRefreshTokenRequest request,
                 [FromServices] ISender sender,
-                [FromServices] ILogger<LoginEndpoint> logger,
                 CancellationToken cancellationToken) =>
             {
+                request.Validate();
                 return (await sender.Send(request.ToCommand(), cancellationToken)).ToApiResultSuccess();
             })
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
-            .WithGroupName("IAM-V1")
+            .WithGroupName("BankingGateWayV1")
             .MapToApiVersion(1)
-            .WithTags("IAM")
+            .WithTags("AUTH")
             .IncludeInOpenApi()
             .Produces<ApiResult<TokenResponse>>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status500InternalServerError)
-            .WithSummary("login")
-            .WithDescription("login in gate way");
+            .WithSummary("exchange refresh token with access token")
+            .WithDescription("Exchanges a refresh token for a new access token");
     }
 }

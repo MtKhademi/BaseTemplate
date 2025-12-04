@@ -1,9 +1,8 @@
-﻿using Common.Data.Seed;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Common.Data;
+namespace Infrastructure.Data;
 
 public static class Extentions
 {

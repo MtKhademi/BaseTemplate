@@ -1,6 +1,6 @@
-﻿namespace IAMModule.IAM.Features.Register;
+﻿namespace IAMModule.IAM.Features.Login;
 
-internal class RegisterEndpoint : ICarterModule
+internal class LoginEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
@@ -9,12 +9,13 @@ internal class RegisterEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapPost("/api/iam/v{apiVersion:apiVersion}/register", async (
-                [FromBody] UserRegistrationRequest request,
+        app.MapPost("/iam/api/v{apiVersion:apiVersion}/auth/login", async (
+                [FromBody] LoginRequest request,
                 [FromServices] ISender sender,
+                [FromServices] ILogger<LoginEndpoint> logger,
                 CancellationToken cancellationToken) =>
             {
-                return Results.Ok((await sender.Send(request.ToCommand(), cancellationToken)).ToApplicationUserResponse().ToApiResultSuccess());
+                return (await sender.Send(request.ToCommand(), cancellationToken)).ToApiResultSuccess();
             })
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
@@ -25,7 +26,7 @@ internal class RegisterEndpoint : ICarterModule
             .Produces<ApiResult<TokenResponse>>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status500InternalServerError)
-            .WithSummary("User registration")
-            .WithDescription("");
+            .WithSummary("login")
+            .WithDescription("login in gate way");
     }
 }

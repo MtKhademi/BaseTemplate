@@ -1,4 +1,4 @@
-﻿namespace Common.Data.Repository
+﻿namespace Infrastructure.Data.Repository
 {
 
     public interface IBaseRepository { }
@@ -24,30 +24,6 @@
         IDeletesSoftepository<TKeyType, TEntity>,
         IDeleteSoftRepository<TKeyType, TEntity>
         where TEntity : class
-    {
-
-    }
-
-
-    public interface ICRUDMRepository<TKeyType, TEntity, TModel> :
-    IGetsNoTrackingRepository<TEntity>,
-    IGetsModelNoTrackingRepository<TModel>,
-    IGetsTrackingRepository<TEntity>,
-    IGetByIdRepository<TKeyType, TEntity>,
-
-    ICreateRepository<TEntity>,
-    ICreatesRepository<TEntity>,
-
-    IUpdateRepository<TEntity>,
-
-    IDeleteHardRepository<TKeyType, TEntity>,
-    IDeletesHardRepository<TKeyType, TEntity>,
-    ITruncateRepository,
-
-    IDeletesSoftepository<TKeyType, TEntity>,
-    IDeleteSoftRepository<TKeyType, TEntity>
-        where TEntity : class
-        where TModel : class
     {
 
     }

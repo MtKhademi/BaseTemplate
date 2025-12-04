@@ -1,7 +1,4 @@
-using System.Net;
-using Microsoft.AspNetCore.Http;
-
-namespace Common.Exceptions;
+namespace Infrastructure.Exceptions;
 
 public sealed class GlobalExceptionHandler
 {

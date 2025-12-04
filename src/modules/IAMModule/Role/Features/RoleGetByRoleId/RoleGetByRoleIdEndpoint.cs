@@ -9,8 +9,8 @@ internal class RoleGetByRoleIdEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapGet("/api/IAM/v{apiVersion:apiVersion}/role/{role-id}", async (
-                [FromRoute(Name ="role-id")] string? roleId,
+        app.MapGet("/iam/api/v{apiVersion:apiVersion}/roles/{roleId}", async (
+                [FromRoute(Name ="roleId")] string? roleId,
                 [FromServices] ISender sender,
                 [FromServices] ILogger<RoleGetByRoleIdEndpoint> logger,
                 CancellationToken cancellationToken) =>

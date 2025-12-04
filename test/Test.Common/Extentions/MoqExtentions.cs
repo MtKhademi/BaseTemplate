@@ -1,4 +1,4 @@
-﻿namespace Test.Common.Extentions;
+﻿namespace Test.Infrastructure.Extentions;
 
 public static class MoqExtentions
 {

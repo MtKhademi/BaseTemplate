@@ -9,7 +9,7 @@ internal class RoleUpdateEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapPut("/api/IAM/v{apiVersion:apiVersion}/role", async (
+        app.MapPut("/iam/api/v{apiVersion:apiVersion}/roles", async (
                 [FromBody] RoleUpdateRequest request,
                 [FromServices] ISender sender,
                 [FromServices] ILogger<RoleUpdateEndpoint> logger,

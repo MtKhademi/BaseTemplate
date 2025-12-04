@@ -1,4 +1,6 @@
-﻿namespace Test.Integration.Common;
+﻿using Infrastructure.Data;
+
+namespace Test.Integration.Common;
 
 public class WebAppFactory : WebApplicationFactory<Api.Program>, IAsyncLifetime
 {

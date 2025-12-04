@@ -1,4 +1,4 @@
-﻿namespace Common.Data.Seed;
+﻿namespace Infrastructure.Data;
 
 public interface IDataSeeder
 {

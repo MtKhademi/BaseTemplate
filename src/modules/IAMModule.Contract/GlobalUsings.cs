@@ -1,11 +1,9 @@
 ﻿global using MediatR;
 
-global using Common.Contracts.CQRS;
-global using Common.Exceptions;
-global using Common.DateTimeHelpers.DateTimeFormatter;
-global using Common.DateTimeHelpers.DateTimeProviders;
-global using Common.Interfaces;
-global using Common.Pagination;
+global using Infrastructure.Contracts.CQRS;
+global using Infrastructure.Exceptions;
+global using Infrastructure.DateTimeHelpers.DateTimeFormatter;
+global using Infrastructure.Pagination;
 
 global using IAMModule.Contract.Responses;
 global using IAMModule.Contract.Commands;

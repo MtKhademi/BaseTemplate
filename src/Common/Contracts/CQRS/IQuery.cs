@@ -1,4 +1,4 @@
-﻿namespace Common.Contracts.CQRS;
+﻿namespace Infrastructure.Contracts.CQRS;
 
 public interface IQuery<out T> : IRequest<T>
     where T : notnull

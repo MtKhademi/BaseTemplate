@@ -1,4 +1,4 @@
-﻿namespace Common.Hangfier;
+﻿namespace Infrastructure.Hangfier;
 
 internal static class RegisterHangfire
 {

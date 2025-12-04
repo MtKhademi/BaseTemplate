@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore;
 
-namespace Common.Data.Repository;
+namespace Infrastructure.Data.Repository;
 
 internal class AnnotationHelper
 {

@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using System.Net.Mime;
 
-namespace Common.Messaging.Serializers;
+namespace Infrastructure.Messaging.Serializers;
 
 public class RawDataMessageSerializerFactory : ISerializerFactory
 {

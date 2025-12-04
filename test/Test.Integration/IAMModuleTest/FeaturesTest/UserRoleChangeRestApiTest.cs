@@ -55,6 +55,22 @@ public partial class UserRoleChangeRestApiTest : BaseTest
         result = await response.Content.ReadModelFromJsonAsync<ApiResultTest<List<UserRoleResponse>>>();
         result.Should().NotBeNull();
         result.Result.Should().HaveCount(2);
-        result.Result.Where(x=>x.RoleName=="NEW-ROLE").Should().HaveCount(1);
+        result.Result.Where(x => x.RoleName == "NEW-ROLE").Should().HaveCount(1);
+    }
+
+
+    [Fact]
+    public async Task Fluent_Should_Change_User_Role()
+    {
+        var scenario = new IamTestScenario(_client, _outPutHelper)
+            .LoginAdmin()
+            .CreateUser("fluent@example.com")
+            .CreateUser("fluent2@example.com")
+            .CreateRole("NEW-ROLE")
+            .LoginUser("fluent@example.com", "P@ssw0rd");
+
+        var roles = scenario.GetCurrentUserRoles();
+
+        roles.Should().Contain(x => x.RoleName == "NEW-ROLE");
     }
 }

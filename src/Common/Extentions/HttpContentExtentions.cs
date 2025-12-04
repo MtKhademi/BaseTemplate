@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Common.Extentions;
+namespace Infrastructure.Extentions;
 
 public static class HttpContentExtentions
 {

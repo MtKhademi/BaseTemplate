@@ -1,4 +1,4 @@
-﻿namespace Common.DateTimeHelpers;
+﻿namespace Infrastructure.DateTimeHelpers;
 
 public static class DateTimeExtensions
 {

@@ -1,4 +1,4 @@
-﻿namespace Common.Messaging.Extentions;
+﻿namespace Infrastructure.Messaging.Extentions;
 
 public static class MassTransitExtentions
 {

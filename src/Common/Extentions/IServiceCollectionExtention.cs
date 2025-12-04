@@ -1,4 +1,6 @@
-﻿namespace Common.Extentions;
+﻿using Infrastructure.Web;
+
+namespace Infrastructure.Extentions;
 
 public static class ServiceCollectionExtention
 {

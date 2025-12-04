@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{66512B6E-3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{C3000B64-B444-46C9-AF54-0E13A328776C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "src\Common\Common.csproj", "{85B84B44-99DE-4ABB-864A-D3C61121C7B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Common\Infrastructure.csproj", "{85B84B44-99DE-4ABB-864A-D3C61121C7B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Common", "test\Test.Common\Test.Common.csproj", "{89B6D479-2EC2-40DF-8BE1-177B4AF9838D}"
 EndProject

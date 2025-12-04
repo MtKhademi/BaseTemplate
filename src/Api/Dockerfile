@@ -15,7 +15,7 @@ COPY ["src/Common/NuGet.config", "src/Common/"]
 COPY ["src/Api/Api.csproj", "src/Api/"]
 COPY ["src/modules/CacheModule/CacheModule.csproj", "src/modules/CacheModule/"]
 COPY ["src/modules/CacheModule.Contract/CacheModule.Contract.csproj", "src/modules/CacheModule.Contract/"]
-COPY ["src/Common/Common.csproj", "src/Common/"]
+COPY ["src/Common/Infrastructure.csproj", "src/Common/"]
 COPY ["src/modules/IAMModule/IAMModule.csproj", "src/modules/IAMModule/"]
 COPY ["src/modules/IAMModule.Contract/IAMModule.Contract.csproj", "src/modules/IAMModule.Contract/"]
 RUN dotnet restore "./src/Api/Api.csproj"

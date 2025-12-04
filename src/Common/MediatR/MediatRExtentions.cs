@@ -1,4 +1,4 @@
-﻿namespace Common.MediatR;
+﻿namespace Infrastructure.MediatR;
 
 public static class MediatRExtentions
 {

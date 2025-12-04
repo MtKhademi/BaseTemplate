@@ -1,4 +1,4 @@
-﻿namespace Common.Contracts.CQRS;
+﻿namespace Infrastructure.Contracts.CQRS;
 
 
 public interface ICommandHandler<in TCommand>

@@ -1,4 +1,4 @@
-﻿namespace Common.DateTimeHelpers.DateTimeProviders;
+﻿namespace Infrastructure.DateTimeHelpers.DateTimeProviders;
 
 public class DateTimeProvider : IDateTimeProvider
 {

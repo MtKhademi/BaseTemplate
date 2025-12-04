@@ -9,13 +9,13 @@ internal class UserRoleGetsEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapGet("/api/IAM/v{apiVersion:apiVersion}/user/{user-name}/roles", async (
-            [FromRoute(Name = "user-name")] string userName,
+        app.MapGet("/iam/api/v{apiVersion:apiVersion}/users/{userId}/roles", async (
+            [FromRoute(Name = "userId")] string userId,
             [FromServices] ISender sender,
             CancellationToken cancellationToken) =>
             {
                 return Results.Ok(
-                    (await sender.Send(UserRoleGetsQuery.Create(userName), cancellationToken))
+                    (await sender.Send(UserRoleGetsQuery.Create(userId), cancellationToken))
                     .Select(role => role.ToUserRoleResponse())
                     .ToApiResultSuccess());
             })
