@@ -1,4 +1,3 @@
-using CacheModule;
 using IAMModule;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,29 +17,14 @@ builder.WebHost.UseKestrel().UseIIS();
 
 builder.Services.AddCorsConfig();
 
-//builder.Services.AddStackExchangeRedisCache(options =>
-//{
-//    options.Configuration = builder.Configuration.GetConnectionString("Redis");
-//});
-
-//builder.Services.AddControllers()
-//    .AddNewtonsoftJson(options =>
-//    {
-//        options.SerializerSettings.Converters.Add(new StringEnumConverter());
-//        options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-//        options.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
-//    });
-
 builder.Services
-    .AddIAMModule(builder.Configuration)
-    .AddCacheModule(builder.Configuration);
+    .AddIAMModule(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
     option
-    .AddSwaggerIAMModule()
-    .AddSwaggerCacheModule();
+    .AddSwaggerIAMModule();
 });
 builder.Services.AddVersioningConfig();
 
@@ -53,9 +37,7 @@ app.MapCarter();
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
-    options.UseSwaggerIAMModule()
-        .UseSwaggerCacheModule();
-
+    options.UseSwaggerIAMModule();
 });
 
 
@@ -67,12 +49,10 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseCorsConfig();
 
-//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.UseMiddleware<GlobalExceptionHandler>();
 
-app.UseIAMModule()
-    .UseCacheModule();
+app.UseIAMModule();
 
 app.Run();
