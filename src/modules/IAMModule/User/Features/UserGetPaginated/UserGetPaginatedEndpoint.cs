@@ -1,6 +1,4 @@
-﻿using Common.Pagination;
-
-namespace IAMModule.UserManagement.Features.UserGetPaginated;
+﻿namespace IAMModule.UserManagement.Features.UserGetPaginated;
 
 internal class UserGetPaginatedEndpoint : ICarterModule
 {
@@ -11,7 +9,7 @@ internal class UserGetPaginatedEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapGet("/api/IAM/v{apiVersion:apiVersion}/user", async (
+        app.MapGet("/iam/api/v{apiVersion:apiVersion}/users", async (
                 [AsParameters] UserGetPaginatedRequest request,
                 [FromServices] ISender sender,
                 [FromServices] ILogger<UserGetPaginatedEndpoint> logger,

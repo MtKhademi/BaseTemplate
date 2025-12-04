@@ -1,4 +1,4 @@
-﻿namespace Common.DDD.ValueObjects;
+﻿namespace Infrastructure.DDD.ValueObjects;
 
 public abstract class BaseValueObject
 {

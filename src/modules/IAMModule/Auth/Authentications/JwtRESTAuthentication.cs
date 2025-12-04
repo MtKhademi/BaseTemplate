@@ -1,6 +1,4 @@
-﻿using Microsoft.CodeAnalysis;
-
-namespace IAMModule.IAM.Authentications;
+﻿namespace IAMModule.IAM.Authentications;
 
 internal static class JwtRESTAuthentication
 {

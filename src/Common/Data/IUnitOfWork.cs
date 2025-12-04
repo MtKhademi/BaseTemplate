@@ -1,7 +1,6 @@
-﻿
-namespace Common.Interfaces;
+﻿namespace Infrastructure.Data;
 
-public interface IBaseUnitOfWork : IAsyncDisposable , IDisposable
+public interface IUnitOfWork : IAsyncDisposable, IDisposable
 {
     /// <summary>
     /// Start the database Transaction

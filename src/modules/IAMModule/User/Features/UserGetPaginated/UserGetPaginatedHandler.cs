@@ -1,4 +1,4 @@
-﻿using Common.Pagination;
+﻿using Infrastructure.Pagination;
 using IAMModule.Contract.Queries;
 
 namespace IAMModule.UserManagement.Features.UserGetPaginated;

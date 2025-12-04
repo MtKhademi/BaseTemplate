@@ -1,3 +1,5 @@
+using Infrastructure.Web;
+
 namespace IAMModule.Contract;
 
 public class IAMModuleConfig : BaseConfig<IAMModuleConfig>

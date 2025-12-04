@@ -1,4 +1,4 @@
-﻿namespace Common.Enumerations;
+﻿namespace Infrastructure.Enumerations;
 
 public enum TypeOfEducation
 {

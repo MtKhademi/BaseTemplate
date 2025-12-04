@@ -7,8 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Auth\Extentions\**" />
+    <EmbeddedResource Remove="Auth\Extentions\**" />
+    <None Remove="Auth\Extentions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="IAM\Extentions\" />
   </ItemGroup>
 
   <ItemGroup>

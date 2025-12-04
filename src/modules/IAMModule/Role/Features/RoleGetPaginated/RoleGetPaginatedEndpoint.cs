@@ -9,7 +9,7 @@ internal class RoleGetPaginatedEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapGet("/api/IAM/v{apiVersion:apiVersion}/role", async (
+        app.MapGet("/iam/api/v{apiVersion:apiVersion}/roles", async (
                 [AsParameters] RoleGetPaginatedRequest request,
                 [FromServices] ISender sender,
                 [FromServices] ILogger<RoleGetPaginatedEndpoint> logger,

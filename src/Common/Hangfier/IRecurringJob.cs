@@ -1,4 +1,4 @@
-﻿namespace Common.Hangfier;
+﻿namespace Infrastructure.Hangfier;
 
 public interface IRecurringJob
 {

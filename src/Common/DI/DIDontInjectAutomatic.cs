@@ -1,4 +1,4 @@
-﻿namespace Common.DI;
+﻿namespace Infrastructure.DI;
 
 public class DIDontInjectAutomatic : Attribute
 {

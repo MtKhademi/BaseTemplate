@@ -1,4 +1,6 @@
-﻿namespace IAMModule.User.Features.UserUpdate;
+﻿using Infrastructure.Web.ApiResult;
+
+namespace IAMModule.User.Features.UserUpdate;
 
 internal class UserUpdateEndpoint : ICarterModule
 {

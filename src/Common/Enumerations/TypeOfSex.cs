@@ -1,6 +1,6 @@
-﻿using Common.Extentions;
+﻿using Infrastructure.Extentions;
 
-namespace Common.Enumerations;
+namespace Infrastructure.Enumerations;
 
 public enum TypeOfSex
 {

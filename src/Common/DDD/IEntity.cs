@@ -1,4 +1,4 @@
-﻿namespace Common.DDD;
+﻿namespace Infrastructure.DDD;
 
 public interface IEntity
 {

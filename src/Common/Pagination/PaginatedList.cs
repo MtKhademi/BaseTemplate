@@ -1,4 +1,4 @@
-﻿namespace Common.Pagination;
+﻿namespace Infrastructure.Pagination;
 
 public interface IPaginated
 {

@@ -9,8 +9,8 @@ internal class RoleDeleteEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapDelete("/api/IAM/v{apiVersion:apiVersion}/role/{role-id}", async (
-                [FromRoute(Name = "role-id")] string? roleId,
+        app.MapDelete("/iam/api/v{apiVersion:apiVersion}/roles/{roleId}", async (
+                [FromRoute(Name = "roleId")] string? roleId,
                 [FromServices] ISender sender,
                 [FromServices] ILogger<RoleDeleteEndpoint> logger,
                 CancellationToken cancellationToken) =>

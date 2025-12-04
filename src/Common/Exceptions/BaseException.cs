@@ -1,4 +1,4 @@
-﻿namespace Common.Exceptions;
+﻿namespace Infrastructure.Exceptions;
 
 public abstract class BaseException : Exception
 {

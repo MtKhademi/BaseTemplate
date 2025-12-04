@@ -9,7 +9,7 @@ internal class UserCreateEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapPost("/api/IAM/v{apiVersion:apiVersion}/user", async (
+        app.MapPost("/iam/api/v{apiVersion:apiVersion}/users", async (
                 [FromBody] UserCreateRequest request,
                 [FromServices] ISender sender,
                 [FromServices] ILogger<UserCreateEndpoint> logger,

@@ -1,6 +1,6 @@
-﻿namespace IAMModule.IAM.Features.ExchangeRefreshTokenWithAccessToken;
+﻿namespace IAMModule.IAM.Features.Register;
 
-internal class ExchangeRefreshTokenWithAccessTokenEndpoint : ICarterModule
+internal class RegisterEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
@@ -9,24 +9,23 @@ internal class ExchangeRefreshTokenWithAccessTokenEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapPut("/api/BankingGateWay/v{apiVersion:apiVersion}/exchange-refresh-token-with-access-token", async (
-                [FromBody] TokenCreateWithRefreshTokenRequest request,
+        app.MapPost("/iam/api/v{apiVersion:apiVersion}/auth/register", async (
+                [FromBody] UserRegistrationRequest request,
                 [FromServices] ISender sender,
                 CancellationToken cancellationToken) =>
             {
-                request.Validate();
-                return (await sender.Send(request.ToCommand(), cancellationToken)).ToApiResultSuccess();
+                return Results.Ok((await sender.Send(request.ToCommand(), cancellationToken)).ToApplicationUserResponse().ToApiResultSuccess());
             })
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
-            .WithGroupName("BankingGateWayV1")
+            .WithGroupName("IAM-V1")
             .MapToApiVersion(1)
-            .WithTags("AUTH")
+            .WithTags("IAM")
             .IncludeInOpenApi()
             .Produces<ApiResult<TokenResponse>>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status500InternalServerError)
-            .WithSummary("exchange refresh token with access token")
-            .WithDescription("Exchanges a refresh token for a new access token");
+            .WithSummary("User registration")
+            .WithDescription("");
     }
 }

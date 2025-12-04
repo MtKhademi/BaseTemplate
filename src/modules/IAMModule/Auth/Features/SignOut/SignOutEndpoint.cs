@@ -1,8 +1,9 @@
 using IAMModule.IAM.Authorization;
+using Infrastructure.Web.ApiResult;
 
-namespace IAMModule.IAM.Features.ChangePassword;
+namespace IAMModule.IAM.Features.SignOut;
 
-internal class ChangePasswordEndpoint : ICarterModule
+internal class SignOutEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
@@ -11,18 +12,16 @@ internal class ChangePasswordEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapPut("/api/BankingGateWay/v{apiVersion:apiVersion}/change-password", async (
+        app.MapPost("/api/BankingGateWay/v{apiVersion:apiVersion}/signout", async (
                 HttpContext context,
-                [FromBody] ChangePasswordRequest request,
                 [FromServices] ISender sender,
                 CancellationToken cancellationToken) =>
             {
                 var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                return (await sender.Send(request.ToCommand(userId), cancellationToken))
-                    .ToApiResultSuccess();
+                return (await sender.Send(new SignOutCommand(userId), cancellationToken)).ToApiResultSuccess();
             })
             .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Update))
+            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Delete))
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("BankingGateWayV1")
@@ -32,7 +31,7 @@ internal class ChangePasswordEndpoint : ICarterModule
             .Produces<ApiResult<bool>>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status500InternalServerError)
-            .WithSummary("Change Password")
-            .WithDescription("Change user password");
+            .WithSummary("Sign Out")
+            .WithDescription("Sign out user and invalidate refresh token");
     }
 }

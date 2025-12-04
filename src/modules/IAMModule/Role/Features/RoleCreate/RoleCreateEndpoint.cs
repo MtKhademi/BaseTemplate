@@ -9,7 +9,7 @@ internal class RoleCreateEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapPost("/api/IAM/v{apiVersion:apiVersion}/role", async (
+        app.MapPost("/iam/api/v{apiVersion:apiVersion}/roles", async (
                 [FromBody] RoleCreateRequest request,
                 [FromServices] ISender sender,
                 [FromServices] ILogger<RoleCreateEndpoint> logger,

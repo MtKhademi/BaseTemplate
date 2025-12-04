@@ -1,4 +1,4 @@
-﻿namespace Common.Contracts.CQRS;
+﻿namespace Infrastructure.Contracts.CQRS;
 
 public interface IQueryHandler<in TQuery, TResponse>
     : IRequestHandler<TQuery, TResponse>

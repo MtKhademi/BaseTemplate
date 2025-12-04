@@ -9,8 +9,8 @@ internal class UserDeleteEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapDelete("/api/IAM/v{apiVersion:apiVersion}/user/{user-id}", async (
-                [FromRoute(Name = "user-id")] string userId,
+        app.MapDelete("/iam/api/v{apiVersion:apiVersion}/users/{userId}", async (
+                [FromRoute(Name = "userId")] string userId,
                 [FromServices] ISender sender,
                 [FromServices] ILogger<UserDeleteEndpoint> logger,
                 CancellationToken cancellationToken) =>

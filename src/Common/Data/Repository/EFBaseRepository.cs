@@ -1,4 +1,4 @@
-﻿namespace Common.Data.Repository;
+﻿namespace Infrastructure.Data.Repository;
 
 public abstract class EFBaseRepository<TKeyModel, TModel>
         where TModel : class

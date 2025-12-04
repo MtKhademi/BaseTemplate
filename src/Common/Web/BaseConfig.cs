@@ -1,4 +1,4 @@
-﻿namespace Common.Interfaces;
+﻿namespace Infrastructure.Web;
 
 public abstract class BaseConfig<T> 
     where T : class

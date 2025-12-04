@@ -1,4 +1,4 @@
-﻿namespace Common.Data.Interceptors;
+﻿namespace Infrastructure.Data.Interceptors;
 
 public class AuditableEntityInterceptor : SaveChangesInterceptor
 {

@@ -1,4 +1,4 @@
-﻿namespace Common.MediatR.Behaviors;
+﻿namespace Infrastructure.MediatR.Behaviors;
 
 public class LogginBehavior<TRequest, TResponse>(
     ILogger<LogginBehavior<TRequest, TResponse>> logger) : IPipelineBehavior<TRequest, TResponse>

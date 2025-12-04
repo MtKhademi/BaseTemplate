@@ -1,4 +1,4 @@
-﻿namespace Test.Common.Requestes;
+﻿namespace Test.Infrastructure.Requestes;
 
 public record PaginatedListTest<TEntity>(
     int? CurrentPage,

@@ -1,4 +1,4 @@
-﻿namespace Common.DateTimeHelpers.DateTimeFormatter;
+﻿namespace Infrastructure.DateTimeHelpers.DateTimeFormatter;
 
 public interface IDateTimeFormatter
 {

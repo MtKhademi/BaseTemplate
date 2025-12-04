@@ -9,8 +9,8 @@ internal class UserRoleChangeEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapPut("/api/IAM/v{apiVersion:apiVersion}/user/{user-id}/role-change/", async (
-                [FromRoute(Name = "user-id")] string userId,
+        app.MapPut("/iam/api/v{apiVersion:apiVersion}/users/{userId}/roles", async (
+                [FromRoute(Name = "userId")] string userId,
                 [FromBody] UserRolesChangeRequest request,
                 [FromServices] ISender sender,
                 CancellationToken cancellationToken) =>

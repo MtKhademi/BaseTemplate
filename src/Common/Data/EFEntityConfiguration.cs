@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Common.DDD;
+using Infrastructure.DDD;
 
-namespace Common.Data;
+namespace Infrastructure.Data;
 
 public abstract class EFEntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
     where TEntity : BaseEntity

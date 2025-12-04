@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Common.Messaging.Serializers;
+namespace Infrastructure.Messaging.Serializers;
 
 internal class RawDataMessageSerializer :
    RawMessageSerializer,
