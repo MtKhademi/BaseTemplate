@@ -21,12 +21,12 @@ internal class LoginEndpoint : ICarterModule
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")
             .MapToApiVersion(1)
-            .WithTags("IAM")
+            .WithTags("AUTH")
             .IncludeInOpenApi()
             .Produces<ApiResult<TokenResponse>>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status500InternalServerError)
             .WithSummary("login")
-            .WithDescription("login in gate way");
+            .WithDescription("");
     }
 }

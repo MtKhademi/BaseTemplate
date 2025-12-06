@@ -1,7 +1,4 @@
-using IAMModule.IAM.Authorization;
-using Infrastructure.Web.ApiResult;
-
-namespace IAMModule.IAM.Features.SignOut;
+namespace IAMModule.Auth.Features.SignOut;
 
 internal class SignOutEndpoint : ICarterModule
 {
@@ -12,7 +9,7 @@ internal class SignOutEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapPost("/api/BankingGateWay/v{apiVersion:apiVersion}/signout", async (
+        app.MapPost("/iam/api/v{apiVersion:apiVersion}/auth/signout", async (
                 HttpContext context,
                 [FromServices] ISender sender,
                 CancellationToken cancellationToken) =>
@@ -20,11 +17,10 @@ internal class SignOutEndpoint : ICarterModule
                 var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 return (await sender.Send(new SignOutCommand(userId), cancellationToken)).ToApiResultSuccess();
             })
-            .RequireAuthorization()
             .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Delete))
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
-            .WithGroupName("BankingGateWayV1")
+            .WithGroupName("IAM-V1")
             .MapToApiVersion(1)
             .WithTags("AUTH")
             .IncludeInOpenApi()

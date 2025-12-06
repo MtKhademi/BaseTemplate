@@ -1,4 +1,5 @@
 ﻿using Test.Integration.Fixtures.IAMModuleFixtures;
+using Test.Integration.Fixtures.TestScenarios;
 
 namespace Test.Integration.IAMModuleTest.FeaturesTest;
 
@@ -28,6 +29,7 @@ public partial class LoginRestApiTest : BaseTest
         string? password = default!)
     {
         //-ARRANGE
+        var testScenarioRunner = new ScenarioRunner(_client, _outPutHelper);
         var dto = new LoginRequestTest(
             UserName: userName,
             Password: password

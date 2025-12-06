@@ -2,13 +2,15 @@
 
 public static class HttpContentExtentions
 {
-    public static async Task WriteOnConsoleAsync(this HttpResponseMessage response, ITestOutputHelper outPut)
+    public static async Task WriteOnConsoleAsync(this HttpResponseMessage response, ITestOutputHelper outPut,
+        string header = "")
     {
-        outPut.WriteLine($"" +
-            $"============ RESPONSE ==================== \n" +
+        outPut.WriteLine(
+            $"============ RESPONSE : {header} ==================== \n" +
             $" -> STATUS : {response.StatusCode}\n" +
             $" -> VALUE : " +
-            $"{await response.Content.ReadAsStringAsync()}");
+            $"{await response.Content.ReadAsStringAsync()}\n" +
+            $"===================================================== \n");
     }
 
 }
