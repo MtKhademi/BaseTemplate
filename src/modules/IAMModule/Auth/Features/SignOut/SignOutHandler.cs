@@ -1,20 +1,9 @@
-using IAMModule.IAM.Services;
+namespace IAMModule.Auth.Features.SignOut;
 
-namespace IAMModule.IAM.Features.SignOut;
-
-internal class SignOutHandler : ICommandHandler<SignOutCommand, bool>
+internal class SignOutHandler(ITokenService tokenService) : ICommandHandler<SignOutCommand, bool>
 {
-    private readonly ILogger<SignOutHandler> _logger;
-    private readonly ITokenService _tokenService;
-
-    public SignOutHandler(ITokenService tokenService, ILogger<SignOutHandler> logger)
-    {
-        _tokenService = tokenService;
-        _logger = logger;
-    }
-
     public async Task<bool> Handle(SignOutCommand command, CancellationToken cancellationToken)
     {
-        return await _tokenService.SignOutAsync(command.UserId);
+        return await tokenService.SignOutAsync(command.UserId);
     }
 }

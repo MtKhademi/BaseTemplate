@@ -20,7 +20,7 @@ internal class RegisterEndpoint : ICarterModule
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")
             .MapToApiVersion(1)
-            .WithTags("IAM")
+            .WithTags("AUTH")
             .IncludeInOpenApi()
             .Produces<ApiResult<TokenResponse>>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)

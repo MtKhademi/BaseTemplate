@@ -57,7 +57,8 @@ internal static class IAMModuleHttpClientExtensions
 
 
 
-    internal static async Task<TokenResponseTest> IAMLoginAdmin(this HttpClient client) => await client.IAMLoginUser(userName: "admin", password: "8585@8585");
+    internal static async Task<TokenResponseTest> IAMLoginAdmin(this HttpClient client) => 
+        await client.IAMLoginUser(userName: "admin", password: "8585@8585");
     internal static async Task<TokenResponseTest> IAMLoginUser(this HttpClient client,
         string userName = DefaultUserName,
         string password = DefaultUserPassword)
