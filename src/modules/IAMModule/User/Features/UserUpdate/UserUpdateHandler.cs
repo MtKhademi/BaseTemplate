@@ -9,6 +9,7 @@ internal class UserUpdateHandler(UserManager<ApplicationUser> userManager)
 
         if (!string.IsNullOrWhiteSpace(command.Email))
         {
+            var users = await userManager.Users.ToListAsync();
             var userEmail = await userManager.FindByEmailAsync(command.Email);
             if (userEmail is not null && userEmail.Id != user.Id)
                 throw new UserUpdateHandlerException(new[] { "Email is already taken" });

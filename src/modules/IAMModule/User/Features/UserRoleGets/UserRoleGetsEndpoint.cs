@@ -16,7 +16,7 @@ internal class UserRoleGetsEndpoint : ICarterModule
             {
                 return Results.Ok(
                     (await sender.Send(UserRoleGetsQuery.Create(userId), cancellationToken))
-                    .Select(role => role.ToUserRoleResponse())
+                    .ToUserRoleResponse()
                     .ToApiResultSuccess());
             })
             .RequireAuthorization()

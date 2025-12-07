@@ -1,6 +1,7 @@
 namespace IAMModule.Contract.Requests;
 
 public record UserUpdateRequest(
+    string? UserId = default!,
     string? Email = default!,
     string? UserName = default!,
     string? Password = default!,
@@ -10,6 +11,6 @@ public record UserUpdateRequest(
     string? LastName = default!
 )
 {
-    public UserUpdateCommand ToUserUpdateCommand(string userId) => UserUpdateCommand.Create(this, userId);
+    public UserUpdateCommand ToUserUpdateCommand() => UserUpdateCommand.Create(this);
 
 }

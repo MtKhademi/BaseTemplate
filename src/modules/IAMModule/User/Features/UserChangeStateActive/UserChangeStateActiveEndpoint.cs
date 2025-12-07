@@ -1,8 +1,6 @@
-﻿using Infrastructure.Web.ApiResult;
+﻿namespace IAMModule.User.Features.UserChangeStateActive;
 
-namespace IAMModule.User.Features.UserUpdate;
-
-internal class UserUpdateEndpoint : ICarterModule
+internal class UserChangeStateActiveEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
@@ -11,26 +9,18 @@ internal class UserUpdateEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapPut("/iam/api/v{apiVersion:apiVersion}/users/{userId}", async (
+        app.MapPatch("/iam/api/v{apiVersion:apiVersion}/users/{userId}/change-state", async (
                 [FromRoute(Name = "userId")] string userId,
-                [FromBody] UserUpdateRequest request,
                 [FromServices] ISender sender,
-                [FromServices] ILogger<UserUpdateEndpoint> logger,
                 CancellationToken cancellationToken) =>
             {
-                if(userId!= request.UserId)
-                {
-                    logger.LogWarning("User id from route {RouteUserId} is different from user id from body {BodyUserId}", userId, request.UserId);
-                    return Results.BadRequest(ApiResult.BadRequest("User id from route is different from user id from body"));
-                }
-
                 return Results.Ok(
-                (await sender.Send(request.ToUserUpdateCommand(), cancellationToken))
+                (await sender.Send(new UserChangeStateActiveCommand(userId), cancellationToken))
                 .ToApplicationUserResponse()
                 .ToApiResultSuccess());
             })
             .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Create))
+            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Update))
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")
@@ -40,7 +30,7 @@ internal class UserUpdateEndpoint : ICarterModule
             .Produces<ApiResult<ApplicationUserResponse>>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status500InternalServerError)
-            .WithSummary("update a user")
+            .WithSummary("Change active state of an user")
             .WithDescription("");
     }
 }

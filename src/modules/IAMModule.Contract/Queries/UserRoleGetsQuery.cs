@@ -1,14 +1,14 @@
 ﻿namespace IAMModule.Contract.Queries;
 
-public record UserRoleGetsQuery : IQuery<IEnumerable<UserRoleModel>>
+public record UserRoleGetsQuery : IQuery<UserRoleModel>
 {
-    public string UserName { get; }
+    public string UserId { get; }
 
-    private UserRoleGetsQuery(string userName)
+    private UserRoleGetsQuery(string userId)
     {
-        UserName = userName;
+        UserId = userId;
     }
 
 
-    public static UserRoleGetsQuery Create(string userName) => new UserRoleGetsQuery(userName: userName);
+    public static UserRoleGetsQuery Create(string userId) => new UserRoleGetsQuery(userId: userId);
 }

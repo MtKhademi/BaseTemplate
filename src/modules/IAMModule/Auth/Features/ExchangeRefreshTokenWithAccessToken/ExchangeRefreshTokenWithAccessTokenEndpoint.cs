@@ -1,6 +1,4 @@
-﻿using Infrastructure.Web.ApiResult;
-
-namespace IAMModule.IAM.Features.ExchangeRefreshTokenWithAccessToken;
+﻿namespace IAMModule.IAM.Features.ExchangeRefreshTokenWithAccessToken;
 
 internal class ExchangeRefreshTokenWithAccessTokenEndpoint : ICarterModule
 {
