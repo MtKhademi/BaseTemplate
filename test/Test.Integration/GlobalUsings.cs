@@ -13,3 +13,8 @@ global using Infrastructure.Extentions;
 global using Test.Infrastructure.Extentions;
 global using Test.Infrastructure.Requestes;
 global using System.Net;
+global using System.Net.Http.Json;
+global using Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.AuthScenarios;
+global using Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.UserScenarios;
+global using Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.RoleScenarios;
+global using System.Linq.Expressions;

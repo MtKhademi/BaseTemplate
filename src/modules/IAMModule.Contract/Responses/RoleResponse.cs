@@ -1,3 +1,3 @@
 namespace IAMModule.Contract.Responses;
 
-public record RoleResponse(string Id, string Name, string Description);
+public record RoleResponse(string RoleId, string RoleName, string RoleDescription);

@@ -41,9 +41,9 @@ public record UserUpdateCommand : ICommand<ApplicationUserModel>
     }
 
 
-    public static UserUpdateCommand Create(UserUpdateRequest request, string? userId)
+    public static UserUpdateCommand Create(UserUpdateRequest request)
         => new UserUpdateCommand(
-            userId: userId ?? "",
+            userId: request.UserId ?? "",
            userName: request.UserName ?? "",
            password: request.Password ?? "",
            confirmPassword: request.ConfirmPassword ?? "",

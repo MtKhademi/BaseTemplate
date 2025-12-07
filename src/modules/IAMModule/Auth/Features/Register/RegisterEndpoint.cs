@@ -10,7 +10,7 @@ internal class RegisterEndpoint : ICarterModule
             .Build();
 
         app.MapPost("/iam/api/v{apiVersion:apiVersion}/auth/register", async (
-                [FromBody] UserRegistrationRequest request,
+                [FromBody] RegistrationRequest request,
                 [FromServices] ISender sender,
                 CancellationToken cancellationToken) =>
             {

@@ -39,7 +39,7 @@ public record UserCreateCommand : ICommand<ApplicationUserModel>
     }
 
 
-    public static UserCreateCommand Create(UserRegistrationRequest request)
+    public static UserCreateCommand Create(RegistrationRequest request)
         => new UserCreateCommand(
             request.UserName ?? "",
             request.Password ?? "",
