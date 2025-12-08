@@ -1,25 +1,34 @@
-namespace IAMModule.IAM.Features.ChangePassword;
+namespace IAMModule.Auth.Features.ChangePassword;
 
-public class ChangePasswordHandler : ICommandHandler<ChangePasswordCommand, bool>
+public class ChangePasswordHandler(
+    UserManager<ApplicationUser> userManager,
+    ITokenService tokenService,
+    IUnitOfWork unitOfWork,
+    ILogger<ChangePasswordHandler> logger) : ICommandHandler<ChangePasswordCommand, bool>
 {
-    private readonly UserManager<ApplicationUser> _userManager;
-
-    public ChangePasswordHandler(UserManager<ApplicationUser> userManager)
-    {
-        _userManager = userManager;
-    }
-
     public async Task<bool> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
     {
-        var userInDb = await _userManager.FindByIdAsync(request.UserId);
-        if (userInDb is null)
-            throw new UserNotFoundWithUserIdException(request.UserId);
+        await unitOfWork.CreateTransactionAsync();
+        try
+        {
+            var user = await userManager.FindByIdOrThrowAsync(request.UserId);
 
-        var changeResult =
-            await _userManager.ChangePasswordAsync(userInDb, request.CurrentPassword, request.NewPassword);
-        if (changeResult.Succeeded)
+            var changeResult =
+                await userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+            if (!changeResult.Succeeded)
+                throw new ChangePasswordNotSuccessException(changeResult);
+
+            await tokenService.RemoveTokenAsync(user);
+
+            await unitOfWork.CommitAsync();
+
             return true;
-
-        throw new ChangePasswordNotSuccessException(changeResult);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error changing password for user {UserId}", request.UserId);
+            await unitOfWork.RollbackAsync();
+            throw;
+        }
     }
 }

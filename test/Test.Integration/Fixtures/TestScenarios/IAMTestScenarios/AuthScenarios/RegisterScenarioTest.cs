@@ -25,7 +25,7 @@ internal class RegisterScenarioTest : IRestApiScenarioTest
 
         var responseData = await response.Content.ReadFromJsonAsync<ApiResultTest<ApplicationUserResponseTest>>();
         context.Set(ScenarioDataKey.Register, responseData);
-        context.AddToList(ScenarioDataKey.CurrentUser, responseData!.Result!);
+        context.AddToList(ScenarioDataKey.Users, responseData!.Result!);
     }
 }
 
