@@ -1,6 +1,6 @@
 ﻿namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.UserScenarios;
 
-internal class UserRoleGetsScenarioTest : IRestApiScenarioTest
+internal class UserRoleGetsScenarioTest : IScenarioStep
 {
     public string? UserId { get; private set; }
 

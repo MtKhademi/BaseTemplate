@@ -1,27 +1,18 @@
 ﻿namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.RoleScenarios;
 
-internal class RoleUpdateScenarioTest : IRestApiScenarioTest
+internal class RoleUpdateScenarioTest(
+    RoleUpdateRequestTest request,
+    Expression<Func<RoleResponseTest, bool>>? conditionChoose = null) : IScenarioStep
 {
-    public string ApiEndpoint => $"/iam/api/v1/roles";
-    private RoleUpdateRequestTest _request;
-    private Func<RoleResponseTest, bool>? _conditionChoose = null;
-    public RoleUpdateScenarioTest(RoleUpdateRequestTest request,
-        Expression<Func<RoleResponseTest, bool>>? conditionChoose = null)
-    {
-        _request = request;
-        _conditionChoose = conditionChoose?.Compile() ?? null;
-    }
-
-
     public async Task ExecuteAsync(ScenarioContext context)
     {
-        if (string.IsNullOrWhiteSpace(_request.RoleId))
+        if (string.IsNullOrWhiteSpace(request.RoleId))
         {
-            if (_conditionChoose is null)
+            if (conditionChoose is null)
             {
                 var roleCreatedResponse = context.Get<ApiResultTest<RoleResponseTest>>(ScenarioDataKey.RoleCreate);
                 if (roleCreatedResponse is not null)
-                    _request = _request with
+                    request = request with
                     {
                         RoleId = roleCreatedResponse!.Result!.RoleId
                     };
@@ -29,29 +20,23 @@ internal class RoleUpdateScenarioTest : IRestApiScenarioTest
             else
             {
                 var roles = context.GetList<RoleResponseTest>(ScenarioDataKey.Roles);
-                var role = roles.SingleOrDefault(_conditionChoose);
+                var role = roles.SingleOrDefault(conditionChoose.Compile());
                 if (role == null)
                     throw new ArgumentNullException("Not found any role with this condition");
 
-                _request = _request with
+                request = request with
                 {
                     RoleId = role.RoleId
                 };
             }
         }
 
-        var response = await context.Client.PutAsync(ApiEndpoint, _request.ToContentHttp());
-        await response.WriteOnConsoleAsync(context.TestOutputHelper, "Role update");
-
-        context.SetLastResponse(response);
-
-        if (!response.IsSuccessStatusCode)
-        {
-            return;
-        }
-
-        var responseContent = await response.Content.ReadFromJsonAsync<ApiResultTest<RoleResponseTest>>();
-        context.Set(ScenarioDataKey.RoleUpdate, responseContent);
+        var apiResult = await context.ApiPutRequestAsync<RoleUpdateRequestTest, RoleResponseTest>(
+            url: "/iam/api/v1/roles",
+            storeKey: ScenarioDataKey.RoleUpdate,
+            request: request,
+            scenarioName: GetType().Name);
+       
     }
 }
 

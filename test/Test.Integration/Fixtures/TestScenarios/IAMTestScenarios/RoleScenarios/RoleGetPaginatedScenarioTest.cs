@@ -1,6 +1,6 @@
-﻿namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios;
+﻿namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.RoleScenarios;
 
-internal class RoleGetPaginatedScenarioTest : IRestApiScenarioTest
+internal class RoleGetPaginatedScenarioTest : IScenarioStep
 {
     public string ApiEndpoint => $"/iam/api/v1/roles";
     public RoleGetPaginatedScenarioTest()
@@ -20,8 +20,10 @@ internal class RoleGetPaginatedScenarioTest : IRestApiScenarioTest
             return;
         }
 
-        var responseContent = await response.Content.ReadFromJsonAsync<PaginatedListTest<RoleResponseTest>>();
-        context.Set(ScenarioDataKey.RoleGetPaginated, responseContent);
+        var apiResult = await context.ApiGetRequestAsync<PaginatedListTest<RoleResponseTest>>(
+            url: $"/iam/api/v1/roles",
+            storeKey: ScenarioDataKey.RoleGetPaginated,
+            scenarioName: GetType().Name);
     }
 }
 

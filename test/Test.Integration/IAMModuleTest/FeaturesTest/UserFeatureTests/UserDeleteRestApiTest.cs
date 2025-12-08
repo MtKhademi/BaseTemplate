@@ -43,8 +43,9 @@ public partial class UserDeleteRestApiTest : BaseTest
         var response = context.LastResponse;
         response.Should().NotBeNull();
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        var apiResult = await response.Content.ReadModelFromJsonAsync<ApiResultTest>();
+        var apiResult = context.Get<ApiResultTest>(ScenarioDataKey.UserDeleteResponse);
         apiResult.Should().NotBeNull();
+        apiResult.IsSuccess.Should().BeTrue();
     }
 
     [Fact]

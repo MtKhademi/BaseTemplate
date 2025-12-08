@@ -4,11 +4,11 @@ internal class ScenarioRunner
 {
     private readonly HttpClient _client;
     private readonly ITestOutputHelper _testOutputHelper;
-    private readonly List<IRestApiScenarioTest> _scenarios = [];
+    private readonly List<IScenarioStep> _scenarios = [];
     public ScenarioRunner(HttpClient client, ITestOutputHelper testOutputHelper) =>
         (_client, _testOutputHelper) = (client, testOutputHelper);
 
-    public ScenarioRunner AddScenario(params IRestApiScenarioTest[] scenarios)
+    public ScenarioRunner AddScenario(params IScenarioStep[] scenarios)
     {
         _scenarios.AddRange(scenarios);
         return this;

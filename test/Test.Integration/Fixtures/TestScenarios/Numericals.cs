@@ -1,4 +1,4 @@
-﻿namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios;
+﻿namespace Test.Integration.Fixtures.TestScenarios;
 
 internal static class Numericals
 {

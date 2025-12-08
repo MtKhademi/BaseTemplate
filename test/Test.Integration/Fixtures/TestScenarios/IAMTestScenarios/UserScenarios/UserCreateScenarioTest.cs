@@ -1,28 +1,16 @@
 ﻿namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.UserScenarios;
 
-internal class UserCreateScenarioTest : IRestApiScenarioTest
+internal class UserCreateScenarioTest(UserCreateRequestTest request) : IScenarioStep
 {
-    public string ApiEndpoint => $"/iam/api/v1/users";
-    private readonly UserCreateRequestTest _request;
-    public UserCreateScenarioTest(UserCreateRequestTest request)
-    {
-        _request = request;
-    }
-
-
     public async Task ExecuteAsync(ScenarioContext context)
     {
-        var response = await context.Client.PostAsync(ApiEndpoint, _request.ToContentHttp());
-        await response.WriteOnConsoleAsync(context.TestOutputHelper, "User Creation");
+        var apiResult = await context.ApiPostRequestAsync<UserCreateRequestTest, ApplicationUserResponseTest>(
+            url: "/iam/api/v1/users",
+            storeKey: ScenarioDataKey.UserCreate,
+            request: request,
+            scenarioName: GetType().Name);
 
-        context.SetLastResponse(response);
-
-        if (!response.IsSuccessStatusCode)
-            return;
-
-        var createdUser = await response.Content.ReadFromJsonAsync<ApiResultTest<ApplicationUserResponseTest>>();
-        context.Set(ScenarioDataKey.UserCreate, createdUser);
-        context.AddToList(ScenarioDataKey.Users, createdUser!.Result);
+        context.AddToList(ScenarioDataKey.Users, apiResult);
     }
 }
 

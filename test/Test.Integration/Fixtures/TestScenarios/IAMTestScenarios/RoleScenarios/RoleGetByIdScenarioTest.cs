@@ -1,19 +1,10 @@
 ﻿namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.RoleScenarios;
 
-internal class RoleGetByIdScenarioTest : IRestApiScenarioTest
+internal class RoleGetByIdScenarioTest(string? roleId = null) : IScenarioStep
 {
-    public string? RoleId { get; private set; }
-
-    public string ApiEndpoint => $"/iam/api/v1/roles";
-
-    public RoleGetByIdScenarioTest(string? roleId = null)
-    {
-        RoleId = roleId;
-    }
     public async Task ExecuteAsync(ScenarioContext context)
     {
-
-        if (string.IsNullOrWhiteSpace(RoleId))
+        if (string.IsNullOrWhiteSpace(roleId))
         {
             var roleCreated = context.Get<ApiResultTest<RoleResponseTest>>(ScenarioDataKey.RoleCreate);
             if (roleCreated == null || roleCreated.Result is null || string.IsNullOrWhiteSpace(roleCreated.Result.RoleId))
@@ -21,19 +12,13 @@ internal class RoleGetByIdScenarioTest : IRestApiScenarioTest
                 context.TestOutputHelper.WriteLine(roleCreated.ToJson());
                 throw new InvalidOperationException("No RoleId provided and no created Role found in context.");
             }
-            RoleId = roleCreated.Result.RoleId;
+            roleId = roleCreated.Result.RoleId;
         }
 
-        var response = await context.Client.GetAsync($"{ApiEndpoint}/{RoleId}");
-        await response.WriteOnConsoleAsync(context.TestOutputHelper, "Get Role By Id");
-        context.SetLastResponse(response);
-
-
-        if (!response.IsSuccessStatusCode)
-            return;
-
-        var roleResponse = await response.Content.ReadFromJsonAsync<ApiResultTest<RoleResponseTest>>();
-        context.Set(ScenarioDataKey.RoleGetByIdResponse, roleResponse);
+        var apiResult = await context.ApiGetRequestAsync<RoleResponseTest>(
+            url: $"/iam/api/v1/roles/{roleId}",
+            storeKey: ScenarioDataKey.RoleGetByIdResponse,
+            scenarioName: GetType().Name);
     }
 }
 

@@ -1,19 +1,16 @@
 ﻿namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.AuthScenarios;
 
-internal class SignOutScenrioTest : IRestApiScenarioTest
+internal class SignOutScenrioTest : IScenarioStep
 {
-    public string ApiEndpoint => $"/iam/api/v1/auth/signout";
-
     public SignOutScenrioTest()
     {
     }
     public async Task ExecuteAsync(ScenarioContext context)
     {
-        var response = await context.Client.PostAsync(ApiEndpoint, null);
-
-        await response.WriteOnConsoleAsync(context.TestOutputHelper, "signout user");
-
-        context.SetLastResponse(response);
+        var apiResult = await context.ApiPostRequestAsync<bool>(
+            url: "/iam/api/v1/auth/signout",
+            ScenarioDataKey.SignOut,
+            scenarioName: GetType().Name);
     }
 }
 

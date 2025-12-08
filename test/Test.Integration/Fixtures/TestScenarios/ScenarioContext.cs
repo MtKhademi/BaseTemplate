@@ -1,72 +1,42 @@
-﻿namespace Test.Integration.Fixtures.TestScenarios;
-
-internal class ScenarioContext
+﻿public class ScenarioContext
 {
-    private readonly Dictionary<string, string> _data = new();
+    private readonly Dictionary<string, object> _items = new();
 
-    public HttpClient Client { get; init; }
-    public ITestOutputHelper TestOutputHelper { get; init; }
+    public HttpClient Client { get; }
+    public ITestOutputHelper TestOutputHelper { get; }
     public HttpResponseMessage? LastResponse { get; private set; }
+
     public ScenarioContext(HttpClient client, ITestOutputHelper testOutputHelper)
     {
         Client = client;
         TestOutputHelper = testOutputHelper;
     }
 
+    public T? Get<T>(ScenarioDataKey key) =>
+        _items.TryGetValue(key.ToString(), out var val) ? (T?)val : default;
 
-    public T? Get<T>(ScenarioDataKey key)
-    {
-        return _data.TryGetValue(key.ToString(), out var value) ? value.ToModel<T>() : default!;
-    }
-    public void Set<T>(ScenarioDataKey key, T value)
-    {
-        _data[key.ToString()] = value!.ToJson();
-    }
+    public void Set<T>(ScenarioDataKey key, T value) =>
+        _items[key.ToString()] = value!;
 
-    internal void RecreateList<T>(ScenarioDataKey key,List<T> values)
+    public void SetLastResponse(HttpResponseMessage response) => LastResponse = response;
+
+    public void AddToList<T>(ScenarioDataKey key, ApiResultTest<T>? apiResult)
     {
-        _data[key.ToString()] = values.ToJson();
+        if(apiResult is null || apiResult.Result is null)
+            return;
+
+        AddToList(key, apiResult!.Result!);
     }
     public void AddToList<T>(ScenarioDataKey key, T value)
     {
-        var list = new List<T>();
-        if (_data.TryGetValue(key.ToString(), out var listObj))
+        if (!_items.TryGetValue(key.ToString(), out var existing) || existing is not List<T> list)
         {
-            list = listObj.ToModel<List<T>>() ?? new List<T>();
+            list = new List<T>();
+            _items[key.ToString()] = list;
         }
         list.Add(value);
-        _data[key.ToString()] = list.ToJson();
     }
+
     public List<T> GetList<T>(ScenarioDataKey key) =>
-        _data.TryGetValue(key.ToString(), out var obj) ? obj.ToModel<List<T>>() : new List<T>();
-
-    public void SetLastResponse(HttpResponseMessage response)
-    {
-        LastResponse = response;
-    }
-
-}
-
-public enum ScenarioDataKey
-{
-    None,
-    CurrentUser,
-    Register,
-    ChangePasswordLoggedUserResponse,
-
-    Users,
-    UserCreate,
-    UserGetByIdResponse,
-    UserDeleteResponse,
-    UserRoleGetsResponse,
-    UserRoleChangeResponse,
-    UserUpdate,
-
-    Roles,
-    RoleCreate,
-    RoleDelete,
-    RoleGetPaginated,
-    RoleGetByIdResponse,
-    RoleUpdate,
-    
+        _items.TryGetValue(key.ToString(), out var obj) && obj is List<T> list ? list : new List<T>();
 }

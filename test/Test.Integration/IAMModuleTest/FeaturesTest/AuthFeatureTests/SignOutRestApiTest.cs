@@ -1,7 +1,4 @@
-﻿using Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.AuthScenarios;
-using Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.UserScenarios;
-
-namespace Test.Integration.IAMModuleTest.FeaturesTest;
+﻿namespace Test.Integration.IAMModuleTest.FeaturesTest;
 
 [Collection("Collection tests v1")]
 [Trait("IAM", "Signout[REST]")]
