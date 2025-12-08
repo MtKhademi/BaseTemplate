@@ -1,6 +1,6 @@
 ﻿namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.UserScenarios;
 
-internal class UserUpdateScenarioTest : IRestApiScenarioTest
+internal class UserUpdateScenarioTest : IScenarioStep
 {
     public string ApiEndpoint => $"/iam/api/v1/users";
     private UserUpdateRequestTest _request;
@@ -54,8 +54,9 @@ internal class UserUpdateScenarioTest : IRestApiScenarioTest
         context.Set(ScenarioDataKey.UserUpdate, createdUser);
 
         var userUpdated = createdUser!.Result!;
-        users.Remove(users.SingleOrDefault(us => us.UserId == userUpdated.UserId)!);
-        context.RecreateList(ScenarioDataKey.Users, users);
+        users.RemoveAll(us => us.UserId == userUpdated.UserId);
+        users.Add(userUpdated);
+        context.Set(ScenarioDataKey.Users, users);
     }
 }
 

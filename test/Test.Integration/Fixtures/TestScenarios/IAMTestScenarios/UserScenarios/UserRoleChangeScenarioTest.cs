@@ -1,34 +1,21 @@
-﻿using Infrastructure.Web.ApiResult;
+﻿namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.UserScenarios;
 
-namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.UserScenarios;
-
-internal class UserRoleChangeScenarioTest : IRestApiScenarioTest
+internal class UserRoleChangeScenarioTest(
+    UserRolesChangeRequestTest request,
+    Expression<Func<ApplicationUserResponseTest, bool>>? userSelecte,
+    Expression<Func<RoleResponseTest, bool>>? roleSelecte) : IScenarioStep
 {
-    public string ApiEndpoint => $"/iam/api/v1/users/[userId]/roles";
-    private UserRolesChangeRequestTest _request;
-    private Func<ApplicationUserResponseTest, bool>? _userSelecte;
-    private Func<RoleResponseTest, bool>? _roleSelecte;
-
-    public UserRoleChangeScenarioTest(UserRolesChangeRequestTest request,
-        Expression<Func<ApplicationUserResponseTest, bool>>? userSelecte,
-        Expression<Func<RoleResponseTest, bool>>? roleSelecte)
-    {
-        _request = request;
-        _userSelecte = userSelecte?.Compile();
-        _roleSelecte = roleSelecte?.Compile();
-    }
-
 
     public async Task ExecuteAsync(ScenarioContext context)
     {
 
-        if (_userSelecte is not null)
+        if (userSelecte is not null)
         {
             var users = context.GetList<ApplicationUserResponseTest>(ScenarioDataKey.Users);
-            var user = users.FirstOrDefault(_userSelecte);
+            var user = users.FirstOrDefault(userSelecte.Compile());
             if (user is not null)
             {
-                _request = _request with
+                request = request with
                 {
                     UserId = user.UserId
                 };
@@ -39,15 +26,15 @@ internal class UserRoleChangeScenarioTest : IRestApiScenarioTest
             }
         }
 
-        if (_roleSelecte is not null)
+        if (roleSelecte is not null)
         {
             var roles = context.GetList<RoleResponseTest>(ScenarioDataKey.Roles);
-            var role = roles.FirstOrDefault(_roleSelecte);
+            var role = roles.FirstOrDefault(roleSelecte.Compile());
             if (role is not null)
             {
-                _request = _request with
+                request = request with
                 {
-                    RoleIds = [role.RoleId]
+                    RoleIds = [role.RoleId!]
                 };
             }
             else
@@ -56,14 +43,11 @@ internal class UserRoleChangeScenarioTest : IRestApiScenarioTest
             }
         }
 
-        var response = await context.Client.PutAsync(
-            ApiEndpoint.Replace("[userId]", _request.UserId), _request.ToContentHttp());
-        await response.WriteOnConsoleAsync(context.TestOutputHelper, "User role update");
-
-        context.SetLastResponse(response);
-
-        var apiResult = await response.Content.ReadFromJsonAsync<ApiResult<UserRoleResponseTest>>();
-        context.Set(ScenarioDataKey.UserRoleChangeResponse, apiResult);
+        var apiResult = await context.ApiPutRequestAsync<UserRolesChangeRequestTest, UserRoleResponseTest>(
+            url: "/iam/api/v1/users/[userId]/roles".Replace("[userId]", request.UserId),
+            storeKey: ScenarioDataKey.UserRoleChangeResponse,
+            request: request,
+            scenarioName: GetType().Name);
     }
 }
 
@@ -75,6 +59,4 @@ internal static class UserRoleChangeScenarioTestExtensions
         Expression<Func<RoleResponseTest, bool>>? roleSelecte)
         => runner.AddScenario(new UserRoleChangeScenarioTest(request,
             userSelecte, roleSelecte));
-
-
 }

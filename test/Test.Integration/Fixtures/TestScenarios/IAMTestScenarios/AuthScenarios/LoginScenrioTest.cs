@@ -1,39 +1,20 @@
 ﻿namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.AuthScenarios;
 
-internal class LoginScenrioTest : IRestApiScenarioTest
+internal class LoginScenrioTest(LoginRequestTest request) : IScenarioStep
 {
-    private LoginRequestTest _request;
-
-    public string ApiEndpoint => $"/iam/api/v1/auth/login";
-
-    public LoginScenrioTest(LoginRequestTest request)
-    {
-        _request = request;
-    }
     public async Task ExecuteAsync(ScenarioContext context)
     {
-        
-        var response = await context.Client.PostAsync(ApiEndpoint, _request.ToContentHttp());
+        var apiResult = await context.ApiPostRequestAsync<LoginRequestTest, TokenResponseTest>(
+            url: "/iam/api/v1/auth/login",
+            storeKey: ScenarioDataKey.CurrentUser,
+            request: request,
+            scenarioName: GetType().Name);
 
-        await response.WriteOnConsoleAsync(context.TestOutputHelper, "Login user");
-
-        context.SetLastResponse(response);
-
-        if (!response.IsSuccessStatusCode)
+        if (apiResult?.Result?.Token != null)
         {
-            return;
+            context.Client.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiResult.Result.Token);
         }
-
-
-        var apiResult = await response.Content.ReadModelFromJsonAsync<ApiResultTest<TokenResponseTest>>();
-        apiResult.Should().NotBeNull();
-        var tokenResponse = apiResult!.Result;
-        tokenResponse.Should().NotBeNull();
-
-        context.Client.DefaultRequestHeaders.Authorization =
-            new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiResult!.Result!.Token);
-
-        context.Set(ScenarioDataKey.CurrentUser, apiResult);
     }
 }
 

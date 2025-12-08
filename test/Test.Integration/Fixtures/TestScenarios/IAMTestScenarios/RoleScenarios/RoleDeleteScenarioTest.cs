@@ -1,29 +1,20 @@
 ﻿namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.RoleScenarios;
 
-internal class RoleDeleteScenarioTest : IRestApiScenarioTest
+internal class RoleDeleteScenarioTest(string? roleId = null) : IScenarioStep
 {
-    public string ApiEndpoint => $"/iam/api/v1/roles";
-    public string? RoleId { get; private set; }
-    public RoleDeleteScenarioTest(string? roleId = null)
-    {
-        RoleId = roleId;
-    }
-
     public async Task ExecuteAsync(ScenarioContext context)
     {
-        if (string.IsNullOrWhiteSpace(RoleId))
+        if (string.IsNullOrWhiteSpace(roleId))
         {
             var createdRoleResponse = context.Get<ApiResultTest<RoleResponseTest>>(ScenarioDataKey.RoleCreate);
-            RoleId = createdRoleResponse.Result.RoleId;
+            roleId = createdRoleResponse.Result.RoleId;
         }
 
-        var response = await context.Client.DeleteAsync($"{ApiEndpoint}/{RoleId}");
-        await response.WriteOnConsoleAsync(context.TestOutputHelper, "Role Delete");
-
-        context.SetLastResponse(response);
-
-        if(!response.IsSuccessStatusCode)
-            return;
+        var apiResult = await context.ApiDeleteRequestAsync<bool>(
+            url: $"/iam/api/v1/roles/{roleId}",
+            storeKey: ScenarioDataKey.RoleDelete,
+            scenarioName: GetType().Name);
+       
     }
 }
 

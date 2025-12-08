@@ -1,31 +1,17 @@
 ﻿namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.AuthScenarios;
 
-internal class RegisterScenarioTest : IRestApiScenarioTest
+internal class RegisterScenarioTest(RegistrationRequestTest request) : IScenarioStep
 {
-    public string ApiEndpoint => $"/iam/api/v1/auth/register";
-    private readonly RegistrationRequestTest _request;
-
-    public RegisterScenarioTest(RegistrationRequestTest request)
-    {
-        _request = request;
-    }
-
-
     public async Task ExecuteAsync(ScenarioContext context)
     {
-        var response = await context.Client.PostAsync(ApiEndpoint, _request.ToContentHttp());
-        await response.WriteOnConsoleAsync(context.TestOutputHelper, "Register");
+        var apiResult = await context.ApiPostRequestAsync<RegistrationRequestTest, ApplicationUserResponseTest>(
+            url: "/iam/api/v1/auth/register",
+            storeKey: ScenarioDataKey.Register,
+            request: request,
+            scenarioName: GetType().Name);
 
-        context.SetLastResponse(response);
+        context.AddToList(ScenarioDataKey.Users, apiResult);
 
-        if (!response.IsSuccessStatusCode)
-        {
-            return;
-        }
-
-        var responseData = await response.Content.ReadFromJsonAsync<ApiResultTest<ApplicationUserResponseTest>>();
-        context.Set(ScenarioDataKey.Register, responseData);
-        context.AddToList(ScenarioDataKey.Users, responseData!.Result!);
     }
 }
 

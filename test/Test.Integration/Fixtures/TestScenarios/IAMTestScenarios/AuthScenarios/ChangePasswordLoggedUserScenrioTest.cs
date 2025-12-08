@@ -1,32 +1,14 @@
 ﻿namespace Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.AuthScenarios;
 
-internal class ChangePasswordLoggedUserScenrioTest : IRestApiScenarioTest
+internal class ChangePasswordLoggedUserScenrioTest(ChangePasswordRequestTest request) : IScenarioStep
 {
-    private ChangePasswordRequestTest _request;
-
-    public string ApiEndpoint => $"/iam/api/v1/auth/change-password";
-
-    public ChangePasswordLoggedUserScenrioTest(ChangePasswordRequestTest request)
-    {
-        _request = request;
-    }
     public async Task ExecuteAsync(ScenarioContext context)
     {
-
-        var response = await context.Client.PatchAsync(ApiEndpoint, _request.ToContentHttp());
-
-        await response.WriteOnConsoleAsync(context.TestOutputHelper, "Change Password Logged User");
-
-        context.SetLastResponse(response);
-
-        if (!response.IsSuccessStatusCode)
-        {
-            return;
-        }
-
-
-        var apiResult = await response.Content.ReadModelFromJsonAsync<ApiResultTest<bool>>();
-        context.Set(ScenarioDataKey.ChangePasswordLoggedUserResponse, apiResult);
+        await context.ApiPatchRequestAsync<ChangePasswordRequestTest, bool>(
+            url: "/iam/api/v1/auth/change-password",
+            storeKey: ScenarioDataKey.ChangePasswordLoggedUserResponse,
+            request: request,
+            scenarioName: GetType().Name);
     }
 }
 

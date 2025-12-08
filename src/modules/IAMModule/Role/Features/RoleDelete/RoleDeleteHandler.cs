@@ -1,14 +1,12 @@
-﻿using IAMModule.Extensions;
-
-namespace IAMModule.Role.Features.RoleDelete;
+﻿namespace IAMModule.Role.Features.RoleDelete;
 
 internal class RoleDeleteHandler(RoleManager<ApplicationRole> roleManager)
-    : ICommandHandler<RoleDeleteCommand, Unit>
+    : ICommandHandler<RoleDeleteCommand, bool>
 {
-    public async Task<Unit> Handle(RoleDeleteCommand command, CancellationToken cancellationToken)
+    public async Task<bool> Handle(RoleDeleteCommand command, CancellationToken cancellationToken)
     {
         var roleEntity = await roleManager.FindByIdOrThrowAsync(command.RoleId);
         await roleManager.DeleteAsync(roleEntity);
-        return Unit.Value;
+        return true;
     }
 }

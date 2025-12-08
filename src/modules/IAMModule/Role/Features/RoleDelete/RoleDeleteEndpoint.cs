@@ -27,7 +27,7 @@ internal class RoleDeleteEndpoint : ICarterModule
             .MapToApiVersion(1)
             .WithTags("ROLE")
             .IncludeInOpenApi()
-            .Produces<ApiResult>(StatusCodes.Status200OK)
+            .Produces<ApiResult<bool>>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status500InternalServerError)
             .WithSummary("delete a role")

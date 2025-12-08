@@ -1,6 +1,6 @@
 namespace IAMModule.Contract.Requests;
 
-public record RoleDeleteCommand : ICommand<Unit>
+public record RoleDeleteCommand : ICommand<bool>
 {
     public string RoleId { get; init; }
 
