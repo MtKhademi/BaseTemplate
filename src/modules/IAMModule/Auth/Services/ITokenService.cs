@@ -7,11 +7,16 @@ public interface ITokenService
     Task<bool> SignOutAsync(string userId);
     Task<bool> ValidTokenAsync(string token, string userId);
     ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
+    Task RemoveTokenAsync(ApplicationUser user);
 }
 
 
 internal class IdentityTokenService : ITokenService
 {
+
+    const string LoginProvider = "AIM";  
+    const string TokenName = "AccessToken";
+
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly ILogger<IdentityTokenService> _logger;
     private readonly RoleManager<ApplicationRole> _roleManager;
@@ -30,10 +35,14 @@ internal class IdentityTokenService : ITokenService
         _unitOfWork = unitOfWork;
     }
 
+    public async Task RemoveTokenAsync(ApplicationUser user)
+    {
+        await _userManager.RemoveAuthenticationTokenAsync(user, LoginProvider, TokenName);
+    }
     public async Task<string> GenerateTokenAsync(ApplicationUser user)
     {
         var accessToken = GenerateEncryptedToken(GetSigningCredentials(), await GetClaimsAsync(user));
-        await _userManager.SetAuthenticationTokenAsync(user, "BankingGateWay", "AccessToken", accessToken);
+        await _userManager.SetAuthenticationTokenAsync(user, LoginProvider, TokenName, accessToken);
         return accessToken;
     }
 
@@ -127,7 +136,7 @@ internal class IdentityTokenService : ITokenService
             return false;
         }
 
-        var tokens = await _userManager.GetAuthenticationTokenAsync(user, "BankingGateWay", "AccessToken");
+        var tokens = await _userManager.GetAuthenticationTokenAsync(user, LoginProvider, TokenName);
         if (tokens == null || !tokens.Any())
         {
             _logger.LogWarning("No tokens found for user: {UserId}", userId);
@@ -163,7 +172,7 @@ internal class IdentityTokenService : ITokenService
             throw new NotValidDataException("Not valid data");
         }
 
-        await _userManager.RemoveAuthenticationTokenAsync(user, "BankingGateWay", "AccessToken");
+        await _userManager.RemoveAuthenticationTokenAsync(user, LoginProvider, TokenName);
 
         await _unitOfWork.CommitAsync();
 

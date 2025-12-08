@@ -55,7 +55,6 @@ public static class IAMModule
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
-                //options.User.RequireUniqueEmail = true;
                 options.User.RequireUniqueEmail = false;
             })
             .AddEntityFrameworkStores<IAMModuleDbContext>()
@@ -71,7 +70,6 @@ public static class IAMModule
 
         services.AddScoped<IUnitOfWork, IAMModuleUnitOfWork>();
         services.AddScoped<IDataSeeder, IAMModuleDbDataSeeder>();
-        //services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddScoped<ITokenService, IdentityTokenService>();
 

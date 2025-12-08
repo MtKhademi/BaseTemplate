@@ -1,6 +1,6 @@
 namespace IAMModule.Contract.Commands;
 
-public class ChangePasswordCommand : ICommand<bool>
+public record ChangePasswordCommand : ICommand<bool>
 {
     public string UserId { get; init; }
     public string CurrentPassword { get; init; }
@@ -10,27 +10,28 @@ public class ChangePasswordCommand : ICommand<bool>
 
     public ChangePasswordCommand(string userId, string currentPassword, string newPassword, string confirmNewPassword)
     {
+        var errors = new List<string>();
+
+        if (string.IsNullOrWhiteSpace(userId))
+            errors.Add($"{nameof(userId)} is required.");
+
+        if (string.IsNullOrWhiteSpace(currentPassword))
+            errors.Add($"{nameof(currentPassword)} is required.");
+
+        if (string.IsNullOrWhiteSpace(newPassword))
+            errors.Add($"{nameof(newPassword)} is required.");
+
+        if (newPassword != confirmNewPassword)
+            errors.Add($"{nameof(newPassword)} and {nameof(confirmNewPassword)} do not match.");
+
+        if (errors.Any())
+            throw new ChangePasswordCommandException(errors);
+
         UserId = userId;
         CurrentPassword = currentPassword;
         NewPassword = newPassword;
         ConfirmNewPassword = confirmNewPassword;
 
-        var errors = new List<string>();
-
-        if (string.IsNullOrWhiteSpace(UserId))
-            errors.Add("User ID is required.");
-
-        if (string.IsNullOrWhiteSpace(CurrentPassword))
-            errors.Add("Current password is required.");
-
-        if (string.IsNullOrWhiteSpace(NewPassword))
-            errors.Add("New password is required.");
-
-        if (NewPassword != ConfirmNewPassword)
-            errors.Add("New password and confirmation do not match.");
-
-        if (errors.Any())
-            throw new ChangePasswordCommandException(errors);
     }
 
 

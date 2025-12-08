@@ -12,6 +12,7 @@ internal class LoginScenrioTest : IRestApiScenarioTest
     }
     public async Task ExecuteAsync(ScenarioContext context)
     {
+        
         var response = await context.Client.PostAsync(ApiEndpoint, _request.ToContentHttp());
 
         await response.WriteOnConsoleAsync(context.TestOutputHelper, "Login user");
@@ -31,6 +32,8 @@ internal class LoginScenrioTest : IRestApiScenarioTest
 
         context.Client.DefaultRequestHeaders.Authorization =
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiResult!.Result!.Token);
+
+        context.Set(ScenarioDataKey.CurrentUser, apiResult);
     }
 }
 

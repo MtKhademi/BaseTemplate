@@ -52,19 +52,21 @@ public enum ScenarioDataKey
     None,
     CurrentUser,
     Register,
+    ChangePasswordLoggedUserResponse,
 
     Users,
     UserCreate,
     UserGetByIdResponse,
     UserDeleteResponse,
     UserRoleGetsResponse,
+    UserRoleChangeResponse,
+    UserUpdate,
 
     Roles,
     RoleCreate,
     RoleDelete,
     RoleGetPaginated,
     RoleGetByIdResponse,
-    UserRoleChangeResponse,
     RoleUpdate,
-    UserUpdate,
+    
 }

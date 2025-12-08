@@ -1,7 +1,4 @@
-using IAMModule.IAM.Authorization;
-using Infrastructure.Web.ApiResult;
-
-namespace IAMModule.IAM.Features.ChangePassword;
+namespace IAMModule.Auth.Features.ChangePassword;
 
 internal class ChangePasswordEndpoint : ICarterModule
 {
@@ -12,7 +9,7 @@ internal class ChangePasswordEndpoint : ICarterModule
             .ReportApiVersions()
             .Build();
 
-        app.MapPut("/api/BankingGateWay/v{apiVersion:apiVersion}/change-password", async (
+        app.MapPatch("/iam/api/v{apiVersion:apiVersion}/auth/change-password", async (
                 HttpContext context,
                 [FromBody] ChangePasswordRequest request,
                 [FromServices] ISender sender,
@@ -23,10 +20,9 @@ internal class ChangePasswordEndpoint : ICarterModule
                     .ToApiResultSuccess();
             })
             .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Update))
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
-            .WithGroupName("BankingGateWayV1")
+            .WithGroupName("IAM-V1")
             .MapToApiVersion(1)
             .WithTags("AUTH")
             .IncludeInOpenApi()
