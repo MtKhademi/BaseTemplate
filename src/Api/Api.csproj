@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\modules\IAMModule\IAMModule.csproj" />
+    <ProjectReference Include="..\modules\NotificationModule\NotificationModule.csproj" />
   </ItemGroup>
 
 

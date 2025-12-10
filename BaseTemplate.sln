@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11205.157 d18.0
+VisualStudioVersion = 18.0.11205.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -24,6 +24,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAMModule", "src\modules\IAMModule\IAMModule.csproj", "{CABE541C-87E2-360E-50F3-49F4C18FF460}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAMModule.Contract", "src\modules\IAMModule.Contract\IAMModule.Contract.csproj", "{81F50366-3857-BE0C-95C2-1389F5F94218}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationModule", "src\modules\NotificationModule\NotificationModule.csproj", "{142A8382-4B27-B7FE-2364-87441E010FC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationModule.Contract", "src\modules\NotificationModule.Contract\NotificationModule.Contract.csproj", "{2F0F1A05-4E27-8EC6-DBE9-4C4B3055EDFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +63,14 @@ Global
 		{81F50366-3857-BE0C-95C2-1389F5F94218}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81F50366-3857-BE0C-95C2-1389F5F94218}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81F50366-3857-BE0C-95C2-1389F5F94218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{142A8382-4B27-B7FE-2364-87441E010FC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{142A8382-4B27-B7FE-2364-87441E010FC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{142A8382-4B27-B7FE-2364-87441E010FC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{142A8382-4B27-B7FE-2364-87441E010FC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F0F1A05-4E27-8EC6-DBE9-4C4B3055EDFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F0F1A05-4E27-8EC6-DBE9-4C4B3055EDFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F0F1A05-4E27-8EC6-DBE9-4C4B3055EDFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F0F1A05-4E27-8EC6-DBE9-4C4B3055EDFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +83,8 @@ Global
 		{CBAFC0F9-5B69-AE5B-776E-B650E010DF04} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{CABE541C-87E2-360E-50F3-49F4C18FF460} = {C3000B64-B444-46C9-AF54-0E13A328776C}
 		{81F50366-3857-BE0C-95C2-1389F5F94218} = {C3000B64-B444-46C9-AF54-0E13A328776C}
+		{142A8382-4B27-B7FE-2364-87441E010FC0} = {C3000B64-B444-46C9-AF54-0E13A328776C}
+		{2F0F1A05-4E27-8EC6-DBE9-4C4B3055EDFC} = {C3000B64-B444-46C9-AF54-0E13A328776C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {97B7354D-8702-4963-9364-26533A862BE4}
