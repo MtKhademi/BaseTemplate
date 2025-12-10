@@ -1,0 +1,3 @@
+dotnet ef migrations add initECommerceDb -s .\src\SolutionSolverApi\ --project .\src\ECommerceModule\ -o Data/Migrations -c ECommerceModule.Data.ECommerceAppContext
+
+dotnet ef migrations remove -s MDF.API --project Modules/SymbolModule -c SymbolDbContext

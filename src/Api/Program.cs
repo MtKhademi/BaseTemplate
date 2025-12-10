@@ -1,4 +1,5 @@
 using IAMModule;
+using NotificationModule;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,13 +19,15 @@ builder.WebHost.UseKestrel().UseIIS();
 builder.Services.AddCorsConfig();
 
 builder.Services
-    .AddIAMModule(builder.Configuration);
+    .AddIAMModule(builder.Configuration)
+    .AddNotificationModule(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
     option
-    .AddSwaggerIAMModule();
+    .AddSwaggerIAMModule()
+    .AddSwaggerNotificationModule();
 });
 builder.Services.AddVersioningConfig();
 
@@ -37,7 +40,8 @@ app.MapCarter();
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
-    options.UseSwaggerIAMModule();
+    options.UseSwaggerIAMModule()
+    .UseSwaggerNotificationModule();
 });
 
 
@@ -53,6 +57,7 @@ app.UseCorsConfig();
 app.UseAuthorization();
 app.UseMiddleware<GlobalExceptionHandler>();
 
-app.UseIAMModule();
+app.UseIAMModule()
+    .UseNotificationModule();
 
 app.Run();
