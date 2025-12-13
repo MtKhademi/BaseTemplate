@@ -1,4 +1,6 @@
-﻿namespace IAMModule.Role.Features.RoleUpdate;
+﻿using Infrastructure.Auth.Authorization;
+
+namespace IAMModule.Role.Features.RoleUpdate;
 
 internal class RoleUpdateEndpoint : ICarterModule
 {
@@ -20,8 +22,7 @@ internal class RoleUpdateEndpoint : ICarterModule
                     .ToRoleResponse()
                     .ToApiResultSuccess());
             })
-            .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Update))
+            .WithPermission(IAMPermissions.RoleUpdate)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")

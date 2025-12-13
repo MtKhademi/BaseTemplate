@@ -1,4 +1,6 @@
-﻿namespace IAMModule.Role.Features.RoleGetPaginated;
+﻿using Infrastructure.Auth.Authorization;
+
+namespace IAMModule.Role.Features.RoleGetPaginated;
 
 internal class RoleGetPaginatedEndpoint : ICarterModule
 {
@@ -19,8 +21,7 @@ internal class RoleGetPaginatedEndpoint : ICarterModule
                     (await sender.Send(request.ToQuery(), cancellationToken))
                     .ToPaginatedList(x => x.ToRoleResponse()).ToApiResultSuccess());
             })
-            .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Read))
+            .WithPermission(IAMPermissions.RoleRead)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")

@@ -1,3 +1,5 @@
+using Infrastructure.Auth.Authorization;
+
 namespace IAMModule.Auth.Features.SignOut;
 
 internal class SignOutEndpoint : ICarterModule
@@ -17,7 +19,7 @@ internal class SignOutEndpoint : ICarterModule
                 var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 return (await sender.Send(new SignOutCommand(userId), cancellationToken)).ToApiResultSuccess();
             })
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Delete))
+            //.WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Delete))
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")

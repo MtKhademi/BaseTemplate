@@ -1,4 +1,6 @@
-﻿namespace IAMModule.IAM.Authentications;
+﻿using Infrastructure.Auth.Authorization;
+
+namespace IAMModule.IAM.Authentications;
 
 internal static class JwtRESTAuthentication
 {
@@ -87,20 +89,20 @@ internal static class JwtRESTAuthentication
 
         services.AddAuthorization(options =>
         {
-            foreach (var prop in typeof(AppPermissions)
-                         .GetProperties(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy))
-            {
-                var propertyValue = prop.GetValue(null);
-                if (propertyValue is not null)
-                {
-                    var permissions = propertyValue as IReadOnlyList<AppPermission>;
-                    foreach (var permission in permissions)
-                    {
-                        options.AddPolicy(permission.Name,
-                            policy => policy.RequireClaim(AppClaim.Permission, permission.Name));
-                    }
-                }
-            }
+            //foreach (var prop in typeof(AppPermissions)
+            //             .GetProperties(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy))
+            //{
+            //    var propertyValue = prop.GetValue(null);
+            //    if (propertyValue is not null)
+            //    {
+            //        var permissions = propertyValue as IReadOnlyList<AppPermission>;
+            //        foreach (var permission in permissions)
+            //        {
+            //            options.AddPolicy(permission.Name,
+            //                policy => policy.RequireClaim(AppClaim.Permission, permission.Name));
+            //        }
+            //    }
+            //}
         });
 
         return services;

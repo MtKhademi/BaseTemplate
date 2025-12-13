@@ -1,3 +1,7 @@
+using IAMModule.Auth.Authorization;
+using IAMModule.Auth.Services;
+using Infrastructure.Auth.Authorization;
+
 namespace IAMModule;
 
 public static class IAMModule
@@ -13,12 +17,19 @@ public static class IAMModule
             .AddRecurringJobs(assembly)
             .RegistersServices<IBaseRepository>(assembly);
 
+        services.AddAuthorization();
+        services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
+        services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
+        services.AddScoped<IUserPermissionService, UserPermissionSerivce>();
+
         return services.AddServices(iamConfig)
             .AddIdentitySettings()
-            .AddJwtRESTAuthentication(iamConfig);
+            .AddJwtRESTAuthentication(iamConfig)
+            .AddSingleton<IAppModulePermission, AppModulePermissions>();
     }
-    public static IApplicationBuilder UseIAMModule(this IApplicationBuilder app)
+    public static IApplicationBuilder UseIAMModule(this WebApplication app)
     {
+        app.PopulatePermissionsFromEndpoints();
         app.UseMigration<IAMModuleDbContext>();
         return app;
     }

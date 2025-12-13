@@ -1,4 +1,6 @@
-﻿namespace IAMModule.User.Features.UserDelete;
+﻿using Infrastructure.Auth.Authorization;
+
+namespace IAMModule.User.Features.UserDelete;
 
 internal class UserDeleteEndpoint : ICarterModule
 {
@@ -18,15 +20,14 @@ internal class UserDeleteEndpoint : ICarterModule
                 return Results.Ok(
                 (await sender.Send(UserDeleteCommand.Create(userId), cancellationToken)).ToApiResultSuccess());
             })
-            .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Create))
+            .WithPermission(IAMPermissions.UserCreate)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")
             .MapToApiVersion(1)
             .WithTags("USER")
             .IncludeInOpenApi()
-            .Produces<ApiResult>(StatusCodes.Status200OK)
+            .Produces<ApiResult<bool>>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status500InternalServerError)
             .WithSummary("delete a user")

@@ -1,6 +1,6 @@
 namespace IAMModule.Contract.Commands;
 
-public record UserDeleteCommand : ICommand<Unit>
+public record UserDeleteCommand : ICommand<bool>
 {
     public string UserId { get; init; }
 

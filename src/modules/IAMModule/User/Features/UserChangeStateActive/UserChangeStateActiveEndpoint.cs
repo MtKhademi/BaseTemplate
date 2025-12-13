@@ -1,4 +1,6 @@
-﻿namespace IAMModule.User.Features.UserChangeStateActive;
+﻿using Infrastructure.Auth.Authorization;
+
+namespace IAMModule.User.Features.UserChangeStateActive;
 
 internal class UserChangeStateActiveEndpoint : ICarterModule
 {
@@ -19,8 +21,7 @@ internal class UserChangeStateActiveEndpoint : ICarterModule
                 .ToApplicationUserResponse()
                 .ToApiResultSuccess());
             })
-            .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Update))
+            .WithPermission(IAMPermissions.UserChangeState)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")

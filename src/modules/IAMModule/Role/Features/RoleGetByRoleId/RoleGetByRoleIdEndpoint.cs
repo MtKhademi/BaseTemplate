@@ -1,4 +1,6 @@
-﻿namespace IAMModule.Role.Features.RoleGetByRoleId;
+﻿using Infrastructure.Auth.Authorization;
+
+namespace IAMModule.Role.Features.RoleGetByRoleId;
 
 internal class RoleGetByRoleIdEndpoint : ICarterModule
 {
@@ -19,8 +21,7 @@ internal class RoleGetByRoleIdEndpoint : ICarterModule
                     (await sender.Send(RoleGetByRoleIdQuery.Create(roleId), cancellationToken))
                         .ToRoleResponse().ToApiResultSuccess());
             })
-            .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Read))
+            .WithPermission(IAMPermissions.RoleRead)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")

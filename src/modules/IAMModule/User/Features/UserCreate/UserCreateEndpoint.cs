@@ -1,4 +1,6 @@
-﻿namespace IAMModule.User.Features.UserCreate;
+﻿using Infrastructure.Auth.Authorization;
+
+namespace IAMModule.User.Features.UserCreate;
 
 internal class UserCreateEndpoint : ICarterModule
 {
@@ -20,8 +22,7 @@ internal class UserCreateEndpoint : ICarterModule
                     .ToApplicationUserResponse()
                     .ToApiResultSuccess());
             })
-            .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Create))
+            .WithPermission(IAMPermissions.UserCreate)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")
