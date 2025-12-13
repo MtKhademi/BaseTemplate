@@ -1,4 +1,6 @@
-﻿namespace IAMModule.User.Features.UserRoleChange;
+﻿using Infrastructure.Auth.Authorization;
+
+namespace IAMModule.User.Features.UserRoleChange;
 
 internal class UserRoleChangeEndpoint : ICarterModule
 {
@@ -24,8 +26,7 @@ internal class UserRoleChangeEndpoint : ICarterModule
                 (await sender.Send(UserRoleChangeCommand.Create(request), cancellationToken))
                 .ToApiResultSuccess());
             })
-            .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Create))
+            .WithPermission(IAMPermissions.UserRoleChange)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")

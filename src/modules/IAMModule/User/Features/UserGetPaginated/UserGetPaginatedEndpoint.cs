@@ -1,4 +1,6 @@
-﻿namespace IAMModule.UserManagement.Features.UserGetPaginated;
+﻿using Infrastructure.Auth.Authorization;
+
+namespace IAMModule.UserManagement.Features.UserGetPaginated;
 
 internal class UserGetPaginatedEndpoint : ICarterModule
 {
@@ -19,8 +21,7 @@ internal class UserGetPaginatedEndpoint : ICarterModule
                     (await sender.Send(request.ToQuery(), cancellationToken))
                     .ToPaginatedList(x => x.ToApplicationUserResponse()).ToApiResultSuccess());
             })
-            .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Read))
+            .WithPermission(IAMPermissions.UserRead)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")

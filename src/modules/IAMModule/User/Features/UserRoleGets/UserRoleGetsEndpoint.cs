@@ -1,4 +1,6 @@
-﻿namespace IAMModule.User.Features.UserRoleGets;
+﻿using Infrastructure.Auth.Authorization;
+
+namespace IAMModule.User.Features.UserRoleGets;
 
 internal class UserRoleGetsEndpoint : ICarterModule
 {
@@ -19,8 +21,7 @@ internal class UserRoleGetsEndpoint : ICarterModule
                     .ToUserRoleResponse()
                     .ToApiResultSuccess());
             })
-            .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Read))
+            .WithPermission(IAMPermissions.UserRoles)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")

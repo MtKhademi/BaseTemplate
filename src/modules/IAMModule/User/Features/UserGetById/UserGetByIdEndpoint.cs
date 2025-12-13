@@ -1,4 +1,6 @@
-﻿namespace IAMModule.UserManagement.Features.UserGetById;
+﻿using Infrastructure.Auth.Authorization;
+
+namespace IAMModule.UserManagement.Features.UserGetById;
 
 internal class UserGetByIdEndpoint : ICarterModule
 {
@@ -19,8 +21,7 @@ internal class UserGetByIdEndpoint : ICarterModule
                     (await sender.Send(new UserGetByIdQuery(userId), cancellationToken))
                     .ToApplicationUserResponse().ToApiResultSuccess());
             })
-            .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Read))
+            .WithPermission(IAMPermissions.UserRead)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")

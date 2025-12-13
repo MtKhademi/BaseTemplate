@@ -21,7 +21,7 @@ internal class SmsNotificationEndpoint : ICarterModule
                     .ToApiResultSuccess());
             })
             .RequireAuthorization()
-            //.WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Create))
+            ////.WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Create))
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("NOTIFICATION-V1")

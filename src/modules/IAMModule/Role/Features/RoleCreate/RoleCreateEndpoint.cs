@@ -1,4 +1,7 @@
-﻿namespace IAMModule.Role.Features.RoleCreate;
+﻿using IAMModule.Auth.Authorization;
+using Infrastructure.Auth.Authorization;
+
+namespace IAMModule.Role.Features.RoleCreate;
 
 internal class RoleCreateEndpoint : ICarterModule
 {
@@ -20,8 +23,7 @@ internal class RoleCreateEndpoint : ICarterModule
                     .ToRoleResponse()
                     .ToApiResultSuccess());
             })
-            .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Read))
+            .WithPermission(IAMPermissions.RoleCreate)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")

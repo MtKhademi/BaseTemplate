@@ -1,4 +1,4 @@
-namespace IAMModule.IAM.Authorization;
+namespace Infrastructure.Auth.Authorization;
 
 public static class AppClaim
 {

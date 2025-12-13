@@ -1,4 +1,5 @@
-﻿using Infrastructure.Web.ApiResult;
+﻿using Infrastructure.Auth.Authorization;
+using Infrastructure.Web.ApiResult;
 
 namespace IAMModule.User.Features.UserUpdate;
 
@@ -29,8 +30,7 @@ internal class UserUpdateEndpoint : ICarterModule
                 .ToApplicationUserResponse()
                 .ToApiResultSuccess());
             })
-            .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Create))
+            .WithPermission(IAMPermissions.UserUpdate)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")

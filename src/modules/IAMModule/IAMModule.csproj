@@ -1,27 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Auth\Extentions\**" />
-    <EmbeddedResource Remove="Auth\Extentions\**" />
-    <None Remove="Auth\Extentions\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Auth\Extentions\**" />
+		<EmbeddedResource Remove="Auth\Extentions\**" />
+		<None Remove="Auth\Extentions\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\Migrations\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Data\Migrations\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\IAMModule.Contract\IAMModule.Contract.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\IAMModule.Contract\IAMModule.Contract.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Test.Integration" />
+		<InternalsVisibleTo Include="Test.Common" />
+	</ItemGroup>
 
 </Project>

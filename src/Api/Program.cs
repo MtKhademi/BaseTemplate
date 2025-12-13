@@ -18,6 +18,8 @@ builder.WebHost.UseKestrel().UseIIS();
 
 builder.Services.AddCorsConfig();
 
+builder.Services.AddVersioningConfig();
+
 builder.Services
     .AddIAMModule(builder.Configuration)
     .AddNotificationModule(builder.Configuration);
@@ -29,12 +31,12 @@ builder.Services.AddSwaggerGen(option =>
     .AddSwaggerIAMModule()
     .AddSwaggerNotificationModule();
 });
-builder.Services.AddVersioningConfig();
 
 
 var app = builder.Build();
 
 app.MapCarter();
+app.UseRouting();
 
 
 app.UseSwagger();
@@ -50,14 +52,18 @@ app.UseDeveloperExceptionPage();
 
 
 app.UseStaticFiles();
-app.UseRouting();
+
+
 app.UseCorsConfig();
 
 
 app.UseAuthorization();
 app.UseMiddleware<GlobalExceptionHandler>();
 
+
+
 app.UseIAMModule()
     .UseNotificationModule();
+
 
 app.Run();

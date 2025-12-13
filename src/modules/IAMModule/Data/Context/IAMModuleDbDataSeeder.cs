@@ -1,14 +1,17 @@
-using IAMModule.IAM.Authorization;
+using Infrastructure.Auth.Authorization;
 
 namespace IAMModule.Data.Context;
 
-public class IAMModuleDbDataSeeder(
+internal class IAMModuleDbDataSeeder(
     IAMModuleDbContext _context,
     RoleManager<ApplicationRole> _roleManager,
-    UserManager<ApplicationUser> _userManager) : IDataSeeder
+    UserManager<ApplicationUser> _userManager,
+    IEnumerable<IAppModulePermission> moduleFeatures) : IDataSeeder
 {
     public async Task SeedAllAsync()
     {
+
+
         // Check for pending and apply if any
         await CheckAndApplyPendingMigrationasync();
         // seed roles
@@ -16,8 +19,10 @@ public class IAMModuleDbDataSeeder(
         // // seed admin
         await SeedAdminUsersAsync();
 
-    }
+        // seed features
+        await SeedModuleFeaturesAsync();
 
+    }
 
     private async Task CheckAndApplyPendingMigrationasync()
     {
@@ -47,12 +52,12 @@ public class IAMModuleDbDataSeeder(
             if (roleName == AppRoles.Admin)
             {
                 // admin 
-                await AssignPermissionsToRoleAsync(role, AppPermissions.AdminPermissions);
+                //await AssignPermissionsToRoleAsync(role, AppPermissions.AdminPermissions);
             }
             else if (roleName == AppRoles.Basic)
             {
                 // basic
-                await AssignPermissionsToRoleAsync(role, AppPermissions.BasicPermissions);
+                //await AssignPermissionsToRoleAsync(role, AppPermissions.BasicPermissions);
             }
         }
     }
@@ -69,8 +74,8 @@ public class IAMModuleDbDataSeeder(
                     RoleId = role.Id,
                     ClaimType = AppClaim.Permission,
                     ClaimValue = permission.Name,
-                    Description = permission.Description,
-                    Group = permission.Group
+                    Description = "permission.Description",
+                    Group = "permission.Group"
                 });
                 await _context.SaveChangesAsync();
             }
@@ -120,4 +125,74 @@ public class IAMModuleDbDataSeeder(
             await _userManager.CreateAsync(adminUser);
         }
     }
+
+    private async Task SeedModuleFeaturesAsync()
+    {
+
+        var appPermissions = new List<PermissionEntity>();
+
+        foreach (var moduleFeature in moduleFeatures)
+        {
+            foreach (var feature in moduleFeature.Features)
+            {
+                var appFeature = await _context.Features
+                    .FirstOrDefaultAsync(f =>
+                        f.Name == feature.Name &&
+                        f.Module == moduleFeature.Module.Name);
+
+                if (appFeature == null)
+                {
+                    appFeature = new FeatureEntity
+                    {
+                        Module = moduleFeature.Module,
+                        Name = feature.Feature.Name,
+                        Description = "feature.Description",
+                    };
+
+                    var appPermission = new PermissionEntity
+                    {
+                        Action = feature.Action,
+                        AppFeature = appFeature,
+                        Description = "feature.Description",
+                        Name = AppPermission.NameFor(
+                                moduleFeature.Module,
+                                feature.Feature,
+                                feature.Action)
+                    };
+
+                    await _context.Features.AddAsync(appFeature);
+                    await _context.Permissions.AddAsync(appPermission);
+                    await _context.SaveChangesAsync();
+
+                    appPermissions.Add(appPermission);
+                }
+            }
+        }
+
+        var adminUserNames = AppCredentials.AdminUsers.Select(x => x.UserName);
+        var adminUsers = await _userManager.Users
+           .Where(u => adminUserNames.Contains(u.UserName))
+           .ToListAsync();
+
+        foreach (var admin in adminUsers)
+        {
+            foreach (var permission in appPermissions)
+            {
+                if (await _context.UserPermissions.FirstOrDefaultAsync(uap =>
+                        uap.UserId == admin.Id &&
+                        uap.AppPermissionId == permission.Id) is null)
+                {
+                    var userAppPermission = new UserAppPermissionEntity
+                    {
+                        User = admin,
+                        AppPermission = permission
+                    };
+                    await _context.UserPermissions.AddAsync(userAppPermission);
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+        }
+    }
+
 }

@@ -1,4 +1,6 @@
-﻿namespace IAMModule.Role.Features.RoleDelete;
+﻿using Infrastructure.Auth.Authorization;
+
+namespace IAMModule.Role.Features.RoleDelete;
 
 internal class RoleDeleteEndpoint : ICarterModule
 {
@@ -19,8 +21,7 @@ internal class RoleDeleteEndpoint : ICarterModule
                     (await sender.Send(RoleDeleteCommand.Create(roleId), cancellationToken))
                     .ToApiResultSuccess());
             })
-            .RequireAuthorization()
-            .WithMetadata(new MustHavePermissionAttribute(AppFeature.IAMModule, AppActions.Delete))
+            .WithPermission(IAMPermissions.RoleDelete)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("IAM-V1")
