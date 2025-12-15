@@ -1,8 +1,6 @@
-﻿using Infrastructure.Auth.Authorization;
+﻿namespace IAMModule.Entities;
 
-namespace IAMModule.Entities;
-
-internal class UserAppPermissionEntity
+internal class UserPermissionEntity
 {
     public string UserId { get; set; }
     public virtual ApplicationUser User { get; set; }

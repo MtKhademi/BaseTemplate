@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Auth.Authorization;
+﻿namespace Infrastructure.Auth;
 
 public class AppModule(string name)
 {

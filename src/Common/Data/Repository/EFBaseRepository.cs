@@ -37,8 +37,8 @@ public abstract class EFBaseRepository<TKeyModel, TModel>
     #region Get
 
     public async Task<TModel?> GetByIDAsync(TKeyModel id) => await _dbSet.FindAsync(id);
-    public virtual IQueryable<TModel> GetsQueryableTracker() => _dbSet.AsQueryable();
-    public virtual IQueryable<TModel> GetsQueryableNoTracker() => _dbSet.AsNoTracking().AsQueryable();
+    public virtual IQueryable<TModel> QueryTracking() => _dbSet.AsQueryable();
+    public virtual IQueryable<TModel> QueryNoTracking() => _dbSet.AsNoTracking().AsQueryable();
     public virtual Task<long> GetCountLongByAsync(CancellationToken cancellationToken = default) => _dbSet.LongCountAsync(cancellationToken);
 
     #endregion

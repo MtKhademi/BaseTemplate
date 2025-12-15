@@ -1,6 +1,4 @@
-﻿using Infrastructure.Auth.Authorization;
-
-namespace IAMModule.Services;
+﻿namespace IAMModule.Services;
 
 internal interface IUserPermissionService : IBaseService
 {

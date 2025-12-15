@@ -32,7 +32,7 @@
     public interface IGetsNoTrackingRepository<TModel>
       where TModel : class
     {
-        IQueryable<TModel> GetsQueryableNoTracker();
+        IQueryable<TModel> QueryNoTracking();
     }
 
     public interface IGetsModelNoTrackingRepository<TModel> where TModel : class
@@ -49,7 +49,7 @@
     public interface IGetsTrackingRepository<TModel>
         where TModel : class
     {
-        IQueryable<TModel> GetsQueryableTracker();
+        IQueryable<TModel> QueryTracking();
     }
     public interface IGetByIdRepository<TKeyType, TModel>
            where TModel : class

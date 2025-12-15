@@ -1,8 +1,8 @@
 ﻿namespace IAMModule.Data.Configs;
 
-internal class UserPermissionEntityConfig : IEntityTypeConfiguration<UserAppPermissionEntity>
+internal class UserPermissionEntityConfig : IEntityTypeConfiguration<UserPermissionEntity>
 {
-    public void Configure(EntityTypeBuilder<UserAppPermissionEntity> builder)
+    public void Configure(EntityTypeBuilder<UserPermissionEntity> builder)
     {
         builder.ToTable("UserPermissions", "IAM");
     

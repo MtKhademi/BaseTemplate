@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Auth.Authorization;
+﻿namespace Infrastructure.Auth;
 
 public class AppFeature(string name, string? description = default!)
 {

@@ -1,4 +1,4 @@
-﻿using Infrastructure.Auth.Authorization;
+﻿using Infrastructure.Auth;
 
 namespace IAMModule.User.Features.UserRoleGets;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Infrastructure.Auth.Authorization;
+namespace Infrastructure.Auth;
 
 public static class RouteHandlerBuilderExtensions
 {

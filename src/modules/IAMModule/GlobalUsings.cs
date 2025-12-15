@@ -57,3 +57,4 @@ global using IAMModule.IAM.Exceptions;
 global using IAMModule.IAM.Authorization;
 global using IAMModule.Role.Exceptions;
 global using IAMModule.Extensions;
+global using IAMModule.AccessControl.Repositories;

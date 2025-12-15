@@ -1,7 +1,6 @@
-using Infrastructure.Auth.Authorization;
 using Microsoft.AspNetCore.Authorization;
 
-namespace IAMModule.IAM.Authorization;
+namespace Infrastructure.Auth;
 
 
 public class ApiPermissionAttribute : AuthorizeAttribute

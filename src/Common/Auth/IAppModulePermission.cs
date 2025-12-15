@@ -1,7 +1,6 @@
-﻿using IAMModule.IAM.Authorization;
-using Microsoft.AspNetCore.Routing;
+﻿using Microsoft.AspNetCore.Routing;
 
-namespace Infrastructure.Auth.Authorization;
+namespace Infrastructure.Auth;
 
 public interface IAppModulePermission
 {

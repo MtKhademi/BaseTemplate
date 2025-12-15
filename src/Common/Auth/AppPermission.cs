@@ -1,6 +1,4 @@
-﻿using IAMModule.IAM.Authorization;
-
-namespace Infrastructure.Auth.Authorization;
+﻿namespace Infrastructure.Auth;
 
 public record AppPermission(
     AppModule Module,

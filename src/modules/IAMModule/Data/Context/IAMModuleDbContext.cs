@@ -18,7 +18,7 @@ internal class IAMModuleDbContext :
 
     internal DbSet<FeatureEntity> Features => Set<FeatureEntity>();
     internal DbSet<PermissionEntity> Permissions => Set<PermissionEntity>();
-    internal DbSet<UserAppPermissionEntity> UserPermissions => Set<UserAppPermissionEntity>();
+    internal DbSet<UserPermissionEntity> UserPermissions => Set<UserPermissionEntity>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

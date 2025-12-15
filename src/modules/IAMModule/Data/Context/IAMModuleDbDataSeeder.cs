@@ -1,4 +1,4 @@
-using Infrastructure.Auth.Authorization;
+using Infrastructure.Auth;
 
 namespace IAMModule.Data.Context;
 
@@ -182,7 +182,7 @@ internal class IAMModuleDbDataSeeder(
                         uap.UserId == admin.Id &&
                         uap.AppPermissionId == permission.Id) is null)
                 {
-                    var userAppPermission = new UserAppPermissionEntity
+                    var userAppPermission = new UserPermissionEntity
                     {
                         User = admin,
                         AppPermission = permission
