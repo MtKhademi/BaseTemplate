@@ -1,6 +1,8 @@
 using IAMModule.Auth.Authorization;
-using IAMModule.Auth.Services;
+using IAMModule.Services;
 using Infrastructure.Auth.Authorization;
+using Microsoft.OpenApi;
+using System.Reflection.Metadata;
 
 namespace IAMModule;
 
@@ -22,6 +24,9 @@ public static class IAMModule
         services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
         services.AddScoped<IUserPermissionService, UserPermissionSerivce>();
 
+        services.AddScoped<IUserPermissionService, UserPermissionSerivce>();
+        services.Decorate<IUserPermissionService, UserPermissionCacheService>();
+
         return services.AddServices(iamConfig)
             .AddIdentitySettings()
             .AddJwtRESTAuthentication(iamConfig)
@@ -36,7 +41,40 @@ public static class IAMModule
 
     public static SwaggerGenOptions AddSwaggerIAMModule(this SwaggerGenOptions option)
     {
-        option.SwaggerDoc("IAM-V1", new Microsoft.OpenApi.OpenApiInfo
+
+        option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+            Name = "Authorization",
+            Type = SecuritySchemeType.Http,
+            Scheme = "Bearer",
+            BearerFormat = "JWT",
+            In = ParameterLocation.Header,
+            Description = "Enter 'Bearer' [space] and then your valid JWT token in the text input below.\r\n\r\nExample: \"Bearer eyJhbGciOi...\""
+        });
+
+        option.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+        {
+            [new OpenApiSecuritySchemeReference("bearer", document)] = []
+        });
+
+        //option.AddSecurityRequirement(new OpenApiSecurityRequirement
+        //{
+
+        //    //{
+        //    //new OpenApiSecurityScheme
+        //    //{
+        //    //    Reference = new OpenApiReference
+        //    //    {
+        //    //        Type = ReferenceType.SecurityScheme,
+        //    //        Id = "Bearer"
+        //    //    }
+        //    //},
+        //    //Array.Empty<string>()
+        //    //}
+        //});
+
+
+        option.SwaggerDoc("IAM-V1", new OpenApiInfo
         {
             Title = "I AM Module - API",
             Version = "v1",

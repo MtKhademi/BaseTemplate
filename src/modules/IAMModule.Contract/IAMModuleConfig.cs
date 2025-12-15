@@ -4,9 +4,9 @@ namespace IAMModule.Contract;
 
 public class IAMModuleConfig : BaseConfig<IAMModuleConfig>
 {
-    public string SecretKey { get; set; }
-    public int TokenExpiryInMinutes { get; set; }
-    public string ConnectionString { get; set; }
+    public string SecretKey { get; set; } = default!;
+    public double TokenExpiryInMinutes { get; set; } = default!;
+    public string ConnectionString { get; set; } = default!;
 
 
     public override (bool isValid, IEnumerable<string> errors) IsValid()
