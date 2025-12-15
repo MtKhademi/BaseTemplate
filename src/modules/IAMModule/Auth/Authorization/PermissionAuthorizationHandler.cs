@@ -1,4 +1,4 @@
-﻿using IAMModule.Auth.Services;
+﻿using IAMModule.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;

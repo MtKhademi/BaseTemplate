@@ -1,4 +1,4 @@
-namespace IAMModule.IAM.Services;
+namespace IAMModule.Services;
 
 public interface ICurrentUserService
 {

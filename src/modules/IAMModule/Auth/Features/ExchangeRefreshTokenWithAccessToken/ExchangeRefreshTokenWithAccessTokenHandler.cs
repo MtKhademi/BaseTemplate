@@ -1,5 +1,5 @@
 ﻿using IAMModule.Contract.Models;
-using IAMModule.IAM.Services;
+using IAMModule.Services;
 
 namespace IAMModule.IAM.Features.ExchangeRefreshTokenWithAccessToken;
 
