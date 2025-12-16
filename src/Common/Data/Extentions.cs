@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Infrastructure.Data;
+﻿namespace Infrastructure.Data;
 
 public static class Extentions
 {

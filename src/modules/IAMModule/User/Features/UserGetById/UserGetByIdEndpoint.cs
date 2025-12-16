@@ -1,6 +1,4 @@
-﻿using Infrastructure.Auth;
-
-namespace IAMModule.UserManagement.Features.UserGetById;
+﻿namespace IAMModule.UserManagement.Features.UserGetById;
 
 internal class UserGetByIdEndpoint : ICarterModule
 {

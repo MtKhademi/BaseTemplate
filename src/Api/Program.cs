@@ -1,4 +1,6 @@
+using CacheModule;
 using IAMModule;
+using Infrastructure.Module;
 using NotificationModule;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,14 +24,16 @@ builder.Services.AddVersioningConfig();
 
 builder.Services
     .AddIAMModule(builder.Configuration)
-    .AddNotificationModule(builder.Configuration);
+    .AddNotificationModule(builder.Configuration)
+    .AddCacheModule(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
     option
     .AddSwaggerIAMModule()
-    .AddSwaggerNotificationModule();
+    .AddSwaggerNotificationModule()
+    .AddSwaggerCacheModule();
 });
 
 
@@ -43,7 +47,8 @@ app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
     options.UseSwaggerIAMModule()
-    .UseSwaggerNotificationModule();
+    .UseSwaggerNotificationModule()
+    .UseSwaggerCacheModule();
 });
 
 
@@ -62,8 +67,10 @@ app.UseMiddleware<GlobalExceptionHandler>();
 
 
 
+app.PopulatePermissionsFromEndpoints();
 app.UseIAMModule()
-    .UseNotificationModule();
+    .UseNotificationModule()
+    .UseCacheModule();
 
 
 app.Run();

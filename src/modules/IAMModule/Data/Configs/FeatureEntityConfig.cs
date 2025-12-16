@@ -8,10 +8,6 @@ internal class FeatureEntityConfig : IEntityTypeConfiguration<FeatureEntity>
 
         builder.HasKey(af => af.Id);
 
-        builder.Property(af => af.Module)
-            .IsRequired()
-            .HasMaxLength(100);
-
         builder.Property(af => af.Name)
             .IsRequired()
             .HasMaxLength(100);
@@ -20,8 +16,8 @@ internal class FeatureEntityConfig : IEntityTypeConfiguration<FeatureEntity>
             .HasMaxLength(500);
 
         builder.HasMany(af => af.Permissions)
-            .WithOne(ap => ap.AppFeature)
-            .HasForeignKey(ap => ap.AppFeatureId)
+            .WithOne(ap => ap.Feature)
+            .HasForeignKey(ap => ap.FeatureId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

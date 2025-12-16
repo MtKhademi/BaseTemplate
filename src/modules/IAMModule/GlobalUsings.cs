@@ -44,6 +44,7 @@ global using Infrastructure.Pagination;
 global using Infrastructure.Data.Repository;
 global using Infrastructure.Web.ApiResult;
 
+global using IAMModule.Services;
 global using IAMModule.Contract;
 global using IAMModule.Contract.Responses;
 global using IAMModule.Contract.Queries;
@@ -58,3 +59,4 @@ global using IAMModule.IAM.Authorization;
 global using IAMModule.Role.Exceptions;
 global using IAMModule.Extensions;
 global using IAMModule.AccessControl.Repositories;
+global using IAMModule.Auth.Authorization;

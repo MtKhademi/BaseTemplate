@@ -1,4 +1,8 @@
-﻿namespace Test.Integration.IAMModuleTest.FeaturesTest.AuthFeatureTests;
+﻿using Test.Integration.Fixtures;
+using Test.Integration.Fixtures.IAMTestScenarios.AccessControll;
+using Test.Integration.Fixtures.IAMTestScenarios.UserScenarios;
+
+namespace Test.Integration.IAMModuleTest.FeaturesTest.AuthFeatureTests;
 
 [Collection("Collection tests v1")]
 [Trait("IAM", "change-password-logged-user[REST]")]
@@ -24,7 +28,7 @@ public partial class ChangePasswordLoggedUserRestApiTest : BaseTest
     {
         //-ARRANGE
         var runner = new ScenarioRunner(_client, _outPutHelper)
-            .RegisterDefault()
+            .RegisterDefaultUser()
             .LoginDefaultUser()
             .ChangePasswordLoggedUser(new ChangePasswordRequestTest(
                 CurrentPassword: password,
@@ -75,7 +79,7 @@ public partial class ChangePasswordLoggedUserRestApiTest : BaseTest
 
         //-ARRANGE
         var runner = new ScenarioRunner(_client, _outPutHelper)
-            .RegisterDefault()
+            .RegisterDefaultUser()
             .LoginDefaultUser()
             .ChangePasswordLoggedUser();
 

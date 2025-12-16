@@ -1,4 +1,8 @@
-﻿namespace Test.Integration.IAMModuleTest.FeaturesTest.UserFeatureTests;
+﻿using Test.Integration.Fixtures;
+using Test.Integration.Fixtures.IAMTestScenarios.AuthScenarios;
+using Test.Integration.Fixtures.IAMTestScenarios.UserScenarios;
+
+namespace Test.Integration.IAMModuleTest.FeaturesTest.UserFeatureTests;
 
 [Collection("Collection tests v1")]
 [Trait("IAM", "user-change-state-active[REST]")]
@@ -71,7 +75,7 @@ public partial class UserChangeStateActiveRestApiTest : BaseTest
     {
         //-ARRANGE
         var runner = new ScenarioRunner(_client, _outPutHelper)
-            .RegisterDefault()
+            .RegisterDefaultUser()
             .LoginDefaultUser()
             .UserChangeStateActive(userId: "user-id");
 

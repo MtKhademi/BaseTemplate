@@ -9,5 +9,8 @@ internal class FeatureEntity
     public virtual ICollection<PermissionEntity> Permissions { get; set; } = default!;
 
     public int ModuleId { get; set; }
-    public virtual ModuleEntity? Module { get; set; } = default!;
+    public virtual ModuleEntity? Module { get; set; }
+
+
+    public FeatureModel ToModel() => new FeatureModel(FeatureId: Id, FeatureName: Name, FeatureDescription: Description);
 }

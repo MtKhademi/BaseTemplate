@@ -1,6 +1,4 @@
-﻿using Infrastructure.Auth;
-
-namespace IAMModule.User.Features.UserRoleChange;
+﻿namespace IAMModule.User.Features.UserRoleChange;
 
 internal class UserRoleChangeEndpoint : ICarterModule
 {

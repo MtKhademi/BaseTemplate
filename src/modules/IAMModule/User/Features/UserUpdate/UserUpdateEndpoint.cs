@@ -1,5 +1,4 @@
-﻿using Infrastructure.Auth;
-using Infrastructure.Web.ApiResult;
+﻿using Infrastructure.Web.ApiResult;
 
 namespace IAMModule.User.Features.UserUpdate;
 

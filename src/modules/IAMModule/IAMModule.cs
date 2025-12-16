@@ -1,7 +1,4 @@
-using IAMModule.Auth.Authorization;
-using IAMModule.Auth.Services;
-using IAMModule.Services;
-using Infrastructure.Auth;
+using Infrastructure.Module;
 
 namespace IAMModule;
 
@@ -26,11 +23,10 @@ public static class IAMModule
         return services.AddServices(iamConfig)
             .AddIdentitySettings()
             .AddJwtRESTAuthentication(iamConfig)
-            .AddSingleton<IAppModulePermission, AppModulePermissions>();
+            .AddSingleton<IModulePermission, AppModulePermissions>();
     }
-    public static IApplicationBuilder UseIAMModule(this WebApplication app)
+    public static IApplicationBuilder UseIAMModule(this IApplicationBuilder app)
     {
-        app.PopulatePermissionsFromEndpoints();
         app.UseMigration<IAMModuleDbContext>();
         return app;
     }

@@ -1,6 +1,4 @@
-﻿using Infrastructure.Auth;
-
-namespace IAMModule.Role.Features.RoleDelete;
+﻿namespace IAMModule.Role.Features.RoleDelete;
 
 internal class RoleDeleteEndpoint : ICarterModule
 {

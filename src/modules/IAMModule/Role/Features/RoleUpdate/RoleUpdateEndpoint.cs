@@ -1,6 +1,4 @@
-﻿using Infrastructure.Auth;
-
-namespace IAMModule.Role.Features.RoleUpdate;
+﻿namespace IAMModule.Role.Features.RoleUpdate;
 
 internal class RoleUpdateEndpoint : ICarterModule
 {

@@ -1,4 +1,6 @@
-﻿namespace Test.Integration.IAMModuleTest.FeaturesTest.UserFeatureTests;
+﻿using Test.Integration.Fixtures.IAMTestScenarios.UserScenarios;
+
+namespace Test.Integration.IAMModuleTest.FeaturesTest.UserFeatureTests;
 
 [Collection("Collection tests v1")]
 [Trait("IAM", "user-get-paginated[REST]")]

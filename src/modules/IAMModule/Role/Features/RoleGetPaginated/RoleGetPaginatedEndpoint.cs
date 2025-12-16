@@ -1,6 +1,4 @@
-﻿using Infrastructure.Auth;
-
-namespace IAMModule.Role.Features.RoleGetPaginated;
+﻿namespace IAMModule.Role.Features.RoleGetPaginated;
 
 internal class RoleGetPaginatedEndpoint : ICarterModule
 {

@@ -1,11 +1,11 @@
-﻿using Infrastructure.Auth;
+﻿using Infrastructure.Module;
 
 namespace IAMModule.Auth.Authorization;
 
-internal class AppModulePermissions : IAppModulePermission
+internal class AppModulePermissions : IModulePermission
 {
-    public AppModule Module => IAMPermissions.Module;
-    private readonly List<AppPermission> _features = new();
-    public IEnumerable<AppPermission> Features => _features;
-    public void AddFeature(AppPermission permission) => _features.Add(permission);
+    public AppModule Module => IAMPermissions.IamModule;
+    private readonly List<ApiPermission> _features = new();
+    public IEnumerable<ApiPermission> Features => _features;
+    public void AddFeature(ApiPermission permission) => _features.Add(permission);
 }

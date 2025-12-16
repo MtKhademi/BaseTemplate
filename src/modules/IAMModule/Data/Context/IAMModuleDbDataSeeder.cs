@@ -1,4 +1,4 @@
-using Infrastructure.Auth;
+using Infrastructure.Module;
 
 namespace IAMModule.Data.Context;
 
@@ -6,11 +6,10 @@ internal class IAMModuleDbDataSeeder(
     IAMModuleDbContext _context,
     RoleManager<ApplicationRole> _roleManager,
     UserManager<ApplicationUser> _userManager,
-    IEnumerable<IAppModulePermission> moduleFeatures) : IDataSeeder
+    IEnumerable<IModulePermission> moduleFeatures) : IDataSeeder
 {
     public async Task SeedAllAsync()
     {
-
 
         // Check for pending and apply if any
         await CheckAndApplyPendingMigrationasync();
@@ -62,7 +61,7 @@ internal class IAMModuleDbDataSeeder(
         }
     }
 
-    private async Task AssignPermissionsToRoleAsync(ApplicationRole role, IReadOnlyList<AppPermission> permissions)
+    private async Task AssignPermissionsToRoleAsync(ApplicationRole role, IReadOnlyList<ApiPermission> permissions)
     {
         var currentClaim = await _roleManager.GetClaimsAsync(role);
         foreach (var permission in permissions)
@@ -135,37 +134,61 @@ internal class IAMModuleDbDataSeeder(
         {
             foreach (var feature in moduleFeature.Features)
             {
-                var appFeature = await _context.Features
+                var moduleEntity = await _context.Modules
+                    .FirstOrDefaultAsync(m => m.Name == moduleFeature.Module.Name);
+
+                if (moduleEntity == null)
+                {
+                    moduleEntity = new ModuleEntity
+                    {
+                        Name = moduleFeature.Module.Name,
+                        Description = moduleFeature.Module.Description,
+                    };
+                    await _context.Modules.AddAsync(moduleEntity);
+                    await _context.SaveChangesAsync();
+                }
+
+                var featureEntity = await _context.Features
                     .FirstOrDefaultAsync(f =>
                         f.Name == feature.Name &&
-                        f.Module == moduleFeature.Module.Name);
+                        f.ModuleId == moduleEntity.Id);
 
-                if (appFeature == null)
+                if (featureEntity == null)
                 {
-                    appFeature = new FeatureEntity
+                    featureEntity = new FeatureEntity
                     {
-                        Module = moduleFeature.Module,
+                        Module = moduleEntity,
+                        ModuleId = moduleEntity.Id,
                         Name = feature.Feature.Name,
-                        Description = "feature.Description",
+                        Description = feature.description,
                     };
+                    await _context.Features.AddAsync(featureEntity);
+                    await _context.SaveChangesAsync();
+                }
 
-                    var appPermission = new PermissionEntity
+                var permissionEntity = await _context.Permissions
+                    .FirstOrDefaultAsync(f =>
+                        f.Name == feature.Name &&
+                        f.FeatureId == featureEntity.Id);
+
+                if (permissionEntity == null)
+                {
+                    permissionEntity = new PermissionEntity
                     {
                         Action = feature.Action,
-                        AppFeature = appFeature,
+                        Feature = featureEntity,
                         Description = "feature.Description",
-                        Name = AppPermission.NameFor(
+                        Name = ApiPermission.NameFor(
                                 moduleFeature.Module,
                                 feature.Feature,
                                 feature.Action)
                     };
 
-                    await _context.Features.AddAsync(appFeature);
-                    await _context.Permissions.AddAsync(appPermission);
+                    await _context.Permissions.AddAsync(permissionEntity);
                     await _context.SaveChangesAsync();
-
-                    appPermissions.Add(appPermission);
                 }
+
+                appPermissions.Add(permissionEntity);
             }
         }
 
@@ -180,18 +203,17 @@ internal class IAMModuleDbDataSeeder(
             {
                 if (await _context.UserPermissions.FirstOrDefaultAsync(uap =>
                         uap.UserId == admin.Id &&
-                        uap.AppPermissionId == permission.Id) is null)
+                        uap.PermissionId == permission.Id) is null)
                 {
                     var userAppPermission = new UserPermissionEntity
                     {
                         User = admin,
-                        AppPermission = permission
+                        Permission = permission
                     };
                     await _context.UserPermissions.AddAsync(userAppPermission);
                     await _context.SaveChangesAsync();
                 }
             }
-
         }
     }
 

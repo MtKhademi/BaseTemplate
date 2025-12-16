@@ -1,4 +1,7 @@
-﻿namespace Test.Integration.IAMModuleTest.FeaturesTest.RoleFeatureTests;
+﻿using Test.Integration.Fixtures.IAMTestScenarios.AuthScenarios;
+using Test.Integration.Fixtures.IAMTestScenarios.RoleScenarios;
+
+namespace Test.Integration.IAMModuleTest.FeaturesTest.RoleFeatureTests;
 
 [Collection("Collection tests v1")]
 [Trait("IAM", "role-get-paginated[REST]")]
@@ -78,7 +81,7 @@ public partial class RoleGetPaginatedRestApiTest : BaseTest
             .LoginAdmin()
             .RoleCreate(roleName: "Role1", roleDescription: "Description for Role1")
             .SignOut()
-            .RegisterDefault()
+            .RegisterDefaultUser()
             .LoginDefaultUser()
             .RoleGetPaginated();
 

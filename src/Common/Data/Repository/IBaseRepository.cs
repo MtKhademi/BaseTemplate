@@ -60,10 +60,6 @@
     #endregion
 
     #region Get Count
-    public interface IGetCountRepository<TFilter>
-    {
-        Task<int> GetCountByAsync(TFilter filter);
-    }
 
     public interface IGetCountRepository
     {

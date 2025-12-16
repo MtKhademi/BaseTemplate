@@ -1,4 +1,4 @@
-﻿using Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.AuthScenarios;
+﻿using Test.Integration.Fixtures.IAMTestScenarios.AuthScenarios;
 
 namespace Test.Integration.IAMModuleTest.FeaturesTest.AuthFeatureTests;
 
@@ -68,7 +68,7 @@ public partial class LoginRestApiTest : BaseTest
     {
         //-ARRANGE
         var runner = new ScenarioRunner(_client, _outPutHelper)
-            .RegisterDefault()
+            .RegisterDefaultUser()
             .LoginUser("testuser", "P@ssw0rd123");
 
         //-ACT
@@ -88,7 +88,7 @@ public partial class LoginRestApiTest : BaseTest
     public async Task Should_be_able_login()
     {
         var runner = new ScenarioRunner(_client, _outPutHelper)
-             .RegisterDefault()
+             .RegisterDefaultUser()
              .LoginUser("testuser", "P@ssw0rd");
 
         //-ACT

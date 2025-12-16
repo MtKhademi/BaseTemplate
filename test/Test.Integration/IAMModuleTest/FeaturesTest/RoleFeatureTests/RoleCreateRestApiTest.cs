@@ -1,4 +1,7 @@
-﻿namespace Test.Integration.IAMModuleTest.FeaturesTest;
+﻿using Test.Integration.Fixtures.IAMTestScenarios.AuthScenarios;
+using Test.Integration.Fixtures.IAMTestScenarios.RoleScenarios;
+
+namespace Test.Integration.IAMModuleTest.FeaturesTest;
 
 [Collection("Collection tests v1")]
 [Trait("IAM", "role-create[REST]")]
@@ -114,7 +117,7 @@ public partial class RoleCreateRestApiTest : BaseTest
     {
         //-ARRANGE
         var runner = new ScenarioRunner(_client, _outPutHelper)
-            .RegisterDefault()
+            .RegisterDefaultUser()
             .LoginDefaultUser()
             .RoleCreate("roleName", "desc");
 

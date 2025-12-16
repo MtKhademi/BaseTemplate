@@ -1,6 +1,4 @@
-﻿using Infrastructure.Auth;
-
-namespace IAMModule.User.Features.UserCreate;
+﻿namespace IAMModule.User.Features.UserCreate;
 
 internal class UserCreateEndpoint : ICarterModule
 {

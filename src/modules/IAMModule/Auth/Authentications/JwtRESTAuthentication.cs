@@ -1,7 +1,4 @@
-﻿using IAMModule.Services;
-using Infrastructure.Auth.Authorization;
-
-namespace IAMModule.IAM.Authentications;
+﻿namespace IAMModule.IAM.Authentications;
 
 internal static class JwtRESTAuthentication
 {

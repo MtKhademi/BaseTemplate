@@ -1,5 +1,3 @@
-using Infrastructure.Auth.Authorization;
-
 namespace IAMModule.Auth.Features.SignOut;
 
 internal class SignOutEndpoint : ICarterModule
