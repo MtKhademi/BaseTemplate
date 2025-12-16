@@ -1,6 +1,4 @@
-﻿using Infrastructure.Auth;
-
-namespace IAMModule.UserManagement.Features.UserGetPaginated;
+﻿namespace IAMModule.UserManagement.Features.UserGetPaginated;
 
 internal class UserGetPaginatedEndpoint : ICarterModule
 {

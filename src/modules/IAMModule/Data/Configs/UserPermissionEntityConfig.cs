@@ -6,6 +6,6 @@ internal class UserPermissionEntityConfig : IEntityTypeConfiguration<UserPermiss
     {
         builder.ToTable("UserPermissions", "IAM");
     
-        builder.HasKey(x => new { x.UserId, x.AppPermissionId });
+        builder.HasKey(x => new { x.UserId, x.PermissionId });
     }
 }

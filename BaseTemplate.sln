@@ -32,6 +32,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationModule", "src\m
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationModule.Contract", "src\modules\NotificationModule.Contract\NotificationModule.Contract.csproj", "{2F0F1A05-4E27-8EC6-DBE9-4C4B3055EDFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheModule", "src\modules\CacheModule\CacheModule.csproj", "{940E25BD-01BB-4C81-96D5-A54B04951D12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheModule.Contract", "src\modules\CacheModule.Contract\CacheModule.Contract.csproj", "{2C7D6739-F086-410F-8B38-C699BD58DD21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +78,14 @@ Global
 		{2F0F1A05-4E27-8EC6-DBE9-4C4B3055EDFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F0F1A05-4E27-8EC6-DBE9-4C4B3055EDFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F0F1A05-4E27-8EC6-DBE9-4C4B3055EDFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{940E25BD-01BB-4C81-96D5-A54B04951D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{940E25BD-01BB-4C81-96D5-A54B04951D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{940E25BD-01BB-4C81-96D5-A54B04951D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{940E25BD-01BB-4C81-96D5-A54B04951D12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C7D6739-F086-410F-8B38-C699BD58DD21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C7D6739-F086-410F-8B38-C699BD58DD21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C7D6739-F086-410F-8B38-C699BD58DD21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C7D6739-F086-410F-8B38-C699BD58DD21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +100,8 @@ Global
 		{81F50366-3857-BE0C-95C2-1389F5F94218} = {C3000B64-B444-46C9-AF54-0E13A328776C}
 		{142A8382-4B27-B7FE-2364-87441E010FC0} = {C3000B64-B444-46C9-AF54-0E13A328776C}
 		{2F0F1A05-4E27-8EC6-DBE9-4C4B3055EDFC} = {C3000B64-B444-46C9-AF54-0E13A328776C}
+		{940E25BD-01BB-4C81-96D5-A54B04951D12} = {C3000B64-B444-46C9-AF54-0E13A328776C}
+		{2C7D6739-F086-410F-8B38-C699BD58DD21} = {C3000B64-B444-46C9-AF54-0E13A328776C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {97B7354D-8702-4963-9364-26533A862BE4}

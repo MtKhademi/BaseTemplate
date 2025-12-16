@@ -1,6 +1,4 @@
-﻿using Infrastructure.Auth;
-
-namespace IAMModule.Role.Features.RoleGetByRoleId;
+﻿namespace IAMModule.Role.Features.RoleGetByRoleId;
 
 internal class RoleGetByRoleIdEndpoint : ICarterModule
 {

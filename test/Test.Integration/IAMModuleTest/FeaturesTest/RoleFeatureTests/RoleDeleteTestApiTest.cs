@@ -1,4 +1,7 @@
-﻿namespace Test.Integration.IAMModuleTest.FeaturesTest.RoleFeatureTests;
+﻿using Test.Integration.Fixtures.IAMTestScenarios.AuthScenarios;
+using Test.Integration.Fixtures.IAMTestScenarios.RoleScenarios;
+
+namespace Test.Integration.IAMModuleTest.FeaturesTest.RoleFeatureTests;
 
 [Collection("Collection tests v1")]
 [Trait("IAM", "role-delete[REST]")]
@@ -85,7 +88,7 @@ public partial class RoleDeleteTestApiTest : BaseTest
     {
         //-ARRANGE
         var runner = new ScenarioRunner(_client, _outPutHelper)
-            .RegisterDefault()
+            .RegisterDefaultUser()
             .LoginDefaultUser()
             .RoleDelete(roleId: "role-id");
 

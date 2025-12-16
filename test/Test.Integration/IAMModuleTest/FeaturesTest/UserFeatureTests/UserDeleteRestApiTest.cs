@@ -1,5 +1,6 @@
-﻿using Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.AuthScenarios;
-using Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.UserScenarios;
+﻿using Test.Integration.Fixtures;
+using Test.Integration.Fixtures.IAMTestScenarios.AuthScenarios;
+using Test.Integration.Fixtures.IAMTestScenarios.UserScenarios;
 
 namespace Test.Integration.IAMModuleTest.FeaturesTest.UserFeatureTests;
 
@@ -106,7 +107,7 @@ public partial class UserDeleteRestApiTest : BaseTest
             .LoginAdmin()
             .UserCreate(createRequest)
             .SignOut()
-            .RegisterDefault()
+            .RegisterDefaultUser()
             .LoginDefaultUser()
             .UserDelete("user-id");
 

@@ -1,5 +1,4 @@
 ﻿using IAMModule.Auth.Authorization;
-using Infrastructure.Auth;
 
 namespace IAMModule.Role.Features.RoleCreate;
 

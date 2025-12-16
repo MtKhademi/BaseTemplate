@@ -1,4 +1,6 @@
-﻿using Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.AuthScenarios;
+﻿using Test.Integration.Fixtures;
+using Test.Integration.Fixtures.IAMTestScenarios.AuthScenarios;
+using Test.Integration.Fixtures.IAMTestScenarios.RoleScenarios;
 
 namespace Test.Integration.IAMModuleTest.FeaturesTest.RoleFeatureTests;
 
@@ -96,7 +98,7 @@ public partial class RoleGetByRoleId : BaseTest
     {
         //-ARRANGE
         var runner = new ScenarioRunner(_client, _outPutHelper)
-            .RegisterDefault()
+            .RegisterDefaultUser()
             .LoginDefaultUser()
             .RoleGetById(RoleId: "123");
 

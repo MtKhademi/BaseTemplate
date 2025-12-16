@@ -1,6 +1,4 @@
-﻿using Infrastructure.Auth;
-
-namespace IAMModule.User.Features.UserDelete;
+﻿namespace IAMModule.User.Features.UserDelete;
 
 internal class UserDeleteEndpoint : ICarterModule
 {

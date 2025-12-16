@@ -1,6 +1,4 @@
-﻿using Infrastructure.Auth;
-
-namespace IAMModule.User.Features.UserRoleGets;
+﻿namespace IAMModule.User.Features.UserRoleGets;
 
 internal class UserRoleGetsEndpoint : ICarterModule
 {

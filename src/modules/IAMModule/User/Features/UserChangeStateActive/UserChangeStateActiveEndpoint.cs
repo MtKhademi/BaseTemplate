@@ -1,6 +1,4 @@
-﻿using Infrastructure.Auth;
-
-namespace IAMModule.User.Features.UserChangeStateActive;
+﻿namespace IAMModule.User.Features.UserChangeStateActive;
 
 internal class UserChangeStateActiveEndpoint : ICarterModule
 {

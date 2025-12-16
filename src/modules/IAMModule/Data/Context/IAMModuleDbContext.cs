@@ -16,6 +16,7 @@ internal class IAMModuleDbContext :
 
     }
 
+    internal DbSet<ModuleEntity> Modules => Set<ModuleEntity>();
     internal DbSet<FeatureEntity> Features => Set<FeatureEntity>();
     internal DbSet<PermissionEntity> Permissions => Set<PermissionEntity>();
     internal DbSet<UserPermissionEntity> UserPermissions => Set<UserPermissionEntity>();

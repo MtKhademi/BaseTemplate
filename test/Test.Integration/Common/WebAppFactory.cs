@@ -1,4 +1,5 @@
-﻿using Infrastructure.Data;
+﻿using IAMModule.Data.Context;
+using Infrastructure.Data;
 
 namespace Test.Integration.Common;
 

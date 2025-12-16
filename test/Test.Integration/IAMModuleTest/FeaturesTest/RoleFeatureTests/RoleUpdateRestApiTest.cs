@@ -1,5 +1,4 @@
-﻿using Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.AuthScenarios;
-
+﻿
 namespace Test.Integration.IAMModuleTest.FeaturesTest.RoleFeatureTests;
 
 [Collection("Collection tests v1")]

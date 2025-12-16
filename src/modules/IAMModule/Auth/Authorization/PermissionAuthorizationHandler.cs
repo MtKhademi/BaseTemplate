@@ -30,9 +30,9 @@ internal sealed class PermissionAuthorizationHandler
         using var scope = _scopeFactory.CreateScope();
 
         var _permissionService = scope.ServiceProvider
-            .GetRequiredService<IUserPermissionService>();
+            .GetRequiredService<IUserPermissionRepository>();
 
-        if (await _permissionService.HasPermissionAsync(userId, requirement.PermissionName))
+        if (await _permissionService.HasPermissionByUserIdAsync(userId, requirement.PermissionName))
         {
             context.Succeed(requirement);
         }

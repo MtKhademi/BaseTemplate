@@ -1,4 +1,7 @@
-﻿using Test.Integration.Fixtures.TestScenarios.IAMTestScenarios.UserScenarios;
+﻿using Test.Integration.Fixtures;
+using Test.Integration.Fixtures.IAMTestScenarios.AuthScenarios;
+using Test.Integration.Fixtures.IAMTestScenarios.UserScenarios;
+using Test.Integration.TestScenarios;
 
 namespace Test.Integration.IAMModuleTest.FeaturesTest.UserFeatureTests;
 
