@@ -1,3 +1,5 @@
+using ECommerceModule.Auth;
+
 namespace ECommerceModule.Orders.Features.GetOrdersPaginated;
 
 internal class GetOrdersPaginatedEndpoint : ICarterModule
@@ -25,6 +27,7 @@ internal class GetOrdersPaginatedEndpoint : ICarterModule
                     .ToOrderResponsePaginated()
                     .ToApiResultSuccess());
             })
+            .WithPermission(ECommercePermissions.Read)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("ECOMMERCE-V1")
