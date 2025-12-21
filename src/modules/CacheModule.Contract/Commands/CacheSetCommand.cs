@@ -2,14 +2,14 @@
 
 namespace CacheModule.Contract.Commands;
 
-public record CacheSetCommand<T> : ICommand<bool> 
+public record CacheSetCommand<T> : ICommand<bool>
     where T : class
 {
     public string Key { get; init; }
     public T Value { get; init; }
     public TimeSpan Expiration { get; init; }
 
-    public CacheSetCommand(string key, T value, TimeSpan expiration)
+    public CacheSetCommand(string key, T? value, TimeSpan? expiration = null)
     {
         var errors = new List<string>();
         if (string.IsNullOrWhiteSpace(key))
@@ -23,15 +23,16 @@ public record CacheSetCommand<T> : ICommand<bool>
 
         Key = key;
         Value = value!;
-        Expiration = expiration;
+        Expiration = expiration ?? TimeSpan.FromMinutes(20);
     }
 
 
     public static CacheSetCommand<string> Create(CacheSetRequest request)
         => new CacheSetCommand<string>(
-            key: request.key!,
-            value: request.value!,
-            expiration: TimeSpan.FromMinutes(request.absoluteExpirationRelativeToNowBaseMinute!.Value)
+            key: request.Key,
+            value: request.Value,
+            expiration: request.AbsoluteExpirationRelativeToNowBaseMinute.HasValue ?
+                TimeSpan.FromMinutes(request.AbsoluteExpirationRelativeToNowBaseMinute!.Value) : null
         );
     internal class CacheSetCommandException : NotValidDataException<CacheSetCommandException>
     {

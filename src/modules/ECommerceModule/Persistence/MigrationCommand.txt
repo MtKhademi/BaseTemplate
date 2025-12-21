@@ -1,0 +1,4 @@
+dotnet ef migrations add initECommerceModuleDb -s .\src\Api --project .\src\modules\ECommerceModule -o Data/Migrations -c ECommerceModule.Persistence.Context.ECommerceDbContext
+
+
+dotnet ef migrations remove -s MDF.API --project Modules/SymbolModule -c SymbolDbContext

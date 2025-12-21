@@ -47,9 +47,9 @@ public partial class UserGetPaginatedTest : BaseTest
         var apiResult = await response.Content.ReadModelFromJsonAsync<ApiResultTest<PaginatedListTest<ApplicationUserResponseTest>>>();
         apiResult.Should().NotBeNull();
         apiResult.Result.Should().NotBeNull();
-        apiResult.Result.TotalItems.Should().BeGreaterThanOrEqualTo(4);
+        apiResult.Result.TotalCount.Should().BeGreaterThanOrEqualTo(4);
 
-        var expectUser = apiResult.Result.Data.FirstOrDefault(u => u.Email == "user5@example.com");
+        var expectUser = apiResult.Result.Items.FirstOrDefault(u => u.Email == "user5@example.com");
         expectUser.Should().NotBeNull();
         expectUser.Email.Should().Be("user5@example.com");
         expectUser.FirstName.Should().Be("User5");

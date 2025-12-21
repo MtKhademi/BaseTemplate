@@ -87,13 +87,13 @@ public static class PaginatedListExtensions
         where TModel : class
         where TResponse : class
     {
-        var mapped = source.Data.Select(mapFunc).ToList();
+        var mapped = source.Items.Select(mapFunc).ToList();
         return new PaginatedList<TResponse>(
             mapped,
             source.CurrentPage,
             source.PageSize,
-            source.TotalItems,
-            source.CountOfAllLogsBaseFilter
+            source.TotalCount,
+            source.TotalCountBaseFilter
         );
     }
 

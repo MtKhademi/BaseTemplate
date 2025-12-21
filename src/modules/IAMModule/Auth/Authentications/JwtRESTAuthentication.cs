@@ -2,20 +2,25 @@
 
 internal static class JwtRESTAuthentication
 {
-    internal static IServiceCollection AddJwtRESTAuthentication(this IServiceCollection services, IAMModuleConfig config)
+    internal static IServiceCollection AddJwtRESTAuthentication(this IServiceCollection services)
     {
-        var key = Encoding.UTF8.GetBytes(config.SecretKey);
 
-        services.AddAuthentication(auth =>
+        services.AddAuthentication(options =>
         {
-            auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        })
-            .AddJwtBearer(bearer =>
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer();
+
+
+        services.AddOptions<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme)
+            .Configure<IOptions<IAMModuleConfig>>((options, config) =>
             {
-                bearer.RequireHttpsMetadata = false;
-                bearer.SaveToken = true;
-                bearer.TokenValidationParameters = new TokenValidationParameters()
+                var key = Encoding.UTF8.GetBytes(config.Value.SecretKey);
+
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
@@ -25,63 +30,7 @@ internal static class JwtRESTAuthentication
                     ClockSkew = TimeSpan.Zero
                 };
 
-                bearer.Events = new JwtBearerEvents
-                {
-                    OnTokenValidated = async context =>
-                    {
-                        // Get UserManager from DI
-                        var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<JwtBearerEvents>>();
-                        var tokenService = context.HttpContext.RequestServices.GetRequiredService<ITokenService>();
-                        var userId = context.Principal.FindFirstValue(ClaimTypes.NameIdentifier);
-
-                        logger.LogInformation("Validating token for user ID: {UserId}", userId);
-
-                        // Get token from header
-                        var token = context.SecurityToken.ToString();
-
-                        if (!await tokenService.ValidTokenAsync(token, userId))
-                        {
-                            context.HttpContext.Items["AuthErrorMessage"] = "Token is not valid or has been revoked.";
-                            context.Fail("Token is not valid or has been revoked.");
-                        }
-                    },
-                    OnMessageReceived = context =>
-                    {
-                        var authHeader = context.Request.Headers["Authorization"].FirstOrDefault();
-                        if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
-                        {
-                            context.Token = authHeader["Bearer ".Length..];
-                        }
-                        return Task.CompletedTask;
-                    },
-
-                    OnAuthenticationFailed = async context =>
-                    {
-                        if (context.Exception is SecurityTokenValidationException)
-                        {
-
-                            if (context.Request.IsRESTRequest())
-                            {
-                                var exception = new JwtRESTNotValidTokenException($"Token validation failed: {context.Exception.Message}");
-                                await exception.WriteResponseAsync(context.HttpContext);
-                            }
-                        }
-                    },
-                    OnChallenge = async context =>
-                    {
-                        context.HandleResponse();
-                        if (!context.Response.HasStarted)
-                        {
-                            var exception = new JwtRESTUnauthorizedException(location: context.Request.Path);
-                            await exception.WriteResponseAsync(context.HttpContext);
-                        }
-                    },
-                    OnForbidden = async context =>
-                    {
-                        var exception = new JwtRESTForbiddenException(location: context.Request.Path);
-                        await exception.WriteResponseAsync(context.HttpContext);
-                    }
-                };
+                options.Events = BuildJwtEvents();
             });
 
         return services;
@@ -91,6 +40,54 @@ internal static class JwtRESTAuthentication
     {
         return request.ContentType?.Contains("application/json") == true;
     }
+
+    private static JwtBearerEvents BuildJwtEvents()
+    {
+        return new JwtBearerEvents
+        {
+            OnTokenValidated = async context =>
+            {
+                var logger = context.HttpContext.RequestServices
+                    .GetRequiredService<ILogger<JwtBearerEvents>>();
+
+                var tokenService = context.HttpContext.RequestServices
+                    .GetRequiredService<ITokenService>();
+
+                var userId = context.Principal?
+                    .FindFirstValue(ClaimTypes.NameIdentifier);
+
+                var token = context.SecurityToken.ToString();
+
+                if (!await tokenService.ValidTokenAsync(token, userId))
+                {
+                    context.Fail("Token is not valid or has been revoked.");
+                }
+            },
+
+            OnMessageReceived = context =>
+            {
+                var authHeader = context.Request.Headers["Authorization"].FirstOrDefault();
+                if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
+                    context.Token = authHeader["Bearer ".Length..];
+
+                return Task.CompletedTask;
+            },
+
+            OnChallenge = async context =>
+            {
+                context.HandleResponse();
+                var exception = new JwtRESTUnauthorizedException(context.Request.Path);
+                await exception.WriteResponseAsync(context.HttpContext);
+            },
+
+            OnForbidden = async context =>
+            {
+                var exception = new JwtRESTForbiddenException(context.Request.Path);
+                await exception.WriteResponseAsync(context.HttpContext);
+            }
+        };
+    }
+
 }
 
 

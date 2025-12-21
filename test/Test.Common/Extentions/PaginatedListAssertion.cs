@@ -8,10 +8,10 @@ public static class PaginatedListAssertion
         ////- check basic------------------------------------------
         paginatedList.CurrentPage.Should().Be(0);
         paginatedList.SizeOfPage.Should().Be(50);
-        paginatedList.TotalItems.Should().Be(0);
+        paginatedList.TotalCount.Should().Be(0);
         paginatedList.TotalPages.Should().Be(0);
-        paginatedList.Data.Should().NotBeNull();
-        paginatedList.Data.Should().HaveCount(0);
+        paginatedList.Items.Should().NotBeNull();
+        paginatedList.Items.Should().HaveCount(0);
         paginatedList.HasPreviousPage.Should().BeFalse();
         paginatedList.HasNextPage.Should().BeFalse();
 

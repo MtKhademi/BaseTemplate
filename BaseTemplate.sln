@@ -36,6 +36,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheModule", "src\modules\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheModule.Contract", "src\modules\CacheModule.Contract\CacheModule.Contract.csproj", "{2C7D6739-F086-410F-8B38-C699BD58DD21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceModule", "src\modules\ECommerceModule\ECommerceModule.csproj", "{CD9C8C53-A45A-46F7-8856-D804E1EB0AB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceModule.Contract", "src\modules\ECommerceModule.Contract\ECommerceModule.Contract.csproj", "{7D616380-C6EB-45A4-9323-E7355C640593}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +90,14 @@ Global
 		{2C7D6739-F086-410F-8B38-C699BD58DD21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C7D6739-F086-410F-8B38-C699BD58DD21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C7D6739-F086-410F-8B38-C699BD58DD21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD9C8C53-A45A-46F7-8856-D804E1EB0AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD9C8C53-A45A-46F7-8856-D804E1EB0AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD9C8C53-A45A-46F7-8856-D804E1EB0AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD9C8C53-A45A-46F7-8856-D804E1EB0AB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D616380-C6EB-45A4-9323-E7355C640593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D616380-C6EB-45A4-9323-E7355C640593}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D616380-C6EB-45A4-9323-E7355C640593}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D616380-C6EB-45A4-9323-E7355C640593}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +114,8 @@ Global
 		{2F0F1A05-4E27-8EC6-DBE9-4C4B3055EDFC} = {C3000B64-B444-46C9-AF54-0E13A328776C}
 		{940E25BD-01BB-4C81-96D5-A54B04951D12} = {C3000B64-B444-46C9-AF54-0E13A328776C}
 		{2C7D6739-F086-410F-8B38-C699BD58DD21} = {C3000B64-B444-46C9-AF54-0E13A328776C}
+		{CD9C8C53-A45A-46F7-8856-D804E1EB0AB5} = {C3000B64-B444-46C9-AF54-0E13A328776C}
+		{7D616380-C6EB-45A4-9323-E7355C640593} = {C3000B64-B444-46C9-AF54-0E13A328776C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {97B7354D-8702-4963-9364-26533A862BE4}

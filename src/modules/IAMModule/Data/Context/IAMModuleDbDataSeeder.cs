@@ -8,7 +8,7 @@ internal class IAMModuleDbDataSeeder(
     UserManager<ApplicationUser> _userManager,
     IEnumerable<IModulePermission> moduleFeatures) : IDataSeeder
 {
-    public async Task SeedAllAsync()
+    public async Task SeedAsync()
     {
 
         // Check for pending and apply if any
