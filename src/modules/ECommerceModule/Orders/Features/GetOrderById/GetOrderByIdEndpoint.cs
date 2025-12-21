@@ -1,3 +1,5 @@
+using ECommerceModule.Auth;
+
 namespace ECommerceModule.Orders.Features.GetOrderById;
 
 internal class GetOrderByIdEndpoint : ICarterModule
@@ -21,6 +23,7 @@ internal class GetOrderByIdEndpoint : ICarterModule
                     .ToOrderResponse()
                     .ToApiResultSuccess());
             })
+            .WithPermission(ECommercePermissions.Read)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("ECOMMERCE-V1")

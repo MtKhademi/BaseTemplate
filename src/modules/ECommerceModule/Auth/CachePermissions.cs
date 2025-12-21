@@ -13,5 +13,6 @@ internal class ECommercePermissions
     internal static ApiPermission Delete => new ApiPermission(ECommerceModule, OrderFeature, ActionType.Delete);
     internal static ApiPermission Read => new ApiPermission(ECommerceModule, OrderFeature, ActionType.Read);
     internal static ApiPermission Create => new ApiPermission(ECommerceModule, OrderFeature, ActionType.Create);
+    internal static ApiPermission Update => new ApiPermission(ECommerceModule, OrderFeature, ActionType.Update);
 
 }

@@ -1,3 +1,4 @@
+using ECommerceModule.Auth;
 using ECommerceModule.Contract.Order.Commands;
 
 namespace ECommerceModule.Orders.Features.MarkOrderAsPaid;
@@ -23,6 +24,7 @@ internal class MarkOrderAsPaidEndpoint : ICarterModule
                     .ToOrderResponse()
                     .ToApiResultSuccess());
             })
+            .WithPermission(ECommercePermissions.Update)
             .WithMetadata(new ApiVersion(1, 0))
             .WithApiVersionSet(versionSet)
             .WithGroupName("ECOMMERCE-V1")
