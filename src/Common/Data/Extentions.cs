@@ -27,7 +27,7 @@ public static class Extentions
         var seeders = scope.ServiceProvider.GetServices<IDataSeeder>();
         foreach (var seeder in seeders)
         {
-            await seeder.SeedAllAsync();
+            await seeder.SeedAsync();
         }
     }
 }

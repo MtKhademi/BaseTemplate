@@ -1,15 +1,20 @@
+using Microsoft.Extensions.Hosting;
+
 namespace Infrastructure.Exceptions;
 
 public sealed class GlobalExceptionHandler
 {
     private readonly RequestDelegate _next;
     private readonly ILogger<GlobalExceptionHandler> _logger;
+    private readonly IHostEnvironment _env;
 
     public GlobalExceptionHandler(RequestDelegate next,
-        ILogger<GlobalExceptionHandler> logger)
+        ILogger<GlobalExceptionHandler> logger,
+        IHostEnvironment env)
     {
         _next = next;
         _logger = logger;
+        _env = env;
     }
 
     public async Task InvokeAsync(HttpContext context)
@@ -35,9 +40,36 @@ public sealed class GlobalExceptionHandler
         context.Response.ContentType = MediaTypeNames.Application.Json;
         context.Response.StatusCode = 500;
 
-        var response = ApiResult.InternalServerError(ex);
-        var json = response.ToJson();
-        await context.Response.WriteAsync(json);
+        if (_env.IsDevelopment())
+        {
+            var devMessages = BuildDevelopmentErrorMessages(context, ex);
+            var response = ApiResult.InternalServerError(devMessages);
+            await context.Response.WriteAsync(response.ToJson());
+            return;
+        }
+
+        var prodResponse = ApiResult.InternalServerError(ex);
+        await context.Response.WriteAsync(prodResponse.ToJson());
+    }
+
+    private static string[] BuildDevelopmentErrorMessages(HttpContext context, Exception ex)
+    {
+        var messages = new List<string>
+        {
+            $"Exception: {ex.GetType().FullName}",
+            $"Message: {ex.Message}",
+            $"Path: {context.Request.Path}",
+            $"Method: {context.Request.Method}",
+            $"TraceId: {context.TraceIdentifier}"
+        };
+
+        if (ex.InnerException is not null)
+            messages.Add($"InnerException: {ex.InnerException.GetType().FullName} | {ex.InnerException.Message}");
+
+        if (!string.IsNullOrWhiteSpace(ex.StackTrace))
+            messages.Add($"StackTrace: {ex.StackTrace}");
+
+        return messages.ToArray();
     }
     private async Task HandleForbiddenExceptionExceptionAsync(HttpContext context, ForbiddenException ex)
     {

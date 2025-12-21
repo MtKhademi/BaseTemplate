@@ -4,22 +4,32 @@ namespace Infrastructure.Extentions;
 
 public static class ServiceCollectionExtention
 {
-    public static ConfigType AddConfig<ConfigType>(this IServiceCollection services, IConfiguration configuration)
-        where ConfigType : BaseConfig<ConfigType>
+    public static IServiceCollection AddConfig<TConfig>(
+            this IServiceCollection services,
+            IConfiguration configuration)
+            where TConfig : BaseConfig<TConfig>
     {
-        var config = configuration.GetSection(typeof(ConfigType).Name);
-        var configConverted = config.Get<ConfigType>();
+        var sectionName = typeof(TConfig).Name;
+        var section = configuration.GetSection(sectionName);
 
-        if (config is null || configConverted is null)
-            throw new ArgumentNullException(typeof(ConfigType).Name, $"Configuration section '{typeof(ConfigType).Name}' is not found or is not valid.");
+        if (!section.Exists())
+            throw new ArgumentNullException(
+                sectionName,
+                $"Configuration section '{sectionName}' is not found.");
 
-        configConverted.IsValidAndThrow();
+        // Bind + register options
+        services.Configure<TConfig>(section);
 
-        services.Configure<ConfigType>(config);
+        // Validate AFTER DI is built (correct lifecycle)
+        services.AddOptions<TConfig>()
+            .Bind(section)
+            .Validate(config =>
+            {
+                config.IsValidAndThrow();
+                return true;
+            });
 
-
-        return configConverted;
-
+        return services;
     }
 
 
@@ -33,7 +43,7 @@ public static class ServiceCollectionExtention
                 throw new ArgumentException("Key cannot be null or empty.", nameof(key));
 
             var service = serviceProvider.GetRequiredKeyedService<TService>(key);
-            if(service is null)
+            if (service is null)
                 throw new ArgumentException($"Service of type {typeof(TService).Name} with key {key} is not registered.", nameof(key));
             return service;
         }

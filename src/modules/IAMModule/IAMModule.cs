@@ -7,7 +7,7 @@ public static class IAMModule
     public static IServiceCollection AddIAMModule(this IServiceCollection services, IConfiguration configuration)
     {
 
-        var iamConfig = services.AddConfig<IAMModuleConfig>(configuration);
+        services.AddConfig<IAMModuleConfig>(configuration);
         var assembly = typeof(IAMModule).Assembly;
         services.AddCarterWithAssemblies(assembly)
             .AddMediatRWithAssemblies(assembly)
@@ -20,9 +20,9 @@ public static class IAMModule
         services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
 
 
-        return services.AddServices(iamConfig)
+        return services.AddServices()
             .AddIdentitySettings()
-            .AddJwtRESTAuthentication(iamConfig)
+            .AddJwtRESTAuthentication()
             .AddSingleton<IModulePermission, AppModulePermissions>();
     }
     public static IApplicationBuilder UseIAMModule(this IApplicationBuilder app)
@@ -69,10 +69,13 @@ public static class IAMModule
             .AddDefaultTokenProviders();
         return services;
     }
-    private static IServiceCollection AddServices(this IServiceCollection services, IAMModuleConfig config)
+    private static IServiceCollection AddServices(this IServiceCollection services)
     {
-        services.AddDbContext<IAMModuleDbContext>(options =>
-            options.UseSqlServer(config.ConnectionString));
+        services.AddDbContext<IAMModuleDbContext>((sp, options) =>
+        {
+            var config = sp.GetRequiredService<IOptions<IAMModuleConfig>>().Value;
+            options.UseSqlServer(config.ConnectionString);
+        });
 
         services.AddHttpContextAccessor();
 

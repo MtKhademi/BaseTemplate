@@ -31,4 +31,11 @@ public enum ScenarioDataKey
     CacheClearAllResponse,
     CacheGetByKeyResponse,
     CacheSetResponse,
+
+    // Order scenarios
+    Orders,
+    OrderCreate,
+    OrderGetByIdResponse,
+    OrderGetPaginated,
+    OrderMarkAsPaidResponse,
 }

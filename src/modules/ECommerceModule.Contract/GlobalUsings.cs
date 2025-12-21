@@ -1,0 +1,14 @@
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using MediatR;
+global using Infrastructure.Contracts.CQRS;
+global using Infrastructure.Exceptions;
+global using Infrastructure.Pagination;
+global using Infrastructure.Web;
+global using ECommerceModule.Contract.Order.Commands;
+global using ECommerceModule.Contract.Order.Queries;
+global using ECommerceModule.Contract.Order.Enumerations;
+global using ECommerceModule.Contract.Order.Models;
+global using ECommerceModule.Contract.Order.Responses;
+global using ECommerceModule.Contract.Order.Requests;

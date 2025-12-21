@@ -1,7 +1,9 @@
 using CacheModule;
+using ECommerceModule;
 using IAMModule;
 using Infrastructure.Module;
 using NotificationModule;
+using ECommerceModule;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +27,8 @@ builder.Services.AddVersioningConfig();
 builder.Services
     .AddIAMModule(builder.Configuration)
     .AddNotificationModule(builder.Configuration)
-    .AddCacheModule(builder.Configuration);
+    .AddCacheModule(builder.Configuration)
+    .AddECommerceModule(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
@@ -33,7 +36,8 @@ builder.Services.AddSwaggerGen(option =>
     option
     .AddSwaggerIAMModule()
     .AddSwaggerNotificationModule()
-    .AddSwaggerCacheModule();
+    .AddSwaggerCacheModule()
+    .AddSwaggerECommerceModule();
 });
 
 
@@ -48,7 +52,8 @@ app.UseSwaggerUI(options =>
 {
     options.UseSwaggerIAMModule()
     .UseSwaggerNotificationModule()
-    .UseSwaggerCacheModule();
+    .UseSwaggerCacheModule()
+    .UseSwaggerECommerceModule();
 });
 
 
@@ -70,7 +75,8 @@ app.UseMiddleware<GlobalExceptionHandler>();
 app.PopulatePermissionsFromEndpoints();
 app.UseIAMModule()
     .UseNotificationModule()
-    .UseCacheModule();
+    .UseCacheModule()
+    .UseECommerceModule();
 
 
 app.Run();

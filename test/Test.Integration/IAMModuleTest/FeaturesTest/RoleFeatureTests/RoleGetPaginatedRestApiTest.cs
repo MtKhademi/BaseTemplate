@@ -42,9 +42,9 @@ public partial class RoleGetPaginatedRestApiTest : BaseTest
         var apiResult = await response.Content.ReadModelFromJsonAsync<ApiResultTest<PaginatedListTest<RoleResponseTest>>>();
         apiResult.Should().NotBeNull();
         apiResult.Result.Should().NotBeNull();
-        apiResult.Result.TotalItems.Should().BeGreaterThanOrEqualTo(6);
+        apiResult.Result.TotalCount.Should().BeGreaterThanOrEqualTo(6);
 
-        var expectRole = apiResult.Result.Data.FirstOrDefault(u => u.RoleName == "Role5");
+        var expectRole = apiResult.Result.Items.FirstOrDefault(u => u.RoleName == "Role5");
         expectRole.Should().NotBeNull();
         expectRole.RoleName.Should().Be("Role5");
         expectRole.RoleDescription.Should().Be("Description for Role5");

@@ -3,7 +3,7 @@ namespace NotificationModule.Data.Context;
 public class NotificationModuleDbDataSeeder(
     NotificationModuleDbContext _context) : IDataSeeder
 {
-    public async Task SeedAllAsync()
+    public async Task SeedAsync()
     {
 
     }
