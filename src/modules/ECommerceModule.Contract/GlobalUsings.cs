@@ -1,3 +1,10 @@
+global using Infrastructure.Contracts.CQRS;
+global using Infrastructure.Pagination;
+global using ECommerceModule.Contract.Catalog.Models;
+global using ECommerceModule.Contract.Catalog.Requests;
+global using ECommerceModule.Contract.Catalog.Responses;
+global using ECommerceModule.Contract.Catalog.Queries;
+global using ECommerceModule.Contract.Catalog.Commands;
 global using System;
 global using System.Collections.Generic;
 global using System.Linq;

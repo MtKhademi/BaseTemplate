@@ -29,8 +29,8 @@ internal sealed class ProductEntityConfig
 
         builder.HasIndex(x => x.CategoryId);
 
-        builder.HasOne<CategoryEntity>()
-            .WithMany()
+        builder.HasOne(x=>x.Category)
+            .WithMany(x=>x.Products)
             .HasForeignKey(x => x.CategoryId)
             .OnDelete(DeleteBehavior.Restrict);
 

@@ -13,10 +13,10 @@ public class SignalRMiddleware
     {
         if (httpContext.Request.Headers.TryGetValue("Origin", out var originValue))
         {
-            httpContext.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
-            httpContext.Response.Headers.Add("Access-Control-Allow-Headers", "x-requested-with");
-            httpContext.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
-            httpContext.Response.Headers.Add("Access-Control-Allow-Origin", originValue);
+            httpContext.Response.Headers.Append("Access-Control-Allow-Credentials", "true");
+            httpContext.Response.Headers.Append("Access-Control-Allow-Headers", "x-requested-with");
+            httpContext.Response.Headers.Append("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+            httpContext.Response.Headers.Append("Access-Control-Allow-Origin", originValue);
 
             if (httpContext.Request.Method == "OPTIONS")
             {
@@ -26,10 +26,10 @@ public class SignalRMiddleware
         }
         else
         {
-            httpContext.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
-            httpContext.Response.Headers.Add("Access-Control-Allow-Headers", "x-requested-with");
-            httpContext.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
-            httpContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            httpContext.Response.Headers.Append("Access-Control-Allow-Credentials", "true");
+            httpContext.Response.Headers.Append("Access-Control-Allow-Headers", "x-requested-with");
+            httpContext.Response.Headers.Append("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+            httpContext.Response.Headers.Append("Access-Control-Allow-Origin", "*");
         }
 
         return _next(httpContext);

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceModule.Data.Migrations
 {
     [DbContext(typeof(ECommerceDbContext))]
-    [Migration("20251222120839_initECommerceModuleDb")]
+    [Migration("20251222180541_initECommerceModuleDb")]
     partial class initECommerceModuleDb
     {
         /// <inheritdoc />
@@ -281,9 +281,6 @@ namespace ECommerceModule.Data.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderEntityId")
-                        .HasColumnType("int");
-
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
@@ -298,8 +295,6 @@ namespace ECommerceModule.Data.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderEntityId");
 
                     b.HasIndex("OrderId");
 
@@ -355,13 +350,24 @@ namespace ECommerceModule.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ECommerceModule.Catalog.Entities.CategoryEntity", b =>
+                {
+                    b.HasOne("ECommerceModule.Catalog.Entities.CategoryEntity", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
             modelBuilder.Entity("ECommerceModule.Catalog.Entities.ProductEntity", b =>
                 {
-                    b.HasOne("ECommerceModule.Catalog.Entities.CategoryEntity", null)
-                        .WithMany()
+                    b.HasOne("ECommerceModule.Catalog.Entities.CategoryEntity", "Category")
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("ECommerceModule.Inventory.Entities.InventoryItemEntity", b =>
@@ -375,12 +381,8 @@ namespace ECommerceModule.Data.Migrations
 
             modelBuilder.Entity("ECommerceModule.Orders.Entities.OrderItemEntity", b =>
                 {
-                    b.HasOne("ECommerceModule.Orders.Entities.OrderEntity", null)
-                        .WithMany("Items")
-                        .HasForeignKey("OrderEntityId");
-
                     b.HasOne("ECommerceModule.Orders.Entities.OrderEntity", "Order")
-                        .WithMany()
+                        .WithMany("Items")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -395,6 +397,11 @@ namespace ECommerceModule.Data.Migrations
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ECommerceModule.Catalog.Entities.CategoryEntity", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("ECommerceModule.Orders.Entities.OrderEntity", b =>
