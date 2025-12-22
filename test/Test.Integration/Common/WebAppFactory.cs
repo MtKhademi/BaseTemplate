@@ -1,14 +1,22 @@
 ﻿using ECommerceModule.Persistence.Context;
 using IAMModule.Data.Context;
 using Infrastructure.Data;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 
 namespace Test.Integration.Common;
 
 public class WebAppFactory : WebApplicationFactory<Api.Program>, IAsyncLifetime
 {
-    private MsSqlContainer _dbContainer;
+    private readonly MsSqlContainer _dbContainer;
+    private string? _connectionString;
+    private bool _isInitialized;
+    private string ConnectionString => _connectionString ??= _dbContainer
+        .GetConnectionString()
+        .Replace("master", "templatetestDb");
     public WebAppFactory()
     {
         _dbContainer = new MsSqlBuilder()
@@ -17,17 +25,28 @@ public class WebAppFactory : WebApplicationFactory<Api.Program>, IAsyncLifetime
     }
     internal async Task ClearDbAsync()
     {
-        var scope = Services.CreateScope();
-        var iamDb = scope.ServiceProvider.GetRequiredService<IAMModuleDbContext>();
-        var ecommerceDb = scope.ServiceProvider.GetRequiredService<ECommerceDbContext>();
+        await InitializeAsync();
 
-        await iamDb.Database.EnsureDeletedAsync();
-        await ecommerceDb.Database.EnsureDeletedAsync();
+        var sqlPath = Path.Combine(AppContext.BaseDirectory, "ClearDb.sql");
+        var clearScript = await File.ReadAllTextAsync(sqlPath);
+
+        await using (var connection = new SqlConnection(ConnectionString))
+        {
+            await connection.OpenAsync();
+            await using var command = new SqlCommand(clearScript, connection);
+            await command.ExecuteNonQueryAsync();
+        }
+
+        await using var scope = Services.CreateAsyncScope();
+        var seeders = scope.ServiceProvider.GetServices<IDataSeeder>();
+        foreach (var item in seeders)
+        {
+            await item.SeedAsync();
+        }
     }
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        var connnectionString = _dbContainer.GetConnectionString()
-            .Replace("master", "templatetestDb");
+        var connnectionString = ConnectionString;
 
         builder.UseEnvironment("Development");
 
@@ -97,21 +116,25 @@ public class WebAppFactory : WebApplicationFactory<Api.Program>, IAsyncLifetime
     }
     public async Task InitializeAsync()
     {
+        if (_isInitialized)
+            return;
 
         await _dbContainer.StartAsync();
 
-        var scope = Services.CreateScope();
+        await using var scope = Services.CreateAsyncScope();
         // Apply migrations before seeding to ensure schema exists
         var iamDb = scope.ServiceProvider.GetRequiredService<IAMModuleDbContext>();
         var ecommerceDb = scope.ServiceProvider.GetRequiredService<ECommerceDbContext>();
-        await iamDb.Database.MigrateAsync();
-        await ecommerceDb.Database.MigrateAsync();
+        // await iamDb.Database.MigrateAsync();
+        // await ecommerceDb.Database.MigrateAsync();
 
         var seeders = scope.ServiceProvider.GetServices<IDataSeeder>();
         foreach (var item in seeders)
         {
             await item.SeedAsync();
         }
+
+        _isInitialized = true;
     }
 }
 
