@@ -38,4 +38,19 @@ public enum ScenarioDataKey
     OrderGetByIdResponse,
     OrderGetPaginated,
     OrderMarkAsPaidResponse,
+
+    // Catalog scenarios
+    Categories,
+    CategoryCreate,
+    CategoryGetByIdResponse,
+    CategoryGetPaginated,
+    CategoryUpdate,
+    CategoryDelete,
+
+    Products,
+    ProductCreate,
+    ProductGetByIdResponse,
+    ProductGetPaginated,
+    ProductUpdate,
+    ProductDelete,
 }

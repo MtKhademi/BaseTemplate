@@ -9,11 +9,13 @@ public static class ScenarioContextApiExtensions
         this ScenarioContext context,
         string url,
         ScenarioDataKey storeKey,
+        ScenarioDataKey? storeListKey = null,
         string? scenarioName = default!) => await context.ApiRequestAsync<object, TResult>(
             method: HttpMethod.Get,
             url: url,
             request: null,
             storeKey: storeKey,
+            storeListKey: storeListKey,
             scenarioName: scenarioName);
 
     #endregion
@@ -105,7 +107,8 @@ public static class ScenarioContextApiExtensions
         string url,
         TRequest request,
         string scenarioName,
-        ScenarioDataKey storeKey)
+        ScenarioDataKey storeKey,
+        ScenarioDataKey? storeListKey = null)
     {
         var message = new HttpRequestMessage(method, url)
         {
@@ -121,6 +124,12 @@ public static class ScenarioContextApiExtensions
 
         var apiResult = await response.Content.ReadModelFromJsonAsync<ApiResultTest<TResult>>();
         context.Set(storeKey, apiResult);
+
+        if(storeListKey is not null)
+        {
+            context.AddToList(storeListKey.Value, apiResult);
+        }
+
         return apiResult;
     }
 }

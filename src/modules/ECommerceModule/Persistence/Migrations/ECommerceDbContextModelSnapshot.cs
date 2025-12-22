@@ -347,13 +347,24 @@ namespace ECommerceModule.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ECommerceModule.Catalog.Entities.CategoryEntity", b =>
+                {
+                    b.HasOne("ECommerceModule.Catalog.Entities.CategoryEntity", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
             modelBuilder.Entity("ECommerceModule.Catalog.Entities.ProductEntity", b =>
                 {
-                    b.HasOne("ECommerceModule.Catalog.Entities.CategoryEntity", null)
-                        .WithMany()
+                    b.HasOne("ECommerceModule.Catalog.Entities.CategoryEntity", "Category")
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("ECommerceModule.Inventory.Entities.InventoryItemEntity", b =>
@@ -383,6 +394,11 @@ namespace ECommerceModule.Data.Migrations
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ECommerceModule.Catalog.Entities.CategoryEntity", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("ECommerceModule.Orders.Entities.OrderEntity", b =>

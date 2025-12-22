@@ -23,6 +23,11 @@ internal sealed class CategoryEntityConfig
         builder.HasIndex(x => x.Name)
             .IsUnique(false);
 
+        builder.HasMany(x => x.Products)
+            .WithOne(x => x.Category)
+            .HasForeignKey(x => x.CategoryId)
+            .OnDelete(DeleteBehavior.Restrict);
+
 
         builder.HasIndex(x => x.Name);
 
