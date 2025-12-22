@@ -11,11 +11,11 @@ public class BaseTest : IAsyncLifetime
     
     public async Task DisposeAsync()
     {
-        await _factory.ClearDbAsync();
+        await Task.CompletedTask;
     }
 
     public async Task InitializeAsync()
     {
-        await _factory.InitializeAsync();
+        await _factory.ClearDbAsync();
     }
 }
