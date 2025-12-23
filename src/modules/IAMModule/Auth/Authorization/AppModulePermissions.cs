@@ -1,6 +1,4 @@
-﻿using Infrastructure.Module;
-
-namespace IAMModule.Auth.Authorization;
+﻿namespace IAMModule.Auth.Authorization;
 
 internal class AppModulePermissions : IModulePermission
 {

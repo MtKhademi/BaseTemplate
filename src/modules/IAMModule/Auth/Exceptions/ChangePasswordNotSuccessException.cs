@@ -1,4 +1,4 @@
-﻿namespace IAMModule.IAM.Exceptions;
+﻿namespace IAMModule.Auth.Exceptions;
 
 internal class ChangePasswordNotSuccessException : NotValidDataException<ChangePasswordNotSuccessException>
 {

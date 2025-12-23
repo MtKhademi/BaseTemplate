@@ -1,6 +1,4 @@
-﻿using IAMModule.Services;
-
-namespace IAMModule.Data.Repositories;
+﻿namespace IAMModule.Data.Repositories;
 
 internal class PermissionRepository(IAMModuleDbContext context) :
     EFBaseRepository<int, PermissionEntity>(context), IPermissionRepository

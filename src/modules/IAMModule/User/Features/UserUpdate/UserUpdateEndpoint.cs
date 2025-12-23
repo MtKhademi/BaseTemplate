@@ -1,6 +1,4 @@
-﻿using Infrastructure.Web.ApiResult;
-
-namespace IAMModule.User.Features.UserUpdate;
+﻿namespace IAMModule.User.Features.UserUpdate;
 
 internal class UserUpdateEndpoint : ICarterModule
 {
@@ -18,7 +16,7 @@ internal class UserUpdateEndpoint : ICarterModule
                 [FromServices] ILogger<UserUpdateEndpoint> logger,
                 CancellationToken cancellationToken) =>
             {
-                if(userId!= request.UserId)
+                if (userId != request.UserId)
                 {
                     logger.LogWarning("User id from route {RouteUserId} is different from user id from body {BodyUserId}", userId, request.UserId);
                     return Results.BadRequest(ApiResult.BadRequest("User id from route is different from user id from body"));

@@ -1,9 +1,4 @@
-﻿using IAMModule.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IAMModule.Auth.Authorization;
+﻿namespace IAMModule.Auth.Authorization;
 
 internal sealed class PermissionAuthorizationHandler
     : AuthorizationHandler<PermissionRequirement>

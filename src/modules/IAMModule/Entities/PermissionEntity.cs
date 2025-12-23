@@ -1,6 +1,4 @@
-﻿using Infrastructure.Module;
-
-namespace IAMModule.Entities;
+﻿namespace IAMModule.Entities;
 
 internal class PermissionEntity
 {

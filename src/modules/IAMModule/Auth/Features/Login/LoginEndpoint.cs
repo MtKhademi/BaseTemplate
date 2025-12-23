@@ -1,4 +1,4 @@
-﻿namespace IAMModule.IAM.Features.Login;
+﻿namespace IAMModule.Auth.Features.Login;
 
 internal class LoginEndpoint : ICarterModule
 {

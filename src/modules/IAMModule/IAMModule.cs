@@ -1,5 +1,3 @@
-using Infrastructure.Module;
-
 namespace IAMModule;
 
 public static class IAMModule

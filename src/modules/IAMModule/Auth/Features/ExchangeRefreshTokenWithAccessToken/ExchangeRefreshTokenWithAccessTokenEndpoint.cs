@@ -1,4 +1,4 @@
-﻿namespace IAMModule.IAM.Features.ExchangeRefreshTokenWithAccessToken;
+﻿namespace IAMModule.Auth.Features.ExchangeRefreshTokenWithAccessToken;
 
 internal class ExchangeRefreshTokenWithAccessTokenEndpoint : ICarterModule
 {

@@ -1,6 +1,4 @@
-using Infrastructure.Module;
-
-namespace IAMModule.IAM.Authorization;
+namespace IAMModule.Auth.Authorization;
 
 internal static class IAMPermissions
 {
