@@ -37,8 +37,16 @@ global using ECommerceModule.Contract.Catalog.Models;
 global using ECommerceModule.Contract.Catalog.Responses;
 global using ECommerceModule.Contract.Catalog.Queries;
 global using ECommerceModule.Contract.Catalog.Requests;
+global using ECommerceModule.Contract.Cart.Models;
+global using ECommerceModule.Contract.Cart.Responses;
+global using ECommerceModule.Contract.Cart.Commands;
+global using ECommerceModule.Contract.Cart.Queries;
+global using ECommerceModule.Contract.Cart.Requests;
 global using ECommerceModule.Contract.Payment.Enumerations;
 global using ECommerceModule.Cart.Entities;
+global using ECommerceModule.Cart.Repositories;
+global using ECommerceModule.Cart.Extensions;
+global using ECommerceModule.Cart.Exceptions;
 global using ECommerceModule.Catalog.Entities;
 global using ECommerceModule.Catalog.Repositories;
 global using ECommerceModule.Catalog.Extensions;
@@ -53,5 +61,4 @@ global using Infrastructure.Data;
 global using Infrastructure.Exceptions;
 global using Infrastructure.Pagination;
 global using ECommerceModule.Contract;
-
 
