@@ -1,6 +1,4 @@
-﻿using IAMModule.Services;
-
-namespace IAMModule.IAM.Features.Login;
+﻿namespace IAMModule.Auth.Features.Login;
 
 internal class LoginHandler(
     UserManager<ApplicationUser> _userManager,

@@ -1,4 +1,4 @@
-namespace IAMModule.IAM.Exceptions;
+namespace IAMModule.Auth.Exceptions;
 
 public class UserNotFoundWithUserNameException : NotFoundException<UserNotFoundWithUserNameException>
 {

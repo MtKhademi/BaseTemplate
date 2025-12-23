@@ -1,4 +1,4 @@
-﻿namespace IAMModule.UserManagement.Features.UserGetPaginated;
+﻿namespace IAMModule.User.Features.UserGetPaginated;
 
 internal class UserGetPaginatedEndpoint : ICarterModule
 {

@@ -1,4 +1,4 @@
-﻿namespace IAMModule.IAM.Authentications;
+﻿namespace IAMModule.Auth.Authentications;
 
 internal static class JwtRESTAuthentication
 {

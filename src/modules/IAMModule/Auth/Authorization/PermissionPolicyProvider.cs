@@ -1,6 +1,4 @@
-﻿using System.Collections.Concurrent;
-
-namespace IAMModule.Auth.Authorization;
+﻿namespace IAMModule.Auth.Authorization;
 
 
 public sealed class PermissionPolicyProvider : IAuthorizationPolicyProvider
@@ -14,7 +12,8 @@ public sealed class PermissionPolicyProvider : IAuthorizationPolicyProvider
 
 
         return Task.FromResult(
-            _cache.GetOrAdd(policyName, name => {
+            _cache.GetOrAdd(policyName, name =>
+            {
                 return new AuthorizationPolicyBuilder()
                     .AddRequirements(new PermissionRequirement(name))
                     .RequireAuthenticatedUser()

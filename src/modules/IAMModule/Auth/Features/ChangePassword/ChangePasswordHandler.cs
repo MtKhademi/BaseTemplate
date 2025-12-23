@@ -1,5 +1,3 @@
-using IAMModule.Services;
-
 namespace IAMModule.Auth.Features.ChangePassword;
 
 public class ChangePasswordHandler(

@@ -1,6 +1,4 @@
-﻿using IAMModule.Auth.Authorization;
-
-namespace IAMModule.Role.Features.RoleCreate;
+﻿namespace IAMModule.Role.Features.RoleCreate;
 
 internal class RoleCreateEndpoint : ICarterModule
 {

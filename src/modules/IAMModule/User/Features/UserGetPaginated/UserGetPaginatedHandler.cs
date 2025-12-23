@@ -1,7 +1,4 @@
-﻿using Infrastructure.Pagination;
-using IAMModule.Contract.Queries;
-
-namespace IAMModule.UserManagement.Features.UserGetPaginated;
+﻿namespace IAMModule.User.Features.UserGetPaginated;
 
 internal class UserGetPaginatedHandler(
     UserManager<ApplicationUser> userManager) : IQueryHandler<UserGetPaginatedQuery, PaginatedList<ApplicationUserModel>>

@@ -1,4 +1,4 @@
-﻿namespace IAMModule.IAM.Features.Register;
+﻿namespace IAMModule.Auth.Features.Register;
 
 internal class RegisterEndpoint : ICarterModule
 {

@@ -1,7 +1,4 @@
-﻿using IAMModule.Contract.Models;
-using IAMModule.Services;
-
-namespace IAMModule.IAM.Features.ExchangeRefreshTokenWithAccessToken;
+﻿namespace IAMModule.Auth.Features.ExchangeRefreshTokenWithAccessToken;
 
 
 internal class ExchangeRefreshTokenWithAccessTokenHandler : ICommandHandler<TokenCreateWithRefreshTokenCommand, TokenModel>

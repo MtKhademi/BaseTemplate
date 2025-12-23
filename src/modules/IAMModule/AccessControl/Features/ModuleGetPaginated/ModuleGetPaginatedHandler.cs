@@ -1,6 +1,4 @@
-﻿using IAMModule.Data.Repositories;
-
-namespace IAMModule.AccessControl.Features.ModuleGetPaginated;
+﻿namespace IAMModule.AccessControl.Features.ModuleGetPaginated;
 
 internal class ModuleGetPaginatedHandler(IModuleRepository repository) :
     IQueryHandler<ModuleGetPaginatedQuery, PaginatedList<ModuleModel>>

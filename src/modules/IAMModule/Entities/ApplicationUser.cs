@@ -1,5 +1,3 @@
-using IAMModule.Contract.Models;
-
 namespace IAMModule.Entities;
 
 public class ApplicationUser : IdentityUser

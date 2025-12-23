@@ -1,4 +1,4 @@
-namespace IAMModule.IAM.Authorization;
+namespace IAMModule.Auth.Authorization;
 
 public static class AppCredentials
 {

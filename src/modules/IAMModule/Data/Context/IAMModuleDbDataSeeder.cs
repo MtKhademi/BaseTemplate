@@ -1,5 +1,3 @@
-using Infrastructure.Module;
-
 namespace IAMModule.Data.Context;
 
 internal class IAMModuleDbDataSeeder(

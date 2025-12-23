@@ -1,4 +1,4 @@
-﻿namespace IAMModule.UserManagement.Features.UserGetById;
+﻿namespace IAMModule.User.Features.UserGetById;
 
 internal class UserGetByIdHandler(UserManager<ApplicationUser> userManager) :
     IQueryHandler<UserGetByIdQuery, ApplicationUserModel>

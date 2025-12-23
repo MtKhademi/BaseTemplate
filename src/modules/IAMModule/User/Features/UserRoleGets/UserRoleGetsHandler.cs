@@ -1,4 +1,4 @@
-﻿namespace IAMModule.UserManagement.Features.UserRoleGets;
+﻿namespace IAMModule.User.Features.UserRoleGets;
 
 internal class UserRoleGetsHandler(
     UserManager<ApplicationUser> userManager,
